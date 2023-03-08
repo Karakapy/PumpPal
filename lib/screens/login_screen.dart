@@ -1,23 +1,18 @@
-// class LoginScreen extends StatelessWidget {
-//   const LoginScreen({Key? key}) : super(key: key);
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return const Placeholder();
-//   }
-// }
-
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:pumppal/themeColor.dart';
+import 'package:pumppal/widgets/button_widget.dart';
+import 'package:pumppal/widgets/logo_widget.dart';
+import 'package:pumppal/widgets/textfield_widget.dart';
+import 'package:pumppal/main.dart';
 
-class LoginScreen extends StatefulWidget {
+class LogInScreen extends StatefulWidget {
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<LogInScreen> createState() => _LogInScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _LogInScreenState extends State<LogInScreen> {
   late FirebaseAuth _auth;
   String email = '';
   String password = '';
@@ -33,52 +28,134 @@ class _LoginScreenState extends State<LoginScreen> {
     _auth = FirebaseAuth.instance;
   }
 
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          const SizedBox(height: 30),
-          TextField(
-            onChanged: (value) {
-              email = value;
-            },
-            decoration: const InputDecoration(
-              hintText: 'email',
+      resizeToAvoidBottomInset: false,
+      body: Container(
+        decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                greyBlueColor,
+                blackColor2,
+              ],
+            )
+        ),
+        child: Column(
+          children: [
+            SizedBox(height: 100,),
+            Container(
+              child:Center(
+                child: LogoWidget(height: 168, width: 167),
+              ),
             ),
-          ),
-          TextField(
-            onChanged: (value) {
-              password = value;
-            },
-            decoration: const InputDecoration(
-              hintText: 'password',
+
+            SizedBox(height: 15,),
+            Container(child: const Center(
+              child: Text(
+                "PumpPal",
+                style: TextStyle(
+                  fontFamily: 'montserrat',
+                  fontSize: 32,
+                  fontWeight: FontWeight.bold,
+                  color: primaryColor,),),
             ),
-          ),
-          TextButton(
-              child: const Text('Login'),
-              onPressed: () async {
-                //print("login with $email , $password");
-                try {
-                  final user = await _auth.signInWithEmailAndPassword(
-                      email: email, password: password);
-                  if (user != null) {
-                    print("$email is in.");
-                  } else {
-                    print("Login failed");
+            ),
+            SizedBox(height: 15,),
+            // Container(child: Center(
+            //   child: TextFieldWidget( text: "Email", icon: Icons.email , isPasswordType: false , controller:_emailController,),
+            //
+            // ),),
+            Container(child: Padding(
+              padding: const EdgeInsets.only(left: 40, top:40, right: 40),
+              child: Column(
+                children: <Widget>[
+                  TextFieldWidget(text: "Email", icon: Icons.email, isPasswordType: false, controller: _emailController),
+                  SizedBox(height: 30,),
+                  TextFieldWidget(text: "Password", icon: Icons.lock, isPasswordType: true, controller: _passwordController),
+
+                ],
+              ),
+            ),
+            ),
+
+            SizedBox(height: 150,),
+            Container(
+              child: ButtonWidget(
+                theChild: Container(
+                  width: 312.0,
+                  height: 64.0,
+                  child: const Center(
+                    child: Text(
+                      "Log in",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'montserrat',
+                        color: blackColor,
+                      ),
+                    ),
+                  ),
+                ),
+                theOnTapFunc: () async {
+
+                  email = _emailController.text;
+                  password = _passwordController.text;
+                  try {
+                    final user = await _auth.signInWithEmailAndPassword(email: email, password: password);
+                    if (user != null) {
+                      print("$email is in.");
+                    } else {
+                      print("Login failed");
+                    }
+                    // final newUser = await _auth.createUserWithEmailAndPassword(email: email, password: password);
                   }
-                } catch (e) {
-                  print(e);
-                }
-              }),
-          TextButton(
-            child: const Text('Register'),
-            onPressed: () {
-              print('register');
-            },
-          ),
-        ],
+                  on FirebaseAuthException catch (e) {
+                    print(e);
+                  }
+
+                  _emailController.clear();
+                  _passwordController.clear();
+                },
+
+              ),
+            ),
+
+            SizedBox(height: 15),
+            signUpOption(),
+          ],
+        ),
       ),
     );
   }
+
+  Row signUpOption(){
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        const Text("First time here?",
+          style: TextStyle(color: whiteColor,fontSize: 20),),
+        SizedBox(width: 10,),
+        GestureDetector(
+          onTap: () {
+            Navigator.pushNamed(context, '/signup');
+
+          },
+
+
+          child: const Text(
+            "Sign up",
+            style: TextStyle(color: primaryColor, fontWeight: FontWeight.bold,fontSize: 20),
+          ),
+        )
+      ],
+    );
+  }
 }
+
+

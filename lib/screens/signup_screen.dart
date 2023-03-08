@@ -141,7 +141,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
         style: TextStyle(color: whiteColor,fontSize: 20),),
         SizedBox(width: 10,),
         GestureDetector(
-          onTap: (){},
+          onTap: (){
+            Navigator.pushNamed(context, '/login');
+          },
           child: const Text(
             "Log in",
             style: TextStyle(color: primaryColor, fontWeight: FontWeight.bold,fontSize: 20),
