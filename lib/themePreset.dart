@@ -11,3 +11,6 @@ const blackColor2 = Color(0xFF000000);
 
 const whiteColor = Color(0xFFFFFFFF);
 
+const primaryFont = TextStyle(fontFamily: 'Montserrat',fontWeight: FontWeight.bold);
+const bodyFont = TextStyle(fontFamily: 'Inter');
+

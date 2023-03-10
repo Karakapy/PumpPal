@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:pumppal/themeColor.dart';
+import 'package:pumppal/themePreset.dart';
 import 'package:pumppal/widgets/button_widget.dart';
 import 'package:pumppal/widgets/logo_widget.dart';
 import 'package:pumppal/widgets/textfield_widget.dart';
