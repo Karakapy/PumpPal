@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:pumppal/screens/login_screen.dart';
 import 'package:pumppal/screens/signup_screen.dart';
 import 'addCar.dart';
+import 'package:pumppal/screens/get_started_screen.dart';
 Future main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -23,6 +24,7 @@ class MyApp extends StatelessWidget {
         '/': (context) => const AddCar(),
         '/login': (context) => LogInScreen(),
         '/signup': (context) => SignUpScreen(),
+        '/getStarted': (context) => GetStartedScreen(),
       },
    );
   }

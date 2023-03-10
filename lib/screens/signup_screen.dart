@@ -109,6 +109,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                    password = _passwordController.text;
                    try {
                      final newUser = await _auth.createUserWithEmailAndPassword(email: email, password: password);
+                     Navigator.pushNamed(context, '/getStarted');
                    }
                    on FirebaseAuthException catch (e) {
                      print(e);
