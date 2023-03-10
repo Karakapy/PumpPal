@@ -60,7 +60,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               child: Text(
                 "PumpPal",
                 style: TextStyle(
-                  fontFamily: 'montserrat',
+                  fontFamily: 'Montserrat',
                   fontSize: 32,
                   fontWeight: FontWeight.bold,
                   color: primaryColor,),),

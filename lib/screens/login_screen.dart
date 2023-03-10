@@ -60,7 +60,7 @@ class _LogInScreenState extends State<LogInScreen> {
               child: Text(
                 "PumpPal",
                 style: TextStyle(
-                  fontFamily: 'montserrat',
+                  fontFamily: 'Montserrat',
                   fontSize: 32,
                   fontWeight: FontWeight.bold,
                   color: primaryColor,),),

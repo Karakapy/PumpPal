@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class LogoWidget extends StatelessWidget {
 
-  static const String logoPath = "lib/assets/logo/pumppal_logo.png";
+  static const String logoPath = "assets/logo/pumppal_logo.png";
   double height;
   double width;
 
