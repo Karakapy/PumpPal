@@ -8,6 +8,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.16"
+  animated_bottom_navigation_bar:
+    dependency: "direct main"
+    description:
+      name: animated_bottom_navigation_bar
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.2.0"
   async:
     dependency: transitive
     description:
@@ -22,6 +29,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.0"
+  carbon_icons:
+    dependency: "direct main"
+    description:
+      name: carbon_icons
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.1+2"
   characters:
     dependency: transitive
     description:

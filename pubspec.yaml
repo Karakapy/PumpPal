@@ -17,6 +17,8 @@ dependencies:
   firebase_core: ^2.7.0
   cloud_firestore: ^4.4.3
   firebase_auth: ^4.2.9
+  animated_bottom_navigation_bar: ^1.2.0
+  carbon_icons: ^0.0.1+2
 
 dev_dependencies:
   flutter_test:

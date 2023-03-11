@@ -39,7 +39,28 @@ class _SignUpScreenState extends State<SignUpScreen> {
         decoration: gradientBg,
         child: Column(
           children: [
-            SizedBox(height: 100,),
+            SizedBox(height: 70,),
+            Container(child: Padding(
+              padding: const EdgeInsets.only(left: 20.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  GestureDetector(
+                    onTap: (){
+                      Navigator.pushNamed(context, '/home');
+                    },
+                    child: Icon(
+                      Icons.arrow_back_ios,
+                      size: 35,
+                      color: primaryColor,
+
+                    ),
+                  ),
+                ],
+              ),
+            ),),
+
+            SizedBox(height: 15,),
             Container(
               child:Center(
                 child: LogoWidget(height: 168, width: 167),
@@ -57,11 +78,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   color: primaryColor,),),
             ),
             ),
-            SizedBox(height: 15,),
-            // Container(child: Center(
-            //   child: TextFieldWidget( text: "Email", icon: Icons.email , isPasswordType: false , controller:_emailController,),
-            //
-            // ),),
+            SizedBox(height: 5,),
             Container(child: Padding(
               padding: const EdgeInsets.only(left: 40, top:40, right: 40),
               child: Column(
@@ -76,7 +93,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             ),
             ),
 
-            SizedBox(height: 60,),
+            SizedBox(height: 50,),
            Container(
              child: ButtonWidget(
                theChild: Container(

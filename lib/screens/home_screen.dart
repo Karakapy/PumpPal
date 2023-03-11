@@ -1,14 +1,15 @@
+import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:pumppal/constantPreset.dart';
 import 'package:pumppal/widgets/fuel_price_widget.dart';
-import 'package:pumppal/widgets/floating_bottom_nav_bar.dart';
 import 'package:intl/intl.dart';
+import 'package:carbon_icons/carbon_icons.dart';
+
 
 
 class HomeScreen extends StatefulWidget {
   @override
   State<HomeScreen> createState() => _HomeScreenState();
-
 
 }
 
@@ -16,7 +17,12 @@ class _HomeScreenState extends State<HomeScreen> {
 
   int _selectedItemIndex = -1;
 
+  List<IconData> iconList = [ //list of icons that required by animated navigation bar.
+    Icons.home_outlined,
+    Icons.person_outline,
+  ];
 
+  int _bottomNavIndex = 0;
 
 
   @override
@@ -36,8 +42,20 @@ class _HomeScreenState extends State<HomeScreen> {
       });
     }
 
+    void _navigation(index){
+
+      setState(() {
+        _bottomNavIndex = index;
+      });
+      if (_bottomNavIndex==1){
+        Navigator.pushNamed(context, '/login');
+      }
+
+    }
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
+      backgroundColor: blackColor2,
       body: Container(
         decoration: BoxDecoration(
             gradient: LinearGradient(
@@ -53,34 +71,18 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           children: [
             SizedBox(height: 100,),
-            Container(child: Padding(
-              padding: const EdgeInsets.only(left: 22, right: 22),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(child: Text("PumpPal", style: TextStyle(
+            Row(
+              children: [
+                Container(
+                  padding: EdgeInsets.only(left: 22.0),
+                  child: Text("PumpPal", style: TextStyle(
                     fontSize: 48,
                     fontWeight: FontWeight.bold,
                     color: primaryColor,
                     fontFamily: 'montserrat'
-                  ),),),
-                  Container(child: GestureDetector(
-                    onTap: () {
-                      Navigator.pushNamed(context, '/login');
-                    },
-                    child: Container(
-                      child: Icon(
-                        Icons.account_circle,
-                        size: 45,
-                        color: Colors.white,
-                      ),
-                    ),
-                  )
-
-                  ),
-                ],
-              ),
-            ),),
+                ),),),
+              ],
+            ),
 
             SizedBox(height: 25,),
             Container(
@@ -143,7 +145,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     height: 50.0,
                     decoration: BoxDecoration(
                       color: whiteColor,
-                      borderRadius: BorderRadius.circular(8.0),
+                      // borderRadius: BorderRadius.circular(8.0),
                     ),
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
@@ -188,14 +190,43 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             SizedBox(height: 23),
 
+
             Container(),
             Container(),
 
           ],
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        elevation: 8,
+        backgroundColor: primaryColor,
+        child: Icon(
+          CarbonIcons.calculation,
+          color: blackColor,
+          size: 30,
+        ),
+        onPressed: () {
+          Navigator.pushNamed(context, '/fuelCalculator');
+
+        },
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      bottomNavigationBar: AnimatedBottomNavigationBar(
+        icons: iconList,
+        iconSize: 35,
+        activeIndex: _bottomNavIndex,
+
+        activeColor: blackColor,
+        inactiveColor: greyColor,
+
+        gapLocation: GapLocation.center,
+        notchSmoothness: NotchSmoothness.smoothEdge,
+        onTap: (index) => _navigation(index),
+      ),
+
     );
   }
 }
 
 
+// Navigator.pushNamed(context, '/login');

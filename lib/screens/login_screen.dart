@@ -5,7 +5,6 @@ import 'package:pumppal/constantPreset.dart';
 import 'package:pumppal/widgets/button_widget.dart';
 import 'package:pumppal/widgets/logo_widget.dart';
 import 'package:pumppal/widgets/textfield_widget.dart';
-import 'package:pumppal/main.dart';
 
 class LogInScreen extends StatefulWidget {
   @override
@@ -35,11 +34,33 @@ class _LogInScreenState extends State<LogInScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
+
       body: Container(
         decoration: gradientBg,
         child: Column(
           children: [
-            SizedBox(height: 100,),
+            SizedBox(height: 70,),
+            Container(child: Padding(
+              padding: const EdgeInsets.only(left: 20.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  GestureDetector(
+                    onTap: (){
+                      Navigator.pushNamed(context, '/home');
+                    },
+                    child: Icon(
+                      Icons.arrow_back_ios,
+                      size: 35,
+                      color: primaryColor,
+
+                    ),
+                  ),
+                ],
+              ),
+            ),),
+
+            SizedBox(height: 15,),
             Container(
               child:Center(
                 child: LogoWidget(height: 168, width: 167),
@@ -58,10 +79,6 @@ class _LogInScreenState extends State<LogInScreen> {
             ),
             ),
             SizedBox(height: 15,),
-            // Container(child: Center(
-            //   child: TextFieldWidget( text: "Email", icon: Icons.email , isPasswordType: false , controller:_emailController,),
-            //
-            // ),),
             Container(child: Padding(
               padding: const EdgeInsets.only(left: 40, top:40, right: 40),
               child: Column(
@@ -75,7 +92,7 @@ class _LogInScreenState extends State<LogInScreen> {
             ),
             ),
 
-            SizedBox(height: 150,),
+            SizedBox(height: 130,),
             Container(
               child: ButtonWidget(
                 theChild: Container(

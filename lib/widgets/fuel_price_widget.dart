@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 class FuelPriceWidget extends StatelessWidget {
-  // const FuelPriceWidget({Key? key}) : super(key: key);
   FuelPriceWidget({
     required this.text, required this.price
   });
