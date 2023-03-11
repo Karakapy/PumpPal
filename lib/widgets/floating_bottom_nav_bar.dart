@@ -3,9 +3,9 @@ import 'package:pumppal/screens/fuel_calculator_screen.dart';
 import 'package:pumppal/themePreset.dart';
 
 class FloatingBottomNavBar extends StatelessWidget {
-  const FloatingBottomNavBar({required this.page});
 
-  final int page;
+  const FloatingBottomNavBar({Key? key}) : super(key: key);
+
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +37,8 @@ class FloatingBottomNavBar extends StatelessWidget {
                 },
               child: Icon(Icons.home,
                   size: 40,
-                  color: page == 1 ? primaryColor : blackColor)
+                  color: primaryColor),
+                  // color: page == 1 ? primaryColor : blackColor)
                 ),
           GestureDetector(
               onTap: () {
@@ -47,7 +48,9 @@ class FloatingBottomNavBar extends StatelessWidget {
                 },
               child: Icon(Icons.calendar_today,
                   size: 38,
-                  color: page == 2 ? primaryColor : blackColor)
+                  color: primaryColor),
+                  // color: page == 2 ? primaryColor : blackColor)
+
           )
         ],
       ),
