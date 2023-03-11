@@ -1,7 +1,9 @@
+import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pumppal/screens/result_screen.dart';
 import 'package:pumppal/widgets/button_widget.dart';
+import 'package:carbon_icons/carbon_icons.dart';
 
 import '../constantPreset.dart';
 
@@ -23,28 +25,65 @@ class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
   double fuelConsumption = 0.0;
   //bar
   int _selectedGasStationIndex = -1;
+  int _selectedFuelTypeIndex = -1;
+
+  int _selectedCalculatorIndex = -1;
+
+  List<String> fuelTypeList = [
+    "E85",
+    "E20",
+    "E91",
+    "E95",
+    "B7",
+    "B10",
+    "B20"
+  ];
+
+  List<String> gasStationList = [
+    "PTT",
+    "BC",
+    "Shell",
+    "Esso",
+    "Caltex",
+    "PT",
+    "Susco"
+  ];
+
+  List<String> calculatorList = [
+    "Budget",
+    "Tank",
+    "Distance",
+  ];
+
+  List<IconData> iconList = [ //list of icons that required by animated navigation bar.
+    Icons.home_outlined,
+    Icons.person_outline,
+  ];
+
+  int _bottomNavIndex = -1;
 
   @override
   Widget build(BuildContext context) {
+
+    void _navigation(index){
+
+      setState(() {
+        _bottomNavIndex = index;
+      });
+      if (_bottomNavIndex==0) {
+        Navigator.pushNamed(context, '/');
+      }
+      if (_bottomNavIndex==1){
+        Navigator.pushNamed(context, '/login');
+      }
+
+    }
+
+
     return Scaffold(
-      extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        leading: IconButton(
-          padding: const EdgeInsets.all(20),
-          icon: const Icon(
-            Icons.arrow_back_ios,
-            size: 40,
-          ),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-        elevation: 0,
-      ),
       body:
       Container(
-        padding: EdgeInsets.all(40),
+        padding: EdgeInsets.only(top:40, right:22, left:22),
         decoration: BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.topCenter,
@@ -55,10 +94,13 @@ class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
               ],
     )
         ),
-        //Title
+          /**
+           * Title
+           */
         child: Column(
           children: [
             Container(
+              margin: EdgeInsets.only(top: 80),
                 child: const Center(
                     child: Text("Fuel",
                         style: TextStyle(
@@ -79,12 +121,104 @@ class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
               ),
             ),
 
-            //gas station bar
+            /**
+             * Car
+             */
+            Row(
+                children: [
+                  Text("Car", style: TextStyle(
+                      fontFamily: 'Inter',
+                      fontSize: 20,
+                      color:Colors.white)),
+                ]
+            ),
+        Container(
+          margin: EdgeInsets.only(bottom: 20),
+          child: ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/');
+              },
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.white,
+                  elevation: 0,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(19))),
+              child: SizedBox(
+                height: 115,
+                child: Container(
+                  padding: EdgeInsets.all(15),
+                  child: Wrap(
+                  children: [
+                    Column(
+                      children: [
+                        Icon(Icons.add_circle, color: Colors.grey,size: 60),
+                        Text("Add new car",style: TextStyle(
+                            fontFamily:"Inter",
+                            fontSize: 20,
+                            color: Colors.grey),),
+                      ],
+                    ),
+                    Image.asset('assets/defaultCarImage.png',
+                    height: 96,
+                    width:160.0,),
+                  ],
+                  ),
+                ),
+              ),
+            ),
+        ),
+
+            //fuel type bar
+            Row(
+                children: [
+                  Text("Fuel Type", style: buttonFont),
+                ]
+            ),
             Container(
-              height: 50.0,
+              margin: EdgeInsets.only(bottom: 20),
+              width: 339,
+              height: 50,
               decoration: BoxDecoration(
                 color: whiteColor,
-                borderRadius: BorderRadius.circular(8.0),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: 7,
+                itemBuilder: (BuildContext context, int index) {
+                  return GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        _selectedFuelTypeIndex = index;
+                        fuelType = fuelTypeList[index];
+                        print(fuelType);
+                      });
+                    },
+                    child: Container(
+                      width: 48.5,
+                      color: _selectedFuelTypeIndex == index ? primaryColor : whiteColor,
+                      child: Center(
+                        child: Text(fuelTypeList[index],style: buttonFont,)
+                        ),
+                      ),
+                  );
+                },
+              ),
+            ),
+
+            //gas station bar
+            Row(
+                children: [
+                  Text("Gas Station", style: buttonFont),
+                ]
+            ),
+            Container(
+              margin: EdgeInsets.only(bottom: 20),
+              width: 339,
+              height: 50,
+              decoration: BoxDecoration(
+                color: whiteColor,
+                borderRadius: BorderRadius.circular(12),
               ),
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
@@ -94,7 +228,8 @@ class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
                     onTap: () {
                       setState(() {
                         _selectedGasStationIndex = index;
-                        print(index);
+                        gasStation = gasStationList[index];
+                        print(gasStation);
                       });
                     },
                     child: Container(
@@ -112,6 +247,44 @@ class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
                 },
               ),
             ),
+
+            //Calculator bar
+            Container(
+              margin: EdgeInsets.only(bottom: 20),
+              width: 339,
+              height: 50,
+              decoration: BoxDecoration(
+                color: whiteColor,
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: 3,
+                itemBuilder: (BuildContext context, int index) {
+                  return GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        _selectedCalculatorIndex = index;
+                        gasStation = gasStationList[index];
+                        print(gasStation);
+                      });
+                    },
+                    child: Container(
+                      width: 109,
+                      color: _selectedCalculatorIndex == index ? primaryColor : whiteColor,
+                      child: Center(
+                        child: Text(calculatorList[index],style: buttonFont,)
+                        ),
+                      ),
+                    );
+                },
+              ),
+            ),
+
+            /**
+             * Data entry
+            * */
+            SizedBox(height: 180,),
 
             //calculate button
             ButtonWidget(theChild: Container(
@@ -136,6 +309,32 @@ class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
             )
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        elevation: 8,
+        backgroundColor: primaryColor,
+        child: Icon(
+          CarbonIcons.calculation,
+          color: blackColor,
+          size: 30,
+        ),
+        onPressed: () {
+          Navigator.pushNamed(context, '/fuelCalculator');
+
+        },
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      bottomNavigationBar: AnimatedBottomNavigationBar(
+        icons: iconList,
+        iconSize: 35,
+        activeIndex: _bottomNavIndex,
+
+        activeColor: blackColor,
+        inactiveColor: greyColor,
+
+        gapLocation: GapLocation.center,
+        notchSmoothness: NotchSmoothness.smoothEdge,
+        onTap: (index) => _navigation(index),
       ),
     );
   }
