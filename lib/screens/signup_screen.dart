@@ -47,7 +47,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 children: [
                   GestureDetector(
                     onTap: (){
-                      Navigator.pushNamed(context, '/home');
+                      Navigator.pushNamed(context, '/');
                     },
                     child: Icon(
                       Icons.arrow_back_ios,

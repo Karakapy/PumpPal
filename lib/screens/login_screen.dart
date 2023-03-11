@@ -47,7 +47,7 @@ class _LogInScreenState extends State<LogInScreen> {
                 children: [
                   GestureDetector(
                     onTap: (){
-                      Navigator.pushNamed(context, '/home');
+                      Navigator.pushNamed(context, '/');
                     },
                     child: Icon(
                       Icons.arrow_back_ios,
@@ -118,7 +118,7 @@ class _LogInScreenState extends State<LogInScreen> {
                     final user = await _auth.signInWithEmailAndPassword(email: email, password: password);
                     if (user != null) {
                       print("$email is in.");
-                      Navigator.pushNamed(context, '/home');
+                      Navigator.pushNamed(context, '/');
                     } else {
                       print("Login failed");
                       loginError(context);
