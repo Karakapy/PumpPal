@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:pumppal/themePreset.dart';
+import 'package:pumppal/constantPreset.dart';
 import 'package:pumppal/widgets/button_widget.dart';
 import 'package:pumppal/widgets/logo_widget.dart';
 import 'package:pumppal/widgets/textfield_widget.dart';
@@ -36,16 +36,7 @@ class _LogInScreenState extends State<LogInScreen> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Container(
-        decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [
-                greyBlueColor,
-                blackColor2,
-              ],
-            )
-        ),
+        decoration: gradientBg,
         child: Column(
           children: [
             SizedBox(height: 100,),
@@ -113,6 +104,7 @@ class _LogInScreenState extends State<LogInScreen> {
                       Navigator.pushNamed(context, '/home');
                     } else {
                       print("Login failed");
+                      loginError(context);
                     }
                     // final newUser = await _auth.createUserWithEmailAndPassword(email: email, password: password);
                   }
@@ -140,7 +132,11 @@ class _LogInScreenState extends State<LogInScreen> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         const Text("First time here?",
-          style: TextStyle(color: whiteColor,fontSize: 20),),
+          style: TextStyle(
+            fontFamily: 'Inter',
+            color: Colors.white,
+            fontSize: 20
+          )),
         SizedBox(width: 10,),
         GestureDetector(
           onTap: () {
@@ -151,12 +147,22 @@ class _LogInScreenState extends State<LogInScreen> {
 
           child: const Text(
             "Sign up",
-            style: TextStyle(color: primaryColor, fontWeight: FontWeight.bold,fontSize: 20),
+            style: TextStyle(fontFamily:'Inter',color: primaryColor, fontWeight: FontWeight.bold,fontSize: 20),
           ),
         )
       ],
     );
   }
+}
+
+Widget loginError(BuildContext context) {
+  return Container(
+      child: Column(
+          children: const [
+            Text("Login failed", style: TextStyle(fontFamily: 'Inter', color: Colors.red, fontSize: 20),)
+          ],
+  )
+  );
 }
 
 

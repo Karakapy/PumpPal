@@ -12,6 +12,16 @@ const blackColor2 = Color(0xFF000000);
 
 const whiteColor = Color(0xFFFFFFFF);
 
-const primaryFont = TextStyle(fontFamily: 'Montserrat',fontWeight: FontWeight.bold);
-const bodyFont = TextStyle(fontFamily: 'Inter');
+const buttonFont = TextStyle(fontFamily: 'Inter', fontSize: 20);
+
+const gradientBg = BoxDecoration(
+    gradient: LinearGradient(
+      begin: Alignment.topCenter,
+      end: Alignment.bottomCenter,
+      colors: [
+        greyBlueColor,
+        blackColor2,
+      ],
+    )
+);
 
