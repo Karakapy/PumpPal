@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:pumppal/screens/fuel_calculator_screen.dart';
 import 'package:pumppal/screens/home_screen.dart';
 import 'package:pumppal/screens/login_screen.dart';
@@ -21,13 +20,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: implement build
     return MaterialApp(
-      initialRoute: '/home',
+      initialRoute: '/',
       routes: {
-        '/': (context) => const AddCar(),
+        '/': (context) => HomeScreen(),
+        '/addCar': (context) => const AddCar(),
         '/login': (context) => LogInScreen(),
         '/signup': (context) => SignUpScreen(),
         '/getStarted': (context) => GetStartedScreen(),
-        '/home': (context) => HomeScreen(),
         '/fuelCalculator': (context) => FuelCalculatorScreen(),
       },
    );

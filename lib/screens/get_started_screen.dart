@@ -1,11 +1,7 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:pumppal/constantPreset.dart';
 import 'package:pumppal/widgets/button_widget.dart';
 import 'package:pumppal/widgets/logo_widget.dart';
-import 'package:pumppal/widgets/textfield_widget.dart';
-import 'package:pumppal/main.dart';
 
 class GetStartedScreen extends StatefulWidget {
   @override

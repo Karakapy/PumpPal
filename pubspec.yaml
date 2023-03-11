@@ -36,6 +36,7 @@ flutter:
   assets:
     - assets/logo/
     - assets/station_logos/
+    - assets/defaultCarImage.png
   #   - images/a_dot_ham.jpeg
 
   fonts:
