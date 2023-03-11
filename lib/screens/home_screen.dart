@@ -4,6 +4,7 @@ import 'package:pumppal/constantPreset.dart';
 import 'package:pumppal/widgets/fuel_price_widget.dart';
 import 'package:intl/intl.dart';
 import 'package:carbon_icons/carbon_icons.dart';
+import 'package:pumppal/widgets/nav_bar_widget.dart';
 
 
 
@@ -43,7 +44,6 @@ class _HomeScreenState extends State<HomeScreen> {
     }
 
     void _navigation(index){
-
       setState(() {
         _bottomNavIndex = index;
       });
@@ -211,19 +211,10 @@ class _HomeScreenState extends State<HomeScreen> {
         },
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: AnimatedBottomNavigationBar(
-        icons: iconList,
-        iconSize: 35,
-        activeIndex: _bottomNavIndex,
-
-        activeColor: blackColor,
-        inactiveColor: greyColor,
-
-        gapLocation: GapLocation.center,
-        notchSmoothness: NotchSmoothness.smoothEdge,
-        onTap: (index) => _navigation(index),
+      bottomNavigationBar: NavBarWidget(
+        currentIndex: _bottomNavIndex,
+        onTap:(index)=>_navigation(index),
       ),
-
     );
   }
 }

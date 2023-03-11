@@ -6,6 +6,7 @@ import 'package:pumppal/widgets/button_widget.dart';
 import 'package:carbon_icons/carbon_icons.dart';
 
 import '../constantPreset.dart';
+import '../widgets/nav_bar_widget.dart';
 
 class FuelCalculatorScreen extends StatefulWidget {
   const FuelCalculatorScreen({Key? key}) : super(key: key);
@@ -331,17 +332,9 @@ class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
         },
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: AnimatedBottomNavigationBar(
-        icons: iconList,
-        iconSize: 35,
-        activeIndex: _bottomNavIndex,
-
-        activeColor: blackColor,
-        inactiveColor: greyColor,
-
-        gapLocation: GapLocation.center,
-        notchSmoothness: NotchSmoothness.smoothEdge,
-        onTap: (index) => _navigation(index),
+      bottomNavigationBar: NavBarWidget(
+        currentIndex: _bottomNavIndex,
+        onTap:(index)=>_navigation(index),
       ),
     );
   }
