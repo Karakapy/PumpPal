@@ -25,3 +25,5 @@ const gradientBg = BoxDecoration(
     )
 );
 
+const redColor = Color(0xFFFF4242);
+const greyColor2 = Color(0xffC6C6C6);

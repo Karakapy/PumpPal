@@ -292,7 +292,9 @@ class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
                 //calculate button
                 Container(
                   margin: EdgeInsets.only(bottom: 40),
-                    child:ButtonWidget(theChild: Container(
+                    child:ButtonWidget(
+                        color: primaryColor,
+                        theChild: Container(
                   width: 312.0,
                   height: 64.0,
                   child: const Center(

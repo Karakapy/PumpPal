@@ -95,6 +95,7 @@ class _LogInScreenState extends State<LogInScreen> {
             SizedBox(height: 130,),
             Container(
               child: ButtonWidget(
+                color: primaryColor,
                 theChild: Container(
                   width: 312.0,
                   height: 64.0,

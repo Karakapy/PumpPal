@@ -29,7 +29,10 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
       enableSuggestions: !widget.isPasswordType,
       autocorrect: !widget.isPasswordType,
       cursorColor: Colors.white,
-      style: TextStyle(color: blackColor),
+      style: TextStyle(
+        color: blackColor,
+        fontSize: 20,
+      ),
       decoration: InputDecoration(
         prefixIcon: Icon(
           widget.icon,

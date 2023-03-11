@@ -96,6 +96,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             SizedBox(height: 50,),
            Container(
              child: ButtonWidget(
+               color: primaryColor,
                theChild: Container(
                  width: 312.0,
                  height: 64.0,

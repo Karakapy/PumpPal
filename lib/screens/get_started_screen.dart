@@ -51,6 +51,7 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
             SizedBox(height: 100,),
             Container(
               child: ButtonWidget(
+                color: primaryColor,
                 theChild: Container(
                   width: 312.0,
                   height: 64.0,
