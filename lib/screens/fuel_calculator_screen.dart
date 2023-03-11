@@ -76,240 +76,247 @@ class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
       if (_bottomNavIndex==1){
         Navigator.pushNamed(context, '/login');
       }
-
     }
 
-
     return Scaffold(
+      extendBody: true,
+      backgroundColor: Colors.white,
       body:
-      Container(
-        padding: EdgeInsets.only(top:40, right:22, left:22),
-        decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [
-                Color(0xff1F1F1F),
-                 Colors.white,
-              ],
-    )
-        ),
-          /**
-           * Title
-           */
-        child: Column(
+          ListView(scrollDirection: Axis.vertical,
           children: [
             Container(
-              margin: EdgeInsets.only(top: 80),
-                child: const Center(
-                    child: Text("Fuel",
+            padding: EdgeInsets.only(right:22, left:22),
+            decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    Color(0xff1F1F1F),
+                    Colors.white,
+                  ],
+                )
+            ),
+            /**
+             * Title
+             */
+            child: Column(
+              children: [
+                Container(
+                    margin: EdgeInsets.only(top: 20),
+                    child: const Center(
+                        child: Text("Fuel",
+                            style: TextStyle(
+                              fontFamily: 'Montserrat',
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 40 ,)
+                        )
+                    )),
+                Container(
+                  child: const Center(
+                    child: Text("Calculator",
                         style: TextStyle(
                           fontFamily: 'Montserrat',
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 40 ,)
-                    )
-                )),
-            Container(
-              child: const Center(
-                child: Text("Calculator",
-                    style: TextStyle(
-                      fontFamily: 'Montserrat',
-                      color: Colors.white,fontWeight:
-                    FontWeight.bold,
-                      fontSize: 40 ,)),
-              ),
-            ),
-
-            /**
-             * Car
-             */
-            Row(
-                children: [
-                  Text("Car", style: TextStyle(
-                      fontFamily: 'Inter',
-                      fontSize: 20,
-                      color:Colors.white)),
-                ]
-            ),
-        Container(
-          margin: EdgeInsets.only(bottom: 20),
-          child: ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/');
-              },
-              style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.white,
-                  elevation: 0,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(19))),
-              child: SizedBox(
-                height: 115,
-                child: Container(
-                  padding: EdgeInsets.all(15),
-                  child: Wrap(
-                  children: [
-                    Column(
-                      children: [
-                        Icon(Icons.add_circle, color: Colors.grey,size: 60),
-                        Text("Add new car",style: TextStyle(
-                            fontFamily:"Inter",
-                            fontSize: 20,
-                            color: Colors.grey),),
-                      ],
-                    ),
-                    Image.asset('assets/defaultCarImage.png',
-                    height: 96,
-                    width:160.0,),
-                  ],
+                          color: Colors.white,fontWeight:
+                        FontWeight.bold,
+                          fontSize: 40 ,)),
                   ),
                 ),
-              ),
-            ),
-        ),
 
-            //fuel type bar
-            Row(
-                children: [
-                  Text("Fuel Type", style: buttonFont),
-                ]
-            ),
-            Container(
-              margin: EdgeInsets.only(bottom: 20),
-              width: 339,
-              height: 50,
-              decoration: BoxDecoration(
-                color: whiteColor,
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: 7,
-                itemBuilder: (BuildContext context, int index) {
-                  return GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        _selectedFuelTypeIndex = index;
-                        fuelType = fuelTypeList[index];
-                        print(fuelType);
-                      });
+                /**
+                 * Car
+                 */
+                Row(
+                    children: [
+                      Text("Car", style: TextStyle(
+                          fontFamily: 'Inter',
+                          fontSize: 20,
+                          color:Colors.white)),
+                    ]
+                ),
+                Container(
+                  margin: EdgeInsets.only(bottom: 20),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/');
                     },
-                    child: Container(
-                      width: 48.5,
-                      color: _selectedFuelTypeIndex == index ? primaryColor : whiteColor,
-                      child: Center(
-                        child: Text(fuelTypeList[index],style: buttonFont,)
-                        ),
-                      ),
-                  );
-                },
-              ),
-            ),
-
-            //gas station bar
-            Row(
-                children: [
-                  Text("Gas Station", style: buttonFont),
-                ]
-            ),
-            Container(
-              margin: EdgeInsets.only(bottom: 20),
-              width: 339,
-              height: 50,
-              decoration: BoxDecoration(
-                color: whiteColor,
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: 7,
-                itemBuilder: (BuildContext context, int index) {
-                  return GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        _selectedGasStationIndex = index;
-                        gasStation = gasStationList[index];
-                        print(gasStation);
-                      });
-                    },
-                    child: Container(
-                      width: 48.5,
-                      color: _selectedGasStationIndex == index ? primaryColor : whiteColor,
-                      child: Center(
-                        child: Image.asset(
-                          'assets/station_logos/station$index.png',
-                          width: 35.0,
-                          height: 35.0,
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.white,
+                        elevation: 0,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(19))),
+                    child: SizedBox(
+                      height: 115,
+                      child: Container(
+                        padding: EdgeInsets.all(15),
+                        child: Wrap(
+                          children: [
+                            Column(
+                              children: [
+                                Icon(Icons.add_circle, color: Colors.grey,size: 60),
+                                Text("Add new car",style: TextStyle(
+                                    fontFamily:"Inter",
+                                    fontSize: 20,
+                                    color: Colors.grey),),
+                              ],
+                            ),
+                            Image.asset('assets/defaultCarImage.png',
+                              height: 96,
+                              width:160.0,),
+                          ],
                         ),
                       ),
                     ),
-                  );
-                },
-              ),
-            ),
-
-            //Calculator bar
-            Container(
-              margin: EdgeInsets.only(bottom: 20),
-              width: 339,
-              height: 50,
-              decoration: BoxDecoration(
-                color: whiteColor,
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: 3,
-                itemBuilder: (BuildContext context, int index) {
-                  return GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        _selectedCalculatorIndex = index;
-                        gasStation = gasStationList[index];
-                        print(gasStation);
-                      });
-                    },
-                    child: Container(
-                      width: 109,
-                      color: _selectedCalculatorIndex == index ? primaryColor : whiteColor,
-                      child: Center(
-                        child: Text(calculatorList[index],style: buttonFont,)
-                        ),
-                      ),
-                    );
-                },
-              ),
-            ),
-
-            /**
-             * Data entry
-            * */
-            SizedBox(height: 180,),
-
-            //calculate button
-            ButtonWidget(theChild: Container(
-              width: 312.0,
-              height: 64.0,
-              child: const Center(
-                child: Text(
-                  "Calculate",
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'montserrat',
-                    color: blackColor,
                   ),
                 ),
-              ),
+
+                //fuel type bar
+                Row(
+                    children: [
+                      Text("Fuel Type", style: buttonFont),
+                    ]
+                ),
+                Container(
+                  margin: EdgeInsets.only(bottom: 20),
+                  width: 339,
+                  height: 50,
+                  decoration: BoxDecoration(
+                    color: whiteColor,
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: 7,
+                    itemBuilder: (BuildContext context, int index) {
+                      return GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            _selectedFuelTypeIndex = index;
+                            fuelType = fuelTypeList[index];
+                            print(fuelType);
+                          });
+                        },
+                        child: Container(
+                          width: 48.5,
+                          color: _selectedFuelTypeIndex == index ? primaryColor : whiteColor,
+                          child: Center(
+                              child: Text(fuelTypeList[index],style: buttonFont,)
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+
+                //gas station bar
+                Row(
+                    children: [
+                      Text("Gas Station", style: buttonFont),
+                    ]
+                ),
+                Container(
+                  margin: EdgeInsets.only(bottom: 20),
+                  width: 339,
+                  height: 50,
+                  decoration: BoxDecoration(
+                    color: whiteColor,
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: 7,
+                    itemBuilder: (BuildContext context, int index) {
+                      return GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            _selectedGasStationIndex = index;
+                            gasStation = gasStationList[index];
+                            print(gasStation);
+                          });
+                        },
+                        child: Container(
+                          width: 48.5,
+                          color: _selectedGasStationIndex == index ? primaryColor : whiteColor,
+                          child: Center(
+                            child: Image.asset(
+                              'assets/station_logos/station$index.png',
+                              width: 35.0,
+                              height: 35.0,
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+
+                //Calculator bar
+                Container(
+                  margin: EdgeInsets.only(bottom: 20),
+                  width: 339,
+                  height: 50,
+                  decoration: BoxDecoration(
+                    color: whiteColor,
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: 3,
+                    itemBuilder: (BuildContext context, int index) {
+                      return GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            _selectedCalculatorIndex = index;
+                            gasStation = gasStationList[index];
+                            print(gasStation);
+                          });
+                        },
+                        child: Container(
+                          width: 109,
+                          color: _selectedCalculatorIndex == index ? primaryColor : whiteColor,
+                          child: Center(
+                              child: Text(calculatorList[index],style: buttonFont,)
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+
+                /**
+                 * Data entry
+                 * */
+                SizedBox(height: 180,),
+
+                //calculate button
+                Container(
+                  margin: EdgeInsets.only(bottom: 40),
+                    child:ButtonWidget(theChild: Container(
+                  width: 312.0,
+                  height: 64.0,
+                  child: const Center(
+                    child: Text(
+                      "Calculate",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'montserrat',
+                        color: blackColor,
+                      ),
+                    ),
+                  ),
+                ),
+                    theOnTapFunc: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) { return const ResultScreen(); }));
+                    }
+                )
+                ),
+              ],
             ),
-              theOnTapFunc: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) { return const ResultScreen(); }));
-            }
-            )
+          ),
           ],
-        ),
-      ),
+          ),
       floatingActionButton: FloatingActionButton(
         elevation: 8,
         backgroundColor: primaryColor,
