@@ -139,7 +139,7 @@ class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
                   margin: EdgeInsets.only(bottom: 20),
                   child: ElevatedButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, '/');
+                      Navigator.pushNamed(context, '/addCar');
                     },
                     style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.white,
