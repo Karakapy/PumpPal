@@ -5,7 +5,7 @@ import 'package:pumppal/widgets/fuel_price_widget.dart';
 import 'package:intl/intl.dart';
 import 'package:carbon_icons/carbon_icons.dart';
 import 'package:pumppal/widgets/nav_bar_widget.dart';
-
+import '../api/api_oil_price.dart';
 
 
 class HomeScreen extends StatefulWidget {
@@ -17,7 +17,8 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
 
   int _selectedItemIndex = -1;
-
+  static List<String> stationLst = ['ptt','bcp','shell','caltex','esso','pt','susco'];
+  String stationName = stationLst.first;
   List<IconData> iconList = [ //list of icons that required by animated navigation bar.
     Icons.home_outlined,
     Icons.person_outline,
@@ -29,7 +30,6 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     String currentTime = DateFormat('dd/MM/yyyy kk:mm:ss').format(DateTime.now());
-
     @override
     void initState() {
       super.initState();
@@ -57,7 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
       resizeToAvoidBottomInset: false,
       backgroundColor: blackColor2,
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
@@ -87,7 +87,7 @@ class _HomeScreenState extends State<HomeScreen> {
             SizedBox(height: 25,),
             Container(
               width: 339,
-              height: 500,
+              height: 600,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),
                 color: lightGreyColor,
@@ -155,7 +155,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           onTap: () {
                             setState(() {
                               _selectedItemIndex = index;
-                              print(index);
+                              print(stationLst[index]);
+                              stationName = stationName[index];
                             });
                           },
                           child: Container(
@@ -173,18 +174,33 @@ class _HomeScreenState extends State<HomeScreen> {
                       },
                     ),
                   ),
-                  Container(child: Column(
-                    children: [
-                      FuelPriceWidget(text: "Gasohol 95", price: 36.94),
-                      FuelPriceWidget(text: "Gasohol 91", price: 36.64),
-                      FuelPriceWidget(text: "Gasohol E85", price: 36.94),
-                      FuelPriceWidget(text: "Gasohol E20", price: 34.34),
-                      FuelPriceWidget(text: "Diesel", price: 34.44),
-                      FuelPriceWidget(text: "Diesel B7", price: 34.44),
-                      FuelPriceWidget(text: "Diesel B20", price: 34.44),
-                      FuelPriceWidget(text: "Diesel Premium", price: 45.34),
-                    ],
-                  ),),
+
+                  Container(
+                    height: 400,
+                    child: FutureBuilder(
+                      future: getOilPrice(stationName),
+                      builder: (context, snapshot) {
+                         if(!snapshot.hasData){
+                           return const Center(
+                             child: CircularProgressIndicator(),
+                           );
+                         } else {
+                           final oil = snapshot.data!;
+                           return ListView.builder(
+                                itemCount: oil.length,
+                               itemBuilder: (context, index){
+                                 final each_oil = oil[index];
+                                 return createOilList(each_oil);
+                               }
+                           );
+
+                         }
+                      },
+                    ),
+
+
+
+                  ),
                 ],
               ),
             ),
