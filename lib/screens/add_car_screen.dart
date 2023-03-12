@@ -314,12 +314,20 @@ class _AddCarScreenState extends State<AddCarScreen> {
                         if(selectedYear != null && selectedModel != null && selectedBrand != null){
                           var chooseCar = car.docs.where((element) => element['model'].toString().toLowerCase() == selectedModel.toString().toLowerCase()).where((element) => element['makeYear'].toString().toLowerCase() == selectedYear.toString().toLowerCase()).toList().first.data();
                           print(userEmail);
-                          // final searchID = await FirebaseFirestore.instance.collection('user_with_car').doc(userEmail).get();
-                          // if(searchID.exists){
-                          final userCarList = FirebaseFirestore.instance.collection('user_with_car').doc(userEmail);
-                          userCarList.update({
-                            'car_lsit': FieldValue.arrayUnion([chooseCar.toJson()])
-                          });
+                          final searchID = await FirebaseFirestore.instance.collection('user_with_car').doc(userEmail).get();
+                          if(searchID.exists){
+                            final userCarList = FirebaseFirestore.instance.collection('user_with_car').doc(userEmail);
+
+                            userCarList.update({
+                              'car_lsit': FieldValue.arrayUnion([chooseCar.toJson()])
+                            });
+                          } else {
+                            final userCarList = FirebaseFirestore.instance.collection('user_with_car').doc(userEmail);
+                            userCarList.set({
+                              'car_lsit': FieldValue.arrayUnion([chooseCar.toJson()])
+                            });
+                          }
+
 
                         }
                       },
