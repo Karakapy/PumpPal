@@ -29,7 +29,8 @@ class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
   //bar index
   int _selectedGasStationIndex = -1;
   int _selectedFuelTypeIndex = -1;
-  int _selectedCalculatorIndex = 0;
+  int _selectedCalculatorIndex = -1;
+
 
   List<String> fuelTypeList = [
     "E85",
@@ -43,7 +44,7 @@ class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
 
   List<String> gasStationList = [
     "PTT",
-    "BC",
+    "Bang Chak",
     "Shell",
     "Esso",
     "Caltex",
@@ -152,6 +153,7 @@ class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
                 /**
                  * Car
                  */
+                SizedBox(height: 20,),
                 Row(
                     children: [
                       Container(
@@ -163,7 +165,9 @@ class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
                       ),
                     ]
                 ),
+
                 // need shared pref keeping data
+                SizedBox(height: 5,),
                 Container(
                   margin: EdgeInsets.only(bottom: 20),
                   child: ElevatedButton(
@@ -204,11 +208,15 @@ class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
                 Row(
                     children: [
                       Container(
-                        padding: EdgeInsets.only(left: 20),
-                        child: Text("Fuel Type", style: buttonFont),
-                      )
+                          padding: EdgeInsets.only(left: 20),
+                          child:Text("Fuel Type", style: TextStyle(
+                              fontFamily: 'Inter',
+                              fontSize: 20,
+                              color:Colors.white))
+                      ),
                     ]
                 ),
+                SizedBox(height: 5,),
                 Container(
                   margin: EdgeInsets.only(bottom: 20),
                   width: 339,
@@ -247,11 +255,15 @@ class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
                 Row(
                     children: [
                       Container(
-                        margin: EdgeInsets.only(left:20),
-                        child:Text("Gas Station", style: buttonFont),
-                      )
+                          padding: EdgeInsets.only(left: 20),
+                          child:Text("Gas Station", style: TextStyle(
+                              fontFamily: 'Inter',
+                              fontSize: 20,
+                              color:Colors.white))
+                      ),
                     ]
                 ),
+                SizedBox(height: 5,),
                 Container(
                   margin: EdgeInsets.only(bottom: 20),
                   width: 339,
@@ -269,6 +281,7 @@ class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
                           setState(() {
                             _selectedGasStationIndex = index;
                             gasStation = gasStationList[index];
+                            print(_selectedGasStationIndex);
                             print(gasStation);
                           });
                         },
@@ -294,7 +307,7 @@ class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
                 //Calculator bar
                 Container(
                   margin: EdgeInsets.only(bottom: 20),
-                  width: 339,
+                  width: 327,
                   height: 50,
                   decoration: BoxDecoration(
                     color: lightGreyColor,
@@ -338,7 +351,7 @@ class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
                 Container(
                   margin: EdgeInsets.only(bottom: 40),
                     child:ButtonWidget(
-                        color: primaryColor,
+                        color: (fuelType != '' && gasStation != '' && type !='')? primaryColor: greyColor2,
                         theChild: Container(
                   width: 312.0,
                   height: 64.0,
@@ -355,8 +368,11 @@ class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
                   ),
                 ),
                     theOnTapFunc: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) { return const ResultScreen(); }));
+                          if(fuelType != '' && gasStation != '' && type !=''){
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context) { return ResultScreen(fuelType: fuelType,gasStation: gasStation,gasStationIndex: _selectedGasStationIndex,type: type,); }));
+                          }
+
                     }
                 )
                 ),
