@@ -2,6 +2,7 @@ import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.da
 import 'package:flutter/material.dart';
 import 'package:pumppal/constantPreset.dart';
 import 'package:carbon_icons/carbon_icons.dart';
+import 'package:pumppal/controllers/auth_controller.dart';
 
 import '../widgets/button_widget.dart';
 import '../widgets/nav_bar_widget.dart';
@@ -30,7 +31,13 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
   }
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    AuthController authController = AuthController();
     return Scaffold(
       body: Column(
         children: <Widget>[
@@ -77,7 +84,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                                   ),
                                 ),
                                 theOnTapFunc: () {
-                                  print('Log out');
+                                  authController.logOut();
                                 },
                                 color: redColor,
                               ),

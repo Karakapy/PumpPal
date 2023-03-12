@@ -4,6 +4,7 @@ import 'package:pumppal/screens/result_screen.dart';
 import 'package:pumppal/widgets/button_widget.dart';
 import 'package:carbon_icons/carbon_icons.dart';
 import 'package:pumppal/widgets/calculator_widget.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../constantPreset.dart';
 import '../widgets/nav_bar_widget.dart';
@@ -62,7 +63,17 @@ class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
   int _bottomNavIndex = -1;
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
+
+    SharedPreferences.getInstance().then((prefs) {
+      final token = prefs.getString('user');
+      print('token: ${token}');
+    });
 
     void _navigation(index){
 
@@ -73,7 +84,7 @@ class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
         Navigator.pushNamed(context, '/');
       }
       if (_bottomNavIndex==1){
-        Navigator.pushNamed(context, '/login');
+        Navigator.pushNamed(context, '/profile');
       }
     }
 

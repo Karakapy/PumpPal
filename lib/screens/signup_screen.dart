@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:pumppal/constantPreset.dart';
+import 'package:pumppal/controllers/auth_controller.dart';
 import 'package:pumppal/widgets/button_widget.dart';
 import 'package:pumppal/widgets/logo_widget.dart';
 import 'package:pumppal/widgets/textfield_widget.dart';
@@ -12,27 +13,15 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-  late FirebaseAuth _auth;
-  String email = '';
-  String password = '';
 
   @override
   void initState() {
     super.initState();
-    initFirebase();
   }
-
-  void initFirebase() async {
-    await Firebase.initializeApp();
-    _auth = FirebaseAuth.instance;
-  }
-
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
-  TextEditingController _confirmPasswordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    AuthController authController = AuthController();
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Container(
@@ -83,11 +72,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
               padding: const EdgeInsets.only(left: 40, top:40, right: 40),
               child: Column(
                 children: <Widget>[
-                  TextFieldWidget(text: "Email", icon: Icons.email, isPasswordType: false, controller: _emailController),
+                  TextFieldWidget(text: "Email", icon: Icons.email, isPasswordType: false, controller: authController.emailController),
                   SizedBox(height: 30,),
-                  TextFieldWidget(text: "Password", icon: Icons.lock, isPasswordType: true, controller: _passwordController),
+                  TextFieldWidget(text: "Password", icon: Icons.lock, isPasswordType: true, controller: authController.passwordController),
                   SizedBox(height: 30,),
-                  TextFieldWidget(text: "Confirm password", icon: Icons.lock, isPasswordType: true, controller: _confirmPasswordController)
+                  TextFieldWidget(text: "Confirm password", icon: Icons.lock, isPasswordType: true, controller: authController.confirmPasswordController)
                 ],
               ),
             ),
@@ -112,24 +101,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                    ),
                  ),
                ),
-               theOnTapFunc: () async {
-                 if (_passwordController.text == _confirmPasswordController.text){
-                   email = _emailController.text;
-                   password = _passwordController.text;
-                   try {
-                     final newUser = await _auth.createUserWithEmailAndPassword(email: email, password: password);
-                     Navigator.pushNamed(context, '/getStarted');
-                   }
-                   on FirebaseAuthException catch (e) {
-                     print(e);
-                   }
-                 }
-                 else{
-                   print("Password and Confirm password are not matched");
-                 }
-                 _emailController.clear();
-                 _passwordController.clear();
-                 _confirmPasswordController.clear();
+               theOnTapFunc: ()  {
+                 authController.signUp();
                },
 
              ),

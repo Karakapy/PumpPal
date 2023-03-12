@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:pumppal/constantPreset.dart';
+import 'package:pumppal/controllers/auth_controller.dart';
 import 'package:pumppal/widgets/button_widget.dart';
 import 'package:pumppal/widgets/logo_widget.dart';
 import 'package:pumppal/widgets/textfield_widget.dart';
@@ -12,26 +13,16 @@ class LogInScreen extends StatefulWidget {
 }
 
 class _LogInScreenState extends State<LogInScreen> {
-  late FirebaseAuth _auth;
-  String email = '';
-  String password = '';
 
   @override
   void initState() {
     super.initState();
-    initFirebase();
   }
 
-  void initFirebase() async {
-    await Firebase.initializeApp();
-    _auth = FirebaseAuth.instance;
-  }
-
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    AuthController authController = AuthController();
     return Scaffold(
       resizeToAvoidBottomInset: false,
 
@@ -83,9 +74,9 @@ class _LogInScreenState extends State<LogInScreen> {
               padding: const EdgeInsets.only(left: 40, top:40, right: 40),
               child: Column(
                 children: <Widget>[
-                  TextFieldWidget(text: "Email", icon: Icons.email, isPasswordType: false, controller: _emailController),
+                  TextFieldWidget(text: "Email", icon: Icons.email, isPasswordType: false, controller: authController.emailController),
                   SizedBox(height: 30,),
-                  TextFieldWidget(text: "Password", icon: Icons.lock, isPasswordType: true, controller: _passwordController),
+                  TextFieldWidget(text: "Password", icon: Icons.lock, isPasswordType: true, controller: authController.passwordController),
 
                 ],
               ),
@@ -111,27 +102,8 @@ class _LogInScreenState extends State<LogInScreen> {
                     ),
                   ),
                 ),
-                theOnTapFunc: () async {
-
-                  email = _emailController.text;
-                  password = _passwordController.text;
-                  try {
-                    final user = await _auth.signInWithEmailAndPassword(email: email, password: password);
-                    if (user != null) {
-                      print("$email is in.");
-                      Navigator.pushNamed(context, '/');
-                    } else {
-                      print("Login failed");
-                      loginError(context);
-                    }
-                    // final newUser = await _auth.createUserWithEmailAndPassword(email: email, password: password);
-                  }
-                  on FirebaseAuthException catch (e) {
-                    print(e);
-                  }
-
-                  _emailController.clear();
-                  _passwordController.clear();
+                theOnTapFunc: () {
+                  authController.logIn();
                 },
 
               ),
