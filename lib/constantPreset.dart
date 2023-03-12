@@ -13,6 +13,7 @@ const blackColor2 = Color(0xFF000000);
 const whiteColor = Color(0xFFFFFFFF);
 
 const buttonFont = TextStyle(fontFamily: 'Inter', fontSize: 20);
+const calculateFont = TextStyle(fontFamily: 'Montserrat', fontWeight:FontWeight.bold,fontSize: 16);
 
 const gradientBg = BoxDecoration(
     gradient: LinearGradient(
