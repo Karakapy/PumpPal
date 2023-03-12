@@ -26,7 +26,7 @@ class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
   //bar index
   int _selectedGasStationIndex = -1;
   int _selectedFuelTypeIndex = -1;
-  int _selectedCalculatorIndex = -1;
+  int _selectedCalculatorIndex = 0;
 
   List<String> fuelTypeList = [
     "E85",
@@ -78,8 +78,8 @@ class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
     }
 
     return Scaffold(
-      extendBody: true,
       backgroundColor: Colors.white,
+      extendBody: true,
       body:
           ListView(scrollDirection: Axis.vertical,
           children: [
@@ -90,7 +90,7 @@ class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [
-                    Color(0xff1F1F1F),
+                    blackColor,
                     Colors.white,
                   ],
                 )
@@ -144,7 +144,7 @@ class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
                       Navigator.pushNamed(context, '/addCar');
                     },
                     style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.white,
+                        backgroundColor: lightGreyColor,
                         elevation: 0,
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(19))),
@@ -204,7 +204,7 @@ class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
                         },
                         child: Container(
                           width: 48.5,
-                          color: _selectedFuelTypeIndex == index ? primaryColor : whiteColor,
+                          color: _selectedFuelTypeIndex == index ? primaryColor : lightGreyColor,
                           child: Center(
                               child: Text(fuelTypeList[index],style: buttonFont,)
                           ),
@@ -228,7 +228,7 @@ class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
                   width: 339,
                   height: 50,
                   decoration: BoxDecoration(
-                    color: whiteColor,
+                    color: lightGreyColor,
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: ListView.builder(
@@ -245,7 +245,7 @@ class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
                         },
                         child: Container(
                           width: 48.5,
-                          color: _selectedGasStationIndex == index ? primaryColor : whiteColor,
+                          color: _selectedGasStationIndex == index ? primaryColor : lightGreyColor,
                           child: Center(
                             child: Image.asset(
                               'assets/station_logos/station$index.png',
@@ -265,7 +265,7 @@ class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
                   width: 339,
                   height: 50,
                   decoration: BoxDecoration(
-                    color: whiteColor,
+                    color: lightGreyColor,
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: ListView.builder(
@@ -282,7 +282,7 @@ class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
                         },
                         child: Container(
                           width: 109,
-                          color: _selectedCalculatorIndex == index ? primaryColor : whiteColor,
+                          color: _selectedCalculatorIndex == index ? primaryColor : lightGreyColor,
                           child: Center(
                               child: Text(calculatorList[index],style: buttonFont,)
                           ),
@@ -295,7 +295,10 @@ class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
                 /**
                  * Data entry
                  * */
-                CalculatorWidget(type: type, fuelConsumption: fuelConsumption, fuelPrice: fuelPrice),
+                CalculatorWidget(type: type,
+                  fuelConsumption: fuelConsumption,
+                  fuelPrice: fuelPrice,
+                  fuelCapacity: fuelCapacity,),
 
                 //calculate button
                 Container(
