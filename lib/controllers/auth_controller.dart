@@ -27,12 +27,9 @@ class AuthController  extends GetxController{
       password = passwordController.text;
       try {
         final newUser = await _auth.createUserWithEmailAndPassword(email: email, password: password);
-        FirebaseFirestore.instance.collection('User').doc(newUser.user!.uid).set({"email": newUser.user!.email});
-
         SharedPreferences prefs = await SharedPreferences.getInstance();
         prefs.setString('user', newUser.user!.uid);
-        // final newUser = await _auth.createUserWithEmailAndPassword(email: email, password: password));
-        // Get.to(GetStartedScreen());
+        Get.to(GetStartedScreen());
       }
       on FirebaseAuthException catch (e) {
         print(e);

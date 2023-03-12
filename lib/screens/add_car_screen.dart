@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:pumppal/constantPreset.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
@@ -5,15 +8,23 @@ import 'package:pumppal/screens/result_screen.dart';
 import '../models/car_model.dart';
 import '../widgets/button_widget.dart';
 // import 'models/car_model.dart';
+import '../screens/user_profile.dart';
 
 class AddCarScreen extends StatefulWidget {
-  const AddCarScreen({Key? key}) : super(key: key);
+  String userEmail;
+
+
+  AddCarScreen(this.userEmail);
 
   @override
-  State<AddCarScreen> createState() => _AddCarScreenState();
+  State<AddCarScreen> createState() => _AddCarScreenState(userEmail);
 }
 
 class _AddCarScreenState extends State<AddCarScreen> {
+
+  String userEmail;
+
+  _AddCarScreenState(this.userEmail);
 
   late List<String> brandList = List.empty();
   late List<String> modelList = List.empty();
@@ -299,11 +310,17 @@ class _AddCarScreenState extends State<AddCarScreen> {
                           ),
                         ),
                       ),
-                      theOnTapFunc: (){
+                      theOnTapFunc: () async {
                         if(selectedYear != null && selectedModel != null && selectedBrand != null){
-                          print(selectedBrand);
-                          print(selectedModel);
-                          print(selectedYear);
+                          var chooseCar = car.docs.where((element) => element['model'].toString().toLowerCase() == selectedModel.toString().toLowerCase()).where((element) => element['makeYear'].toString().toLowerCase() == selectedYear.toString().toLowerCase()).toList().first.data();
+                          print(userEmail);
+                          // final searchID = await FirebaseFirestore.instance.collection('user_with_car').doc(userEmail).get();
+                          // if(searchID.exists){
+                          final userCarList = FirebaseFirestore.instance.collection('user_with_car').doc(userEmail);
+                          userCarList.update({
+                            'car_lsit': FieldValue.arrayUnion([chooseCar.toJson()])
+                          });
+
                         }
                       },
                       // theOnTapFunc: () {

@@ -3,8 +3,12 @@ import 'package:pumppal/constantPreset.dart';
 import 'package:carbon_icons/carbon_icons.dart';
 import 'package:pumppal/controllers/auth_controller.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:pumppal/screens/add_car_screen.dart';
 import '../widgets/button_widget.dart';
 import '../widgets/nav_bar_widget.dart';
+import '../models/car_model.dart';
+
+
 
 class UserProfileScreen extends StatefulWidget {
   @override
@@ -12,6 +16,7 @@ class UserProfileScreen extends StatefulWidget {
 }
 
 class _UserProfileScreenState extends State<UserProfileScreen> {
+
   List<IconData> iconList = [
     Icons.home_outlined,
     Icons.person_outline,
@@ -51,8 +56,8 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
               children: [
                 Container(
                     height: 370.0,
-                    decoration: new BoxDecoration(
-                      gradient: LinearGradient(
+                    decoration: BoxDecoration(
+                      gradient: const LinearGradient(
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
                         colors: [
@@ -111,7 +116,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                           children: [
                             Text(
                               '${email}',
-                              style: TextStyle(
+                              style: const TextStyle(
                                 color: blackColor,
                                 fontSize: 23,
                                 fontWeight: FontWeight.bold,
@@ -142,7 +147,8 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                   margin: EdgeInsets.only(bottom: 20),
                   child: ElevatedButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, '/addCar');
+                      // Navigator.pushNamed(context, '/addCar');
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => AddCarScreen(email!)));
                     },
                     style: ElevatedButton.styleFrom(
                         backgroundColor: lightGreyColor,
@@ -156,7 +162,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                         child: Wrap(
                           children: [
                             Column(
-                              children: [
+                              children: const [
                                 Icon(Icons.add_circle, color:greyColor2,size: 60),
                                 Text("Add new car",style: TextStyle(
                                     fontFamily:"Inter",
@@ -173,10 +179,10 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                     ),
                   ),
                 ),
-
               ],
             ),
-          ),)
+          ),
+          )
         ],
       ),
 

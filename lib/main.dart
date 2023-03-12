@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => HomeScreen(),
-        '/addCar': (context) => AddCarScreen(),
+        // '/addCar': (context) => AddCarScreen(),
         // '/addCar1': (context) => const AddCar(),
         '/login': (context) => LogInScreen(),
         '/signup': (context) => SignUpScreen(),
