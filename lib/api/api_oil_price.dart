@@ -6,24 +6,33 @@ import 'package:http/http.dart' as http;
 import '../models/oil_model.dart';
 final dio = Dio();
 
-Future <List<Oil>> getOilPrice(String stationName) async{
+Future <List<List<Oil>>> getOilPrice() async{
   print("calling");
   final response = await dio.get('https://api.chnwt.dev/thai-oil-api/latest');
-  var oilDetail = <Oil>[];
+  var station = <List<Oil>>[];
   print("DONE");
   print(response.statusCode);
   if(response.statusCode == 200){
     Map<String, dynamic> ss = Map<String, dynamic>.from(json.decode(response.toString())['response']['stations']);
-    for(var oil in Map<String, dynamic>.from(ss[stationName]).keys){
-      if(ss[stationName][oil]['name'] != "") {
-        var eachOil = Oil(name: oil, price: double.parse(ss[stationName][oil]['price'].toString()));
-        oilDetail.add(eachOil);
-        print(eachOil.name);
+
+    for(var stationName in ss.keys){
+      var oilDetail = <Oil>[];
+      for(var oil in Map<String, dynamic>.from(ss[stationName]).keys) {
+        if (ss[stationName][oil]['name'] != "") {
+          var eachOil = Oil(name: oil,
+              price: double.parse(ss[stationName][oil]['price'].toString()));
+          oilDetail.add(eachOil);
+          // print(eachOil.name);
+        }
       }
+      station.add(oilDetail);
     }
   }
-  return oilDetail;
+  return station;
 }
+
+
+
 //
 // class OilPrice extends StatefulWidget{
 //   const OilPrice({super.key});

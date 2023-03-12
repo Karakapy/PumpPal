@@ -10,7 +10,10 @@ String? oilNameParser(String prevname){
     "diesel_b7": "Diesel B7",
     "diesel_b20": "Diesel B20",
     "premium_diesel": "Premium Diesel",
-    "ngv": "NGV"
+    "ngv": "NGV",
+    "vpower_gasohol_95": "V-Power Gasohol 95",
+    "vpower_diesel": "V-Power Diesel",
+    "vpower_diesel_b7": "V-Power Diesel B7"
   };
   return parser[prevname];
 

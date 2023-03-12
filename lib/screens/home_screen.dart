@@ -16,9 +16,8 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
 
-  int _selectedItemIndex = -1;
-  static List<String> stationLst = ['ptt','bcp','shell','caltex','esso','pt','susco'];
-  String stationName = stationLst.first;
+  int _selectedItemIndex = 0;
+
   List<IconData> iconList = [ //list of icons that required by animated navigation bar.
     Icons.home_outlined,
     Icons.person_outline,
@@ -155,8 +154,6 @@ class _HomeScreenState extends State<HomeScreen> {
                           onTap: () {
                             setState(() {
                               _selectedItemIndex = index;
-                              print(stationLst[index]);
-                              stationName = stationName[index];
                             });
                           },
                           child: Container(
@@ -178,7 +175,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   Container(
                     height: 300,
                     child: FutureBuilder(
-                      future: getOilPrice(stationName),
+                      future: getOilPrice(),
                       builder: (context, snapshot) {
                          if(!snapshot.hasData){
                            return const Center(
@@ -187,9 +184,9 @@ class _HomeScreenState extends State<HomeScreen> {
                          } else {
                            final oil = snapshot.data!;
                            return ListView.builder(
-                                itemCount: oil.length,
+                                itemCount: oil[_selectedItemIndex].length,
                                itemBuilder: (context, index){
-                                 final each_oil = oil[index];
+                                 final each_oil = oil[_selectedItemIndex][index];
                                  return createOilList(each_oil);
                                }
                            );

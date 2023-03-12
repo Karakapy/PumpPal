@@ -8,13 +8,12 @@ Widget createOilList(Oil oil) => Container(
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-
-        Container(child: Text(oilNameParser(oil.name).toString(),style: TextStyle(
+        Container(child: Text(oilNameParser(oil.name).toString(),style: const TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.bold,
             fontFamily: 'Montserrat'
         ),)),
-        Container(child: Text(oil.price.toString(), style: TextStyle(
+        Container(child: Text(oil.price.toString(), style: const TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.bold,
             fontFamily: 'Montserrat'
