@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/oil_model.dart';
-
+import '../parser/oil_name_parser.dart';
 Widget createOilList(Oil oil) => Container(
   margin: EdgeInsets.only(left: 15, right: 15),
   child: Padding(
@@ -9,7 +9,7 @@ Widget createOilList(Oil oil) => Container(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
 
-        Container(child: Text(oil.name,style: TextStyle(
+        Container(child: Text(oilNameParser(oil.name).toString(),style: TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.bold,
             fontFamily: 'Montserrat'

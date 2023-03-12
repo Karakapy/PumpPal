@@ -87,7 +87,7 @@ class _HomeScreenState extends State<HomeScreen> {
             SizedBox(height: 25,),
             Container(
               width: 339,
-              height: 600,
+              height: 500,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),
                 color: lightGreyColor,
@@ -176,7 +176,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
 
                   Container(
-                    height: 400,
+                    height: 300,
                     child: FutureBuilder(
                       future: getOilPrice(stationName),
                       builder: (context, snapshot) {
