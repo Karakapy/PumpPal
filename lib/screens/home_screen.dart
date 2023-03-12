@@ -108,53 +108,55 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               child: Column(
                 children: [
-                  Container(
-                    child: Padding(
-                      padding: const EdgeInsets.all(15.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Container(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Container(
-                                  child: Text("FUEL PRICE",style: TextStyle(
-                                    fontSize: 30,
-                                    fontWeight: FontWeight.bold,
-                                    fontFamily: 'montserrat',
-                                  ),),
-                                ),
-                                Container(
-                                  child: Text("updated at $currentTime",style: TextStyle(
-                                      fontSize: 13,
-                                      fontFamily: 'montserrat'
-                                  ),),
-                                ),
-                              ],
-                            ),
+
+                  //text
+                  Padding(
+                    padding: const EdgeInsets.all(15.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                child: Text("FUEL PRICE",style: TextStyle(
+                                  fontSize: 30,
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: 'montserrat',
+                                ),),
+                              ),
+                              Container(
+                                child: Text("updated at $currentTime",style: TextStyle(
+                                    fontSize: 13,
+                                    fontFamily: 'montserrat'
+                                ),),
+                              ),
+                            ],
                           ),
-                          Container(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
-                                Container(
-                                  child: GestureDetector(
-                                    onTap: _refreshTime,
-                                    child: Icon(
-                                      Icons.refresh,
-                                      size: 30,
-                                      color: blackColor,
-                                    ),
+                        ),
+                        Container(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Container(
+                                child: GestureDetector(
+                                  onTap: _refreshTime,
+                                  child: Icon(
+                                    Icons.refresh,
+                                    size: 30,
+                                    color: blackColor,
                                   ),
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
+
+                  // choosing fuel station
                   Container(
                     height: 50.0,
                     decoration: BoxDecoration(
@@ -187,8 +189,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
 
+                  // fuel price list
                   Container(
-                    height: 300,
+                    height: 365,
                     child: FutureBuilder(
                       future: getOilPrice(),
                       builder: (context, snapshot) {
@@ -199,6 +202,7 @@ class _HomeScreenState extends State<HomeScreen> {
                          } else {
                            final oil = snapshot.data!;
                            return ListView.builder(
+                               padding: EdgeInsets.only(top:10,bottom: 10),
                                 itemCount: oil[_selectedItemIndex].length,
                                itemBuilder: (context, index){
                                  final each_oil = oil[_selectedItemIndex][index];
