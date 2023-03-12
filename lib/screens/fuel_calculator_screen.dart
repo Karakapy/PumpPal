@@ -187,7 +187,7 @@ class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
                   width: 339,
                   height: 50,
                   decoration: BoxDecoration(
-                    color: whiteColor,
+                    color: lightGreyColor,
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: ListView.builder(
@@ -204,7 +204,9 @@ class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
                         },
                         child: Container(
                           width: 48.5,
-                          color: _selectedFuelTypeIndex == index ? primaryColor : lightGreyColor,
+                        decoration: BoxDecoration(
+                            color: _selectedFuelTypeIndex == index ? primaryColor : lightGreyColor,
+                            borderRadius: BorderRadius.circular(12)),
                           child: Center(
                               child: Text(fuelTypeList[index],style: buttonFont,)
                           ),
@@ -245,7 +247,10 @@ class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
                         },
                         child: Container(
                           width: 48.5,
-                          color: _selectedGasStationIndex == index ? primaryColor : lightGreyColor,
+                          decoration: BoxDecoration(
+                            color: _selectedGasStationIndex == index ? primaryColor : lightGreyColor,
+                            borderRadius: BorderRadius.circular(12),
+                          ),
                           child: Center(
                             child: Image.asset(
                               'assets/station_logos/station$index.png',
@@ -282,7 +287,9 @@ class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
                         },
                         child: Container(
                           width: 109,
-                          color: _selectedCalculatorIndex == index ? primaryColor : lightGreyColor,
+                          decoration: BoxDecoration(
+                              color: _selectedCalculatorIndex == index ? primaryColor : lightGreyColor,
+                              borderRadius: BorderRadius.circular(12)),
                           child: Center(
                               child: Text(calculatorList[index],style: buttonFont,)
                           ),
