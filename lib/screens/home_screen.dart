@@ -1,10 +1,10 @@
-import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:pumppal/constantPreset.dart';
 import 'package:pumppal/widgets/fuel_price_widget.dart';
 import 'package:intl/intl.dart';
 import 'package:carbon_icons/carbon_icons.dart';
 import 'package:pumppal/widgets/nav_bar_widget.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../api/api_oil_price.dart';
 
 
@@ -18,27 +18,39 @@ class _HomeScreenState extends State<HomeScreen> {
 
   int _selectedItemIndex = 0;
 
-  List<IconData> iconList = [ //list of icons that required by animated navigation bar.
+  List<IconData> iconList = [
     Icons.home_outlined,
     Icons.person_outline,
   ];
 
   int _bottomNavIndex = 0;
 
+  @override
+  void initState() {
+    super.initState();
+    checkToken();
+  }
+
+  String? token;
+
+  void checkToken(){
+    SharedPreferences.getInstance().then((prefs) {
+      final userToken = prefs.getString('user');
+
+      setState(() {
+        token=userToken;
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+
     String currentTime = DateFormat('dd/MM/yyyy kk:mm:ss').format(DateTime.now());
-    @override
-    void initState() {
-      super.initState();
-      currentTime = DateFormat('dd/MM/yyyy kk:mm:ss').format(DateTime.now());
-    }
 
     void _refreshTime() {
       setState(() {
         currentTime = DateFormat('dd/MM/yyyy kk:mm:ss').format(DateTime.now());
-        // var dateUtc = DateTime.now().toUtc().toLocal();
       });
     }
 
@@ -47,9 +59,12 @@ class _HomeScreenState extends State<HomeScreen> {
         _bottomNavIndex = index;
       });
       if (_bottomNavIndex==1){
-        Navigator.pushNamed(context, '/login');
+        if(token != null){
+          Navigator.pushNamed(context, '/profile');
+        }else{
+          Navigator.pushNamed(context, '/login');
+        }
       }
-
     }
 
     return Scaffold(
@@ -219,7 +234,12 @@ class _HomeScreenState extends State<HomeScreen> {
           size: 30,
         ),
         onPressed: () {
-          Navigator.pushNamed(context, '/fuelCalculator');
+          if (token != null){
+            Navigator.pushNamed(context, '/fuelCalculator');
+          }else{
+            Navigator.pushNamed(context, '/login');
+          }
+
 
         },
       ),

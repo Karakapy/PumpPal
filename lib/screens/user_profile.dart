@@ -1,9 +1,8 @@
-import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:pumppal/constantPreset.dart';
 import 'package:carbon_icons/carbon_icons.dart';
 import 'package:pumppal/controllers/auth_controller.dart';
-
+import 'package:firebase_auth/firebase_auth.dart';
 import '../widgets/button_widget.dart';
 import '../widgets/nav_bar_widget.dart';
 
@@ -14,7 +13,6 @@ class UserProfileScreen extends StatefulWidget {
 
 class _UserProfileScreenState extends State<UserProfileScreen> {
   List<IconData> iconList = [
-    //list of icons that required by animated navigation bar.
     Icons.home_outlined,
     Icons.person_outline,
   ];
@@ -30,6 +28,8 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
     }
   }
 
+  FirebaseAuth? auth;
+
   @override
   void initState() {
     super.initState();
@@ -37,6 +37,11 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
+
+    FirebaseAuth auth = FirebaseAuth.instance;
+    final user = auth.currentUser;
+    final email = user?.email;
+
     AuthController authController = AuthController();
     return Scaffold(
       body: Column(
@@ -105,7 +110,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              'PumpPal@hotmail.com',
+                              '${email}',
                               style: TextStyle(
                                 color: blackColor,
                                 fontSize: 23,
