@@ -25,14 +25,6 @@ Widget createOilList(Oil oil) => Container(
   ),
 
 );
-//
-// Widget buildOil(List<Oil> oil) => ListView.builder(
-//     itemCount: oil.length,
-//     itemBuilder: (context, index){
-//       final each_oil = oil[index];
-//       return createOilList(each_oil);
-//
-//     });
 
 
 class FuelPriceWidget extends StatelessWidget {
