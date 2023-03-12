@@ -327,9 +327,10 @@ class _AddCarScreenState extends State<AddCarScreen> {
                               'car_lsit': FieldValue.arrayUnion([chooseCar.toJson()])
                             });
                           }
-
-
                         }
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) { return UserProfileScreen(); }));
+
                       },
                       // theOnTapFunc: () {
                       //   Navigator.push(context,

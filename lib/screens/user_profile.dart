@@ -142,7 +142,6 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
           Expanded(child: SingleChildScrollView(
             child: Column(
               children: [
-
                 Container(
                   margin: EdgeInsets.only(bottom: 20),
                   child: ElevatedButton(
