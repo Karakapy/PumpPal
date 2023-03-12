@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: implement build
     return MaterialApp(
-      initialRoute: '/addCar',
+      initialRoute: '/',
       routes: {
         '/': (context) => HomeScreen(),
         '/addCar': (context) => AddCarScreen(),

@@ -149,7 +149,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                                 Text("Add new car",style: TextStyle(
                                     fontFamily:"Inter",
                                     fontSize: 20,
-                                    color: Colors.grey),),
+                                    color: Color(0xffC6C6C6)),),
                               ],
                             ),
                             Image.asset('assets/defaultCarImage.png',

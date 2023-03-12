@@ -1,9 +1,9 @@
-import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pumppal/screens/result_screen.dart';
 import 'package:pumppal/widgets/button_widget.dart';
 import 'package:carbon_icons/carbon_icons.dart';
+import 'package:pumppal/widgets/calculator_widget.dart';
 
 import '../constantPreset.dart';
 import '../widgets/nav_bar_widget.dart';
@@ -19,15 +19,13 @@ class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
   String gasStation = '';
   String fuelType = '';
   double fuelPrice = 0.0;
-  //Budget parameter
-  double budget = 0.0;
+  String type ='';
   //car data
   double fuelCapacity = 0.0;
   double fuelConsumption = 0.0;
-  //bar
+  //bar index
   int _selectedGasStationIndex = -1;
   int _selectedFuelTypeIndex = -1;
-
   int _selectedCalculatorIndex = -1;
 
   List<String> fuelTypeList = [
@@ -103,7 +101,7 @@ class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
             child: Column(
               children: [
                 Container(
-                    margin: EdgeInsets.only(top: 20),
+                    margin: EdgeInsets.only(top: 30),
                     child: const Center(
                         child: Text("Fuel",
                             style: TextStyle(
@@ -129,12 +127,16 @@ class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
                  */
                 Row(
                     children: [
-                      Text("Car", style: TextStyle(
+                      Container(
+                        padding: EdgeInsets.only(left: 20),
+                          child:Text("Car", style: TextStyle(
                           fontFamily: 'Inter',
                           fontSize: 20,
-                          color:Colors.white)),
+                          color:Colors.white))
+                      ),
                     ]
                 ),
+                // need shared pref keeping data
                 Container(
                   margin: EdgeInsets.only(bottom: 20),
                   child: ElevatedButton(
@@ -158,7 +160,7 @@ class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
                                 Text("Add new car",style: TextStyle(
                                     fontFamily:"Inter",
                                     fontSize: 20,
-                                    color: Colors.grey),),
+                                    color: Color(0xffC6C6C6)),),
                               ],
                             ),
                             Image.asset('assets/defaultCarImage.png',
@@ -174,7 +176,10 @@ class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
                 //fuel type bar
                 Row(
                     children: [
-                      Text("Fuel Type", style: buttonFont),
+                      Container(
+                        padding: EdgeInsets.only(left: 20),
+                        child: Text("Fuel Type", style: buttonFont),
+                      )
                     ]
                 ),
                 Container(
@@ -212,7 +217,10 @@ class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
                 //gas station bar
                 Row(
                     children: [
-                      Text("Gas Station", style: buttonFont),
+                      Container(
+                        margin: EdgeInsets.only(left:20),
+                        child:Text("Gas Station", style: buttonFont),
+                      )
                     ]
                 ),
                 Container(
@@ -268,8 +276,8 @@ class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
                         onTap: () {
                           setState(() {
                             _selectedCalculatorIndex = index;
-                            gasStation = gasStationList[index];
-                            print(gasStation);
+                            type = calculatorList[index];
+                            print(type);
                           });
                         },
                         child: Container(
@@ -287,7 +295,7 @@ class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
                 /**
                  * Data entry
                  * */
-                SizedBox(height: 180,),
+                CalculatorWidget(type: type, fuelConsumption: fuelConsumption, fuelPrice: fuelPrice),
 
                 //calculate button
                 Container(
@@ -330,7 +338,6 @@ class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
         ),
         onPressed: () {
           Navigator.pushNamed(context, '/fuelCalculator');
-
         },
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
