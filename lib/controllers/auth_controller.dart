@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
@@ -26,7 +27,10 @@ class AuthController  extends GetxController{
       email = emailController.text;
       password = passwordController.text;
       try {
-        final newUser = await _auth.createUserWithEmailAndPassword(email: email, password: password);
+        final newUser = await _auth.createUserWithEmailAndPassword(email: email, password: password).then((value) => {
+          FirebaseFirestore.instance.collection('User').doc(value.user?.uid).set({"email": value.user?.email})
+          
+        });
         Get.to(GetStartedScreen());
       }
       on FirebaseAuthException catch (e) {
