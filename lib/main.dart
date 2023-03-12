@@ -8,6 +8,7 @@ import 'package:pumppal/screens/login_screen.dart';
 import 'package:pumppal/screens/signup_screen.dart';
 import 'addCar.dart';
 import 'package:pumppal/screens/get_started_screen.dart';
+import 'apiOilPrice.dart';
 Future main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
