@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pumppal/screens/home_screen.dart';
 import 'package:pumppal/screens/result_screen.dart';
+import 'package:pumppal/screens/user_profile.dart';
 import 'package:pumppal/widgets/button_widget.dart';
 import 'package:carbon_icons/carbon_icons.dart';
 import 'package:pumppal/widgets/calculator_widget.dart';
@@ -65,15 +67,22 @@ class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
   @override
   void initState() {
     super.initState();
+    checkToken();
+  }
+
+  String? token;
+  void checkToken(){
+    SharedPreferences.getInstance().then((prefs) {
+      final userToken = prefs.getString('user');
+
+      setState(() {
+        token=userToken;
+      });
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-
-    SharedPreferences.getInstance().then((prefs) {
-      final token = prefs.getString('user');
-      print('token: ${token}');
-    });
 
     void _navigation(index){
 
@@ -81,10 +90,17 @@ class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
         _bottomNavIndex = index;
       });
       if (_bottomNavIndex==0) {
-        Navigator.pushNamed(context, '/');
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => HomeScreen()),
+        );
       }
       if (_bottomNavIndex==1){
-        Navigator.pushNamed(context, '/profile');
+        if(token != null){
+          Navigator.pushNamed(context, '/profile');
+        }else{
+          Navigator.pushNamed(context, '/login');
+        }
       }
     }
 
@@ -358,7 +374,6 @@ class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
           size: 30,
         ),
         onPressed: () {
-          Navigator.pushNamed(context, '/fuelCalculator');
         },
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,

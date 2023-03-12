@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:pumppal/screens/get_started_screen.dart';
 import 'package:pumppal/screens/home_screen.dart';
-import 'package:pumppal/screens/login_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthController  extends GetxController{
@@ -27,6 +26,8 @@ class AuthController  extends GetxController{
       password = passwordController.text;
       try {
         final newUser = await _auth.createUserWithEmailAndPassword(email: email, password: password);
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        prefs.setString('user', newUser.user!.uid);
         Get.to(GetStartedScreen());
       }
       on FirebaseAuthException catch (e) {
@@ -49,10 +50,7 @@ class AuthController  extends GetxController{
       if (user != null) {
         SharedPreferences prefs = await SharedPreferences.getInstance();
         prefs.setString('user', user.user!.uid);
-        prefs.setBool("isLoggedIn",true);
-
         print(prefs.getString('user'));
-        print(prefs.getBool("isLoggedIn"));
         print("$email is in.");
         Get.to(() => HomeScreen());
 
@@ -63,23 +61,18 @@ class AuthController  extends GetxController{
     on FirebaseAuthException catch (e) {
       print(e);
     }
-
     emailController.clear();
     passwordController.clear();
-
   }
 
   Future<void> logOut()async {
     print("$email is logging out.");
     await _auth.signOut();
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.remove('user');
-    final beforeToken = prefs.getString('user');
-    print('beforeToken: ${beforeToken}');
     prefs.clear();
-    final afterToken = prefs.getString('user');
-    print('afterToken: ${afterToken}');
     Get.offAll(HomeScreen());
   }
+
+
 
 }
