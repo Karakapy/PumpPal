@@ -136,7 +136,7 @@ class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
                               fontFamily: 'Montserrat',
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
-                              fontSize: 40 ,)
+                              fontSize: 50 ,)
                         )
                     )),
                 Container(
@@ -146,7 +146,7 @@ class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
                           fontFamily: 'Montserrat',
                           color: Colors.white,fontWeight:
                         FontWeight.bold,
-                          fontSize: 40 ,)),
+                          fontSize: 50 ,)),
                   ),
                 ),
 
@@ -204,53 +204,6 @@ class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
                   ),
                 ),
 
-                //fuel type bar
-                Row(
-                    children: [
-                      Container(
-                          padding: EdgeInsets.only(left: 20),
-                          child:Text("Fuel Type", style: TextStyle(
-                              fontFamily: 'Inter',
-                              fontSize: 20,
-                              color:Colors.white))
-                      ),
-                    ]
-                ),
-                SizedBox(height: 5,),
-                Container(
-                  margin: EdgeInsets.only(bottom: 20),
-                  width: 339,
-                  height: 50,
-                  decoration: BoxDecoration(
-                    color: lightGreyColor,
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: 7,
-                    itemBuilder: (BuildContext context, int index) {
-                      return GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            _selectedFuelTypeIndex = index;
-                            fuelType = fuelTypeList[index];
-                            print(fuelType);
-                          });
-                        },
-                        child: Container(
-                          width: 48.5,
-                        decoration: BoxDecoration(
-                            color: _selectedFuelTypeIndex == index ? primaryColor : lightGreyColor,
-                            borderRadius: BorderRadius.circular(12)),
-                          child: Center(
-                              child: Text(fuelTypeList[index],style: buttonFont,)
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-                ),
-
                 //gas station bar
                 Row(
                     children: [
@@ -297,6 +250,53 @@ class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
                               width: 35.0,
                               height: 35.0,
                             ),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+
+                //fuel type bar
+                Row(
+                    children: [
+                      Container(
+                          padding: EdgeInsets.only(left: 20),
+                          child:Text("Fuel Type", style: TextStyle(
+                              fontFamily: 'Inter',
+                              fontSize: 20,
+                              color:Colors.white))
+                      ),
+                    ]
+                ),
+                SizedBox(height: 5,),
+                Container(
+                  margin: EdgeInsets.only(bottom: 20),
+                  width: 339,
+                  height: 50,
+                  decoration: BoxDecoration(
+                    color: lightGreyColor,
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: 7,
+                    itemBuilder: (BuildContext context, int index) {
+                      return GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            _selectedFuelTypeIndex = index;
+                            fuelType = fuelTypeList[index];
+                            print(fuelType);
+                          });
+                        },
+                        child: Container(
+                          width: 48.5,
+                        decoration: BoxDecoration(
+                            color: _selectedFuelTypeIndex == index ? primaryColor : lightGreyColor,
+                            borderRadius: BorderRadius.circular(12)),
+                          child: Center(
+                              child: Text(fuelTypeList[index],style: buttonFont,)
                           ),
                         ),
                       );

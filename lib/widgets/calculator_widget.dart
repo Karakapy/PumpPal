@@ -82,6 +82,16 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
                 child: Column(
                     children: [
                       calculatorTextGenerator(),
+                      Container(
+                        padding: EdgeInsets.only(bottom: 15),
+                        child:Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text("Budget", style: calculateFont),
+                            TextFormField(),
+                            Text("Baht", style: calculateFont),
+                          ],),
+                      ),
                     ]
                 )
             )
@@ -97,7 +107,9 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
           child:Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text("Fuel Capacity", style: calculateFont),
+              Container(
+                  padding: EdgeInsets.only(right: 23),
+                  child:Text("Fuel Capacity", style: calculateFont)),
               Text("${widget.fuelCapacity}", style: calculateFont),
               Text("L", style: calculateFont),
             ],),
@@ -107,7 +119,9 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
           child:Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text("Fuel Consumption", style: calculateFont),
+              Container(
+                  padding: EdgeInsets.only(right: 15),
+                  child:Text("Fuel Consumption", style: calculateFont)),
               Text("${widget.fuelConsumption}", style: calculateFont),
               Text("km/L", style: calculateFont),
             ],),
@@ -117,7 +131,9 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
           child:Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text("Fuel Price", style: calculateFont),
+              Container(
+                  padding: EdgeInsets.only(right: 100),
+                  child:Text("Fuel Price", style: calculateFont)),
               Text("${widget.fuelPrice}", style: calculateFont),
               Text("Baht/L", style: calculateFont),
             ],),
