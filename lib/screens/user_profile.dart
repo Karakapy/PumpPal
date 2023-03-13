@@ -148,20 +148,21 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                 child: StreamBuilder(
                   stream: collection.doc(email).snapshots(),
                   builder: (context, snapshot) {
-                    if(snapshot.hasData){
-                      final user = snapshot.data!;
-                      final car = user.data()?.values.first as List;
-
+                    if(snapshot.hasData && snapshot.data?.data()?.values.first.runtimeType != null){
+                      final user = snapshot.data;
+                      final car = user?.data()?.values.first as List;
                       return ListView.builder(
                           padding: const EdgeInsets.only(top: 20, bottom: 20),
                           shrinkWrap: true,
                           itemCount: car.length,
                           itemBuilder: (context, index){
+                            print(car.length);
                             final eachCar = CarModel.fromJson(car[index]);
                             return buildButton(eachCar, index, car.length, context, email!);
                           });
                     } else {
                       return Container(
+                        height: 120,
                         margin: EdgeInsets.only(bottom: 20),
                         child: ElevatedButton(
                           onPressed: () {
@@ -190,11 +191,12 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                                   Image.asset('assets/defaultCarImage.png',
                                     height: 96,
                                     width:160.0,),
-                                ],
+                                    ],
+                                  ),
                               ),
                             ),
                           ),
-                        ),
+
                       );
                     }
                   },
