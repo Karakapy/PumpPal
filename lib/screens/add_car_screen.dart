@@ -7,8 +7,8 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:pumppal/screens/result_screen.dart';
 import '../models/car_model.dart';
 import '../widgets/button_widget.dart';
-// import 'models/car_model.dart';
 import '../screens/user_profile.dart';
+import '../controllers/car_list_controller.dart';
 
 class AddCarScreen extends StatefulWidget {
   String userEmail;
@@ -328,8 +328,9 @@ class _AddCarScreenState extends State<AddCarScreen> {
                             });
                           }
                         }
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (context) { return UserProfileScreen(); }));
+                        getCarModel(userEmail);
+                          // Navigator.push(context,
+                          //     MaterialPageRoute(builder: (context) { return UserProfileScreen(); }));
 
                       },
                       // theOnTapFunc: () {

@@ -98,7 +98,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                                 },
                                 color: redColor,
                               ),
-                            )
+                            ),
                           ],
                         ),
                         Row(
