@@ -88,7 +88,6 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text("Budget", style: calculateFont),
-                            TextFormField(),
                             Text("Baht", style: calculateFont),
                           ],),
                       ),
