@@ -125,7 +125,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                             ),
                           ],
                         ),
-                        Container(),
+
                       ],
                     )),
                 Padding(
@@ -139,69 +139,73 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
               ],
             ),
           ),
+
+
+
           Expanded(child: SingleChildScrollView(
-            child: Column(
-              children: [
-                Container(
-                  child: FutureBuilder(
-                    future: getCarModel(email!),
-                    builder: (context, snapshot) {
-                      if(!snapshot.hasData){
-                        return Container();
-                      } else {
-                        final carList = snapshot.data!;
-                        return ListView.builder(
-                          itemCount: carList.length,
+            child: Container(
+                height: 350,
+                child: StreamBuilder(
+                  stream: collection.doc(email).snapshots(),
+                  builder: (context, snapshot) {
+                    if(snapshot.hasData){
+                      final user = snapshot.data!;
+                      final car = user.data()?.values.first as List;
+
+                      return ListView.builder(
+                          padding: const EdgeInsets.only(top: 20, bottom: 20),
+                          shrinkWrap: true,
+                          itemCount: car.length,
                           itemBuilder: (context, index){
-                            final each_car = carList[index];
-                            print(each_car.carName);
-                            return buildButton(each_car);
+                            final eachCar = CarModel.fromJson(car[index]);
+                            return buildButton(eachCar, index, car.length, context, email!);
+                          });
+                    } else {
+                      return Container(
+                        margin: EdgeInsets.only(bottom: 20),
+                        child: ElevatedButton(
+                          onPressed: () {
+                            Navigator.of(context).push(MaterialPageRoute(builder: (context) => AddCarScreen(email!)));
                           },
-                        );
-                      }
-                    },
-                  ),
-                ),
-
-
-                Container(
-                  margin: EdgeInsets.only(bottom: 20),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      // Navigator.pushNamed(context, '/addCar');
-                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => AddCarScreen(email!)));
-                    },
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: lightGreyColor,
-                        elevation: 0,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(19))),
-                    child: SizedBox(
-                      height: 115,
-                      child: Container(
-                        padding: EdgeInsets.all(15),
-                        child: Wrap(
-                          children: [
-                            Column(
-                              children: const [
-                                Icon(Icons.add_circle, color:greyColor2,size: 60),
-                                Text("Add new car",style: TextStyle(
-                                    fontFamily:"Inter",
-                                    fontSize: 20,
-                                    color: Color(0xffC6C6C6)),),
-                              ],
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: lightGreyColor,
+                              elevation: 0,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(19))),
+                          child: SizedBox(
+                            height: 115,
+                            child: Container(
+                              padding: EdgeInsets.all(15),
+                              child: Wrap(
+                                children: [
+                                  Column(
+                                    children: const [
+                                      Icon(Icons.add_circle, color:greyColor2,size: 60),
+                                      Text("Add new car",style: TextStyle(
+                                          fontFamily:"Inter",
+                                          fontSize: 20,
+                                          color: Color(0xffC6C6C6)),),
+                                    ],
+                                  ),
+                                  Image.asset('assets/defaultCarImage.png',
+                                    height: 96,
+                                    width:160.0,),
+                                ],
+                              ),
                             ),
-                            Image.asset('assets/defaultCarImage.png',
-                              height: 96,
-                              width:160.0,),
-                          ],
+                          ),
                         ),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
+                      );
+                    }
+                  },
+                )
             ),
+
+
+
+
+
+
           ),
           )
         ],
@@ -227,3 +231,4 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
     );
   }
 }
+
