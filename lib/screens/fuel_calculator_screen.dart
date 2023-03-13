@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pumppal/screens/home_screen.dart';
@@ -10,6 +11,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../constantPreset.dart';
 import '../widgets/nav_bar_widget.dart';
+import 'add_car_screen.dart';
 
 class FuelCalculatorScreen extends StatefulWidget {
   const FuelCalculatorScreen({Key? key}) : super(key: key);
@@ -31,6 +33,7 @@ class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
   int _selectedFuelTypeIndex = -1;
   int _selectedCalculatorIndex = -1;
 
+  FirebaseAuth? auth;
 
   List<String> fuelTypeList = [
     "E85",
@@ -105,6 +108,10 @@ class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
       }
     }
 
+    FirebaseAuth auth = FirebaseAuth.instance;
+    final user = auth.currentUser;
+    final email = user?.email;
+
     return Scaffold(
       backgroundColor: Colors.white,
       extendBody: true,
@@ -172,7 +179,7 @@ class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
                   margin: EdgeInsets.only(bottom: 20),
                   child: ElevatedButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, '/addCar');
+                      Navigator.push(context,MaterialPageRoute(builder: (context) => AddCarScreen(email!)));
                     },
                     style: ElevatedButton.styleFrom(
                         backgroundColor: lightGreyColor,

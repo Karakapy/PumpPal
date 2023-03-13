@@ -52,6 +52,17 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
                       Text("L", style: calculateFont),
                     ],),
                 ),
+                Container(
+                  child:Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                          padding: EdgeInsets.only(right: 20),
+                          child:Text("Final amount", style: calculateFont)),
+                      Text("${widget.current}", style: calculateFont),
+                      Text("L", style: calculateFont),
+                    ],),
+                ),
               ],
             ),
           ),
@@ -67,6 +78,14 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
               child: Column(
                   children: [
                   calculatorTextGenerator(),
+                  Container(
+                    child:Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text("Distance", style: calculateFont),
+                        Text("km", style: calculateFont),
+                      ],),
+                  ),
               ]
             )
         )
