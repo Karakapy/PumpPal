@@ -7,8 +7,8 @@ import 'package:pumppal/screens/add_car_screen.dart';
 import '../widgets/button_widget.dart';
 import '../widgets/nav_bar_widget.dart';
 import '../models/car_model.dart';
-
-
+import '../controllers/car_list_controller.dart';
+import '../widgets/button_car_widget.dart';
 
 class UserProfileScreen extends StatefulWidget {
   @override
@@ -142,6 +142,28 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
           Expanded(child: SingleChildScrollView(
             child: Column(
               children: [
+                Container(
+                  child: FutureBuilder(
+                    future: getCarModel(email!),
+                    builder: (context, snapshot) {
+                      if(!snapshot.hasData){
+                        return Container();
+                      } else {
+                        final carList = snapshot.data!;
+                        return ListView.builder(
+                          itemCount: carList.length,
+                          itemBuilder: (context, index){
+                            final each_car = carList[index];
+                            print(each_car.carName);
+                            return buildButton(each_car);
+                          },
+                        );
+                      }
+                    },
+                  ),
+                ),
+
+
                 Container(
                   margin: EdgeInsets.only(bottom: 20),
                   child: ElevatedButton(

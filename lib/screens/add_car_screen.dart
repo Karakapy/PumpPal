@@ -328,9 +328,8 @@ class _AddCarScreenState extends State<AddCarScreen> {
                             });
                           }
                         }
-                        getCarModel(userEmail);
-                          // Navigator.push(context,
-                          //     MaterialPageRoute(builder: (context) { return UserProfileScreen(); }));
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) { return UserProfileScreen(); }));
 
                       },
                       // theOnTapFunc: () {
