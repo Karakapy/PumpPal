@@ -107,6 +107,17 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text("Budget", style: calculateFont),
+                            Container(
+                              width: 123,
+                                child:TextFormField(
+                              decoration: InputDecoration(
+                                hintText: 'Enter the amount',
+                                border: InputBorder.none
+                              ),
+                              textAlign: TextAlign.right,
+                              keyboardType: TextInputType.number,
+                            )
+                            ),
                             Text("Baht", style: calculateFont),
                           ],),
                       ),
