@@ -8,11 +8,14 @@ class CalculatorWidget extends StatefulWidget {
   double fuelPrice = 0.0;
   double fuelCapacity = 0.0;
   double fuelConsumption = 0.0;
+
   //Budget parameter
   double budget = 0.0;
+
   //Tank parameter
   double current = 0.0;
   double desired = 0.0;
+
   //Distance parameter
   double distance = 0.0;
 
@@ -28,9 +31,18 @@ class CalculatorWidget extends StatefulWidget {
 
 class _CalculatorWidgetState extends State<CalculatorWidget> {
 
+  final TextEditingController _controller = TextEditingController();
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     switch (widget.type) {
+      //Tank calculator
       case "Tank":
         return Container(
           margin: EdgeInsets.only(bottom: 20),
@@ -67,6 +79,8 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
             ),
           ),
         );
+
+      //distance calculator
       case "Distance":
         return Container(
           margin: EdgeInsets.only(bottom: 20),
@@ -90,6 +104,8 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
             )
         )
         );
+
+      //Budget calculator
       default:
         return Container(
           margin: EdgeInsets.only(bottom: 20),
@@ -102,7 +118,6 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
                     children: [
                       calculatorTextGenerator(),
                       Container(
-                        padding: EdgeInsets.only(bottom: 15),
                         child:Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -110,15 +125,16 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
                             Container(
                               width: 123,
                                 child:TextFormField(
+                                  controller: _controller,
                               decoration: InputDecoration(
                                 hintText: 'Enter the amount',
                                 border: InputBorder.none
                               ),
                               textAlign: TextAlign.right,
                               keyboardType: TextInputType.number,
-                              onChanged: (String? input) {
+                              onChanged: (input) {
                                 setState(() {
-                                  widget.budget = input as double;
+                                  widget.budget = double.parse(input);
                                 });
                                 print(widget.budget);
                                 },
@@ -163,7 +179,6 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
             ],),
         ),
         Container(
-          padding: EdgeInsets.only(bottom: 15),
           child:Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
