@@ -116,6 +116,13 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
                               ),
                               textAlign: TextAlign.right,
                               keyboardType: TextInputType.number,
+                              onChanged: (String? input) {
+                                setState(() {
+                                  widget.budget = input as double;
+                                });
+                                print(widget.budget);
+                                },
+
                             )
                             ),
                             Text("Baht", style: calculateFont),
