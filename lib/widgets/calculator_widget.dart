@@ -50,17 +50,33 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
             color: lightGreyColor,
             borderRadius: BorderRadius.circular(12),),
           child: Container(
-            padding: EdgeInsets.all(20),
+            padding: EdgeInsets.only(top: 20,right: 20,left: 20,bottom:10),
             child: Column(
               children: [
                 calculatorTextGenerator(),
                 Container(
-                  padding: EdgeInsets.only(bottom: 15),
                   child:Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text("Current amount", style: calculateFont),
-                      Text("${widget.current}", style: calculateFont),
+                      Container(
+                        width: 123,
+                        child:TextFormField(
+                          controller: _controller,
+                          decoration: InputDecoration(
+                              hintText: 'Enter the amount',
+                              border: InputBorder.none
+                          ),
+                          textAlign: TextAlign.right,
+                          keyboardType: TextInputType.number,
+                          onChanged: (input) {
+                            setState(() {
+                              widget.current = double.parse(input);
+                            });
+                            print(widget.current);
+                          },
+                        ),
+                      ),
                       Text("L", style: calculateFont),
                     ],),
                 ),
@@ -71,7 +87,24 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
                       Container(
                           padding: EdgeInsets.only(right: 20),
                           child:Text("Final amount", style: calculateFont)),
-                      Text("${widget.current}", style: calculateFont),
+                      Container(
+                        width: 123,
+                        child:TextFormField(
+                          controller: _controller,
+                          decoration: InputDecoration(
+                              hintText: 'Enter the amount',
+                              border: InputBorder.none
+                          ),
+                          textAlign: TextAlign.right,
+                          keyboardType: TextInputType.number,
+                          onChanged: (input) {
+                            setState(() {
+                              widget.desired = double.parse(input);
+                            });
+                            print(widget.desired);
+                          },
+                        ),
+                      ),
                       Text("L", style: calculateFont),
                     ],),
                 ),
@@ -88,7 +121,7 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
             color: lightGreyColor,
             borderRadius: BorderRadius.circular(12),),
             child: Container(
-              padding: EdgeInsets.all(20),
+              padding: EdgeInsets.only(top: 20,right: 20,left: 20,bottom:10),
               child: Column(
                   children: [
                   calculatorTextGenerator(),
@@ -97,6 +130,24 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text("Distance", style: calculateFont),
+                        Container(
+                          width: 123,
+                          child:TextFormField(
+                            controller: _controller,
+                            decoration: InputDecoration(
+                                hintText: 'Enter the amount',
+                                border: InputBorder.none
+                            ),
+                            textAlign: TextAlign.right,
+                            keyboardType: TextInputType.number,
+                            onChanged: (input) {
+                              setState(() {
+                                widget.distance = double.parse(input);
+                              });
+                              print(widget.distance);
+                            },
+                          ),
+                        ),
                         Text("km", style: calculateFont),
                       ],),
                   ),
@@ -112,9 +163,10 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
           decoration: BoxDecoration(
             color: lightGreyColor,
             borderRadius: BorderRadius.circular(12),),
-            child: Container(
-                padding: EdgeInsets.all(20),
-                child: Column(
+                child:Container(
+                padding: EdgeInsets.only(top: 20,right: 20,left: 20,bottom:10),
+                child: Center(
+                    child: Column(
                     children: [
                       calculatorTextGenerator(),
                       Container(
@@ -146,6 +198,7 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
                       ),
                     ]
                 )
+            )
             )
         );
     }
