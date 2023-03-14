@@ -1,3 +1,4 @@
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +23,7 @@ class FuelCalculatorScreen extends StatefulWidget {
 
 class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
   String gasStation = '';
-  String fuelType = '';
+  String? fuelType;
   double fuelPrice = 0.0;
   String type ='';
   //car data
@@ -278,40 +279,81 @@ class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
                 ),
                 SizedBox(height: 5,),
                 Container(
-                  margin: EdgeInsets.only(bottom: 20),
                   width: 339,
                   height: 50,
-                  decoration: BoxDecoration(
-                    color: lightGreyColor,
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: 7,
-                    itemBuilder: (BuildContext context, int index) {
-                      return GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            _selectedFuelTypeIndex = index;
-                            fuelType = fuelTypeList[index];
-                            print(fuelType);
-                          });
-                        },
-                        child: Container(
-                          width: 48.5,
-                        decoration: BoxDecoration(
-                            color: _selectedFuelTypeIndex == index ? primaryColor : lightGreyColor,
-                            borderRadius: BorderRadius.circular(12)),
-                          child: Center(
-                              child: Text(fuelTypeList[index],style: buttonFont,)
-                          ),
-                        ),
+                  margin: EdgeInsets.only(bottom: 20),
+                  child: DropdownButtonFormField2<String>(
+                    value: fuelType,
+                    decoration: InputDecoration(
+                      isDense: true,
+                      contentPadding: EdgeInsets.zero,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                    isExpanded: true,
+                    hint: const Text(
+                      'Select the fuel type',
+                      style: TextStyle(fontSize: 20),
+                    ),
+                    items: fuelTypeList.map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value, style: buttonFont,),
                       );
+                    }).toList(),
+                    validator: (value) {
+                      if (value == null) {
+                        return 'Please select the fuel type.';
+                      }
+                      return null;
                     },
+                    onChanged: (String? value) {
+                      // This is called when the user selects an item.
+                      setState(() {
+                        fuelType = value!;
+
+                      });
+                    },
+                    // onSaved: (value) {
+                    //   selectedModel = value.toString();
+                    // },
+                    buttonStyleData: ButtonStyleData(
+                      height: 60,
+                      padding: const EdgeInsets.only(left: 20, right: 10),
+                      decoration:BoxDecoration(
+                        borderRadius: BorderRadius.circular(12),
+                        color: lightGreyColor
+                      )
+                    ),
+                    iconStyleData: const IconStyleData(
+                      icon: Icon(
+                        Icons.arrow_drop_down,
+                        color: blackColor,
+                      ),
+                      iconSize: 30,
+                    ),
+                    dropdownStyleData: DropdownStyleData(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                    ),
                   ),
                 ),
 
                 //Calculator bar
+                Row(
+                    children: [
+                      Container(
+                          padding: EdgeInsets.only(left: 20),
+                          child:Text("Calculator Type", style: TextStyle(
+                              fontFamily: 'Inter',
+                              fontSize: 20,
+                              color:Colors.white))
+                      ),
+                    ]
+                ),
+                SizedBox(height: 5),
                 Container(
                   margin: EdgeInsets.only(bottom: 20),
                   width: 327,
@@ -375,7 +417,7 @@ class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
                   ),
                 ),
                     theOnTapFunc: () {
-                          if(fuelType != '' && gasStation != '' && type !=''){
+                          if(fuelType!=null && gasStation != '' && type !=''){
                             Navigator.push(context,
                                 MaterialPageRoute(builder: (context) { return ResultScreen(fuelType: fuelType,gasStation: gasStation,gasStationIndex: _selectedGasStationIndex,type: type,); }));
                           }

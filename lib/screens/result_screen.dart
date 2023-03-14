@@ -16,7 +16,7 @@ class ResultScreen extends StatefulWidget {
   });
 
   final String gasStation;
-  final String fuelType;
+  final String? fuelType;
   final String type;
   final int gasStationIndex;
 
