@@ -129,7 +129,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                       ],
                     )),
                 Padding(
-                  padding: EdgeInsets.only(left: 20, top: 20, bottom: 20),
+                  padding: EdgeInsets.only(left: 20, top: 20),
                   child: Row(
                     children: [
                       Text("List of Cars", style: buttonFont),
@@ -152,7 +152,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                       final user = snapshot.data;
                       final car = user?.data()?.values.first as List;
                       return ListView.builder(
-                          padding: const EdgeInsets.only(top: 20, bottom: 20),
+                          padding: const EdgeInsets.only( bottom: 20),
                           shrinkWrap: true,
                           itemCount: car.length,
                           itemBuilder: (context, index){

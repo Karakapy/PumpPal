@@ -6,31 +6,37 @@ import '../screens/add_car_screen.dart';
 
 Widget buildButton(CarModel car, int index, int totalSize, BuildContext context, String email){
   if(index < totalSize-1){
-    return ElevatedButton(
-      onPressed: (){},
+    return Container(
+      margin: EdgeInsets.all(20),
+        child:ElevatedButton(
+      onPressed: (){
+      },
       style: ElevatedButton.styleFrom(
           backgroundColor: lightGreyColor,
-          elevation: 10,
+          elevation: 0,
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(19))),
       child: SizedBox(
         height: 115,
-        child: Container(
-          padding: EdgeInsets.only(top:20,bottom: 20),
-          // padding: EdgeInsets.all(15),
-          child: Wrap(
+        child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text("${car.make} ${car.model}", style: TextStyle(
+                  Container(
+                    child: Text("${car.make} ${car.model}", style: TextStyle(
                       fontFamily: "Inter",
                       fontSize: 20,
                       color: Colors.black
                   ),),
-                  Text("${car.makeYear.toInt()}",style: TextStyle(
+                  ),
+                  Container(
+                    child: Text("${car.makeYear.toInt()}",style: TextStyle(
                       fontFamily:"Inter",
                       fontSize: 20,
-                      color: Color(0xffC6C6C6)),),
+                      color: greyColor),),
+                  ),
                 ],
               ),
               Image.asset('assets/defaultCarImage.png',
@@ -42,7 +48,9 @@ Widget buildButton(CarModel car, int index, int totalSize, BuildContext context,
       ),
     );
   } else {
-    return ElevatedButton(
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 20),
+        child: ElevatedButton(
       onPressed: () {
         Navigator.of(context).push(MaterialPageRoute(builder: (context) => AddCarScreen(email!)));
       },
@@ -73,6 +81,7 @@ Widget buildButton(CarModel car, int index, int totalSize, BuildContext context,
           ),
         ),
       ),
+    )
     );
   }
 
