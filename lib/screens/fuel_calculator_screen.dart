@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:pumppal/screens/home_screen.dart';
 import 'package:pumppal/screens/result_screen.dart';
 import 'package:pumppal/screens/user_profile.dart';
+import 'package:pumppal/widgets/add_new_car_widget.dart';
 import 'package:pumppal/widgets/button_widget.dart';
 import 'package:carbon_icons/carbon_icons.dart';
 import 'package:pumppal/widgets/calculator_widget.dart';
@@ -178,38 +179,7 @@ class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
                 SizedBox(height: 5,),
                 Container(
                   margin: EdgeInsets.only(bottom: 20),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(context,MaterialPageRoute(builder: (context) => AddCarScreen(email!)));
-                    },
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: lightGreyColor,
-                        elevation: 0,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(19))),
-                    child: SizedBox(
-                      height: 115,
-                      child: Container(
-                        padding: EdgeInsets.all(15),
-                        child: Wrap(
-                          children: [
-                            Column(
-                              children: [
-                                Icon(Icons.add_circle, color: Colors.grey,size: 60),
-                                Text("Add new car",style: TextStyle(
-                                    fontFamily:"Inter",
-                                    fontSize: 20,
-                                    color: Color(0xffC6C6C6)),),
-                              ],
-                            ),
-                            Image.asset('assets/defaultCarImage.png',
-                              height: 96,
-                              width:160.0,),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
+                  child: AddNewCarWidget(email: email,),
                 ),
 
                 //gas station bar
