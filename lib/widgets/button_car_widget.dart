@@ -14,15 +14,16 @@ Widget buildButton(CarModel car, int index, int totalSize, BuildContext context,
         },
         style: ElevatedButton.styleFrom(
             backgroundColor: lightGreyColor,
-            elevation: 10,
+            elevation: 0,
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(19))),
         child: SizedBox(
           height: 115,
           child: Container(
-            padding: EdgeInsets.only(top:20,bottom: 20),
+            padding: EdgeInsets.symmetric(vertical: 20),
             // padding: EdgeInsets.all(15),
-            child: Wrap(
+            child:Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -50,7 +51,7 @@ Widget buildButton(CarModel car, int index, int totalSize, BuildContext context,
                   ],
                 ),
                 Image.asset('assets/defaultCarImage.png',
-                  height: 96,
+                  height: 960,
                   width:160.0,),
               ],
             ),

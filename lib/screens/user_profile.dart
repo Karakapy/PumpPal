@@ -55,7 +55,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
             child: Column(
               children: [
                 Container(
-                    height: 370.0,
+                    height: 340.0,
                     decoration: BoxDecoration(
                       gradient: const LinearGradient(
                         begin: Alignment.topCenter,
@@ -170,7 +170,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                                         },
                                         style: ElevatedButton.styleFrom(
                                             backgroundColor: lightGreyColor,
-                                            elevation: 10,
+                                            elevation: 0,
                                             shape: RoundedRectangleBorder(
                                                 borderRadius: BorderRadius.circular(19))),
                                         child: SizedBox(
@@ -210,14 +210,15 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                           },
                           style: ElevatedButton.styleFrom(
                               backgroundColor: lightGreyColor,
-                              elevation: 10,
+                              elevation: 0,
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(19))),
                           child: SizedBox(
                             height: 115,
                             child: Container(
                               padding: EdgeInsets.all(15),
-                              child: Wrap(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceAround,
                                 children: [
                                   Column(
                                     children: const [
@@ -242,12 +243,6 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                   },
                 )
             ),
-
-
-
-
-
-
           ),
           )
         ],
