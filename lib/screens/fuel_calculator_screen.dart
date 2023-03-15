@@ -321,9 +321,10 @@ class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
                           // This is called when the user selects an item.
                           setState(() {
                             final oilName = revOilNameParser(value!);
-                            // final oill = oilList.map((e) => )
+                            final oilGetPrice = oil[_selectedGasStationIndex].firstWhere(
+                                    (element) => element.name == oilName);
                             fuelType = value!;
-                            // fuelPrice = ;
+                            fuelPrice = oilGetPrice.price;
                           });
                         },
                         // onSaved: (value) {
