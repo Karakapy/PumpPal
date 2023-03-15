@@ -25,7 +25,7 @@ class AuthController  extends GetxController{
   String email = '';
   String password = '';
 
-  Future<void> signUp()async{
+  Future<void> signUp(BuildContext context)async{
     if (passwordController.text == confirmPasswordController.text){
       email = emailController.text;
       password = passwordController.text;
@@ -37,10 +37,25 @@ class AuthController  extends GetxController{
       }
       on FirebaseAuthException catch (e) {
         print(e);
+        if (e.code == 'unknown'){
+          showSnackBar(context, "Please fill in your email and password");
+        }
+        else if (e.code == 'invalid-email'){
+          showSnackBar(context, "The email address is not valid");
+        }
+        else if (e.code == 'weak-password'){
+          showSnackBar(context, "Password should be at least 6 characters");
+        }
+        else if (e.code == 'email-already-in-use'){
+          showSnackBar(context, "Email address already in use");
+        }
+        else{
+          showSnackBar(context, "Failed to sign up. Please try again later");
+        }
       }
     }
     else{
-      print("Password and Confirm password are not matched");
+      showSnackBar(context, "Password and Confirm password are not matched");
     }
     emailController.clear();
     passwordController.clear();

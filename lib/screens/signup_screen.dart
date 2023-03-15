@@ -102,7 +102,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                  ),
                ),
                theOnTapFunc: ()  {
-                 authController.signUp();
+                 authController.signUp(context);
                },
 
              ),
