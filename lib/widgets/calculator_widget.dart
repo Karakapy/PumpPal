@@ -118,6 +118,44 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
                       Text("L", style: calculateFont),
                     ],),
                 ),
+                //calculate button
+                Container(
+                    margin: EdgeInsets.only(bottom: 40),
+                    child:ButtonWidget(
+                        color: (widget.fuelCapacity!=0 && widget.fuelPrice!=0 && widget.budget!=0
+                        )? primaryColor: greyColor2,
+                        theChild: Container(
+                          width: 312.0,
+                          height: 64.0,
+                          child: const Center(
+                            child: Text(
+                              "Calculate",
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: 'montserrat',
+                                color: blackColor,
+                              ),
+                            ),
+                          ),
+                        ),
+                        theOnTapFunc: () {
+                          if(widget.fuelCapacity!=0 && widget.fuelPrice!=0
+                              && widget.current!=0 && widget.desired!=0){
+                            List<double> res = tankCal(widget.current,widget.desired);
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context) {
+                                  return ResultScreen(
+                                      fuelType: widget.fuelType,
+                                      gasStation: widget.gasStation,
+                                      gasStationIndex: widget.selectedGasStationIndex,
+                                      type: widget.type,
+                                      res: res
+                                  ); }));
+                          }
+                        }
+                    )
+                ),
               ],
             ),
           ),
@@ -161,12 +199,12 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
                         Text("km", style: calculateFont),
                       ],),
                   ),
-
                     //calculate button
                     Container(
                         margin: EdgeInsets.only(bottom: 40),
                         child:ButtonWidget(
-                            color: (widget.fuelCapacity!=0 && widget.fuelPrice!=0 && widget.budget!=0
+                            color: (widget.fuelCapacity!=0 && widget.fuelPrice!=0
+                                && widget.budget!=0
                             )? primaryColor: greyColor2,
                             theChild: Container(
                               width: 312.0,
@@ -184,16 +222,17 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
                               ),
                             ),
                             theOnTapFunc: () {
-                              if(widget.fuelCapacity!=0 && widget.fuelPrice!=0 && widget.budget!=0){
-                                List<double> res = budgetCal(widget.budget);
+                              if(widget.fuelCapacity!=0 && widget.fuelPrice!=0
+                                  && widget.distance!=0){
+                                List<double> res = distanceCal(widget.distance);
                                 Navigator.push(context,
                                     MaterialPageRoute(builder: (context) {
                                       return ResultScreen(
-                                        fuelType: widget.fuelType,
-                                        gasStation: widget.gasStation,
-                                        gasStationIndex: widget.selectedGasStationIndex,
-                                        type: widget.type,
-                                        res: res
+                                          fuelType: widget.fuelType,
+                                          gasStation: widget.gasStation,
+                                          gasStationIndex: widget.selectedGasStationIndex,
+                                          type: widget.type,
+                                          res: res
                                       ); }));
                               }
                             }
@@ -243,6 +282,45 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
                             ),
                             Text("Baht", style: calculateFont),
                           ],),
+                      ),
+                      //calculate button
+                      Container(
+                          margin: EdgeInsets.only(bottom: 40),
+                          child:ButtonWidget(
+                              color: (widget.fuelCapacity!=0 && widget.fuelPrice!=0
+                                  && widget.budget!=0
+                              )? primaryColor: greyColor2,
+                              theChild: Container(
+                                width: 312.0,
+                                height: 64.0,
+                                child: const Center(
+                                  child: Text(
+                                    "Calculate",
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'montserrat',
+                                      color: blackColor,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              theOnTapFunc: () {
+                                if(widget.fuelCapacity!=0 && widget.fuelPrice!=0
+                                    && widget.budget!=0){
+                                  List<double> res = budgetCal(widget.budget);
+                                  Navigator.push(context,
+                                      MaterialPageRoute(builder: (context) {
+                                        return ResultScreen(
+                                            fuelType: widget.fuelType,
+                                            gasStation: widget.gasStation,
+                                            gasStationIndex: widget.selectedGasStationIndex,
+                                            type: widget.type,
+                                            res: res
+                                        ); }));
+                                }
+                              }
+                          )
                       ),
                     ]
                 )
