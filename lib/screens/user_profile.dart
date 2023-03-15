@@ -210,7 +210,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                           },
                           style: ElevatedButton.styleFrom(
                               backgroundColor: lightGreyColor,
-                              elevation: 0,
+                              elevation: 10,
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(19))),
                           child: SizedBox(

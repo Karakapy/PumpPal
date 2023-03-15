@@ -28,7 +28,14 @@ Widget buildButton(CarModel car, int index, int totalSize, BuildContext context,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
-                      child: Text("${carNameParser(car.make)} ${car.model}", style: TextStyle(
+                      child: Text("${carNameParser(car.make)} ", style: TextStyle(
+                          fontFamily: "Inter",
+                          fontSize: 20,
+                          color: Colors.black
+                      ),),
+                    ),
+                    Container(
+                      child: Text("${car.model}", style: TextStyle(
                           fontFamily: "Inter",
                           fontSize: 20,
                           color: Colors.black
