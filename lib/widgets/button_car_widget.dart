@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pumppal/widgets/alert_dialog_widget.dart';
 import '../constantPreset.dart';
 import '../models/car_model.dart';
 import '../screens/add_car_screen.dart';
@@ -16,15 +17,36 @@ Widget buildButton(CarModel car, int index, int totalSize, BuildContext context,
     return Dismissible(
       key: Key('uniqueKey'), // provide a unique key for the widget
       direction: DismissDirection.endToStart, // swipe direction
+      confirmDismiss: (direction) async {
+        // show the delete confirmation dialog and wait for user response
+        return await showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialogWidget(title: "Confirm Delete", body: "Are you sure to delete this car?",);
+          },
+        );
+      },
+      background: Container(
+        color: redColor,
+        child: Align(
+          alignment: Alignment.centerRight,
+          child: Padding(
+            padding: EdgeInsets.only(right: 20),
+            child: Icon(
+              Icons.delete,
+              color: Colors.white,
+              size: 40,
+            ),
+          ),
+        ),
+      ),
       onDismissed: (direction) async {
-     
+
         final userCarList = FirebaseFirestore.instance.collection('user_with_car').doc(email);
 
         userCarList.update({
           'car_lsit': FieldValue.arrayRemove([car.toJson()])
         });
-
-
       },
       child: Container(
         margin: EdgeInsets.all(20),

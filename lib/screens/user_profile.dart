@@ -55,7 +55,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
             child: Column(
               children: [
                 Container(
-                    height: 340.0,
+                    height: 370.0,
                     decoration: BoxDecoration(
                       gradient: const LinearGradient(
                         begin: Alignment.topCenter,
