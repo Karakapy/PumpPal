@@ -420,7 +420,7 @@ class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
       floatingActionButton: FloatingActionButton(
         elevation: 8,
         backgroundColor: primaryColor,
-        child: Icon(
+        child: const Icon(
           CarbonIcons.calculation,
           color: blackColor,
           size: 30,
