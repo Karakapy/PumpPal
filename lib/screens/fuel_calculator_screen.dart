@@ -400,7 +400,7 @@ class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
                 Container(
                   margin: EdgeInsets.only(bottom: 40),
                     child:ButtonWidget(
-                        color: (fuelType != '' && gasStation != '' && type !='')? primaryColor: greyColor2,
+                        color: (fuelType != null && gasStation != '' && type !='')? primaryColor: greyColor2,
                         theChild: Container(
                   width: 312.0,
                   height: 64.0,
