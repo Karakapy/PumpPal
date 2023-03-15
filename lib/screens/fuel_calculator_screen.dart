@@ -242,6 +242,7 @@ class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
                           setState(() {
                             _selectedGasStationIndex = index;
                             gasStation = gasStationList[index];
+                            fuelType = null;
                             print(_selectedGasStationIndex);
                             print(gasStation);
                           });
@@ -281,7 +282,7 @@ class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
                 FutureBuilder(
                   future: getOilPrice(),
                   builder: (context,snapshot) {
-                  if (snapshot.hasData!) {
+                  if (!snapshot.hasData) {
                     return Text("no data");
                   } else {
                     final oil = snapshot.data!;
@@ -304,10 +305,10 @@ class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
                           'Select the fuel type',
                           style: TextStyle(fontSize: 20),
                         ),
-                        items: fuelTypeList.map<DropdownMenuItem<String>>((String value) {
+                        items: oilList.map<DropdownMenuItem<String>>((String? value) {
                           return DropdownMenuItem<String>(
                             value: value,
-                            child: Text(value, style: buttonFont,),
+                            child: Text(value!, style: buttonFont,),
                           );
                         }).toList(),
                         validator: (value) {
@@ -358,7 +359,7 @@ class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
                     children: [
                       Container(
                           padding: EdgeInsets.only(left: 20),
-                          child:Text("Calculator Type", style: TextStyle(
+                          child: const Text("Calculator Type", style: TextStyle(
                               fontFamily: 'Inter',
                               fontSize: 20,
                               color:Colors.white))
