@@ -103,7 +103,7 @@ class _LogInScreenState extends State<LogInScreen> {
                   ),
                 ),
                 theOnTapFunc: () {
-                  authController.logIn();
+                  authController.logIn(context);
                 },
 
               ),

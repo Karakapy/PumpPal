@@ -1,11 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:pumppal/constantPreset.dart';
 import 'package:pumppal/screens/get_started_screen.dart';
 import 'package:pumppal/screens/home_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 class AuthController  extends GetxController{
 
@@ -43,7 +47,7 @@ class AuthController  extends GetxController{
     confirmPasswordController.clear();
   }
 
-  Future<void> logIn()async{
+  Future<void> logIn(BuildContext context)async{
     email = emailController.text;
     password = passwordController.text;
     try {
@@ -60,7 +64,23 @@ class AuthController  extends GetxController{
       }
     }
     on FirebaseAuthException catch (e) {
-      print(e);
+      if (e.code == 'unknown'){
+        showSnackBar(context, "Please fill in your email and password");
+      }
+      else if (e.code == 'user-not-found'){
+        showSnackBar(context, "No user found with this email address");
+      }
+      else if (e.code == 'invalid-email'){
+        showSnackBar(context, "The email address is not valid");
+      }
+      else if (e.code == 'wrong-password'){
+        showSnackBar(context, "The password is incorrect");
+      }
+      else{
+        showSnackBar(context, "An error occurred while signing in. Please try again later");
+      }
+
+      print(e.toString());
     }
     emailController.clear();
     passwordController.clear();
@@ -74,6 +94,19 @@ class AuthController  extends GetxController{
     Get.offAll(HomeScreen());
   }
 
+  void showSnackBar(context, text){
+    showTopSnackBar(
+      Overlay.of(context)!,
+      CustomSnackBar.error(
+        message: "${text}",
+        textStyle: TextStyle(
+            fontSize: 18,
+            color: whiteColor,
+            fontWeight: FontWeight.bold
+        ),
+      ),
+    );
 
+  }
 
 }
