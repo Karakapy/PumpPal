@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../constantPreset.dart';
 import '../models/car_model.dart';
 import '../screens/add_car_screen.dart';
+import '../parser/car_name_parser.dart';
 
 Widget buildButton(CarModel car, int index, int totalSize, BuildContext context, String email){
 
@@ -27,7 +28,7 @@ Widget buildButton(CarModel car, int index, int totalSize, BuildContext context,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
-                      child: Text("${car.make} ${car.model}", style: TextStyle(
+                      child: Text("${carNameParser(car.make)} ${car.model}", style: TextStyle(
                           fontFamily: "Inter",
                           fontSize: 20,
                           color: Colors.black
