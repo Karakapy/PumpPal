@@ -27,7 +27,13 @@ Widget buildButton(CarModel car, int index, int totalSize, BuildContext context,
         );
       },
       background: Container(
-        color: redColor,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Colors.red, Colors.white],
+            begin: Alignment.centerRight,
+            end: Alignment.centerLeft,
+          ),
+        ),
         child: Align(
           alignment: Alignment.centerRight,
           child: Padding(
@@ -49,7 +55,7 @@ Widget buildButton(CarModel car, int index, int totalSize, BuildContext context,
         });
       },
       child: Container(
-        margin: EdgeInsets.all(20),
+        margin: EdgeInsets.only(left: 20,right: 20,bottom: 20),
         child:ElevatedButton(
           onPressed: (){
           },

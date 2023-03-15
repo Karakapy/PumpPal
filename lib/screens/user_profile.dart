@@ -4,6 +4,7 @@ import 'package:carbon_icons/carbon_icons.dart';
 import 'package:pumppal/controllers/auth_controller.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:pumppal/screens/add_car_screen.dart';
+import 'package:pumppal/widgets/add_new_car_widget.dart';
 import '../widgets/button_widget.dart';
 import '../widgets/nav_bar_widget.dart';
 import '../models/car_model.dart';
@@ -144,7 +145,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
 
           Expanded(child: SingleChildScrollView(
             child: Container(
-                height: 350,
+                height: 320,
                 child: StreamBuilder(
                   stream: collection.doc(email).snapshots(),
                   builder: (context, snapshot) {
@@ -164,38 +165,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                             } else {
                               return Container(
                                       margin: EdgeInsets.symmetric(horizontal: 20),
-                                      child: ElevatedButton(
-                                        onPressed: () {
-                                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => AddCarScreen(email!)));
-                                        },
-                                        style: ElevatedButton.styleFrom(
-                                            backgroundColor: lightGreyColor,
-                                            elevation: 0,
-                                            shape: RoundedRectangleBorder(
-                                                borderRadius: BorderRadius.circular(19))),
-                                        child: SizedBox(
-                                          height: 115,
-                                          child: Container(
-                                            padding: EdgeInsets.all(15),
-                                            child: Wrap(
-                                              children: [
-                                                Column(
-                                                  children: const [
-                                                    Icon(Icons.add_circle, color:greyColor2,size: 60),
-                                                    Text("Add new car",style: TextStyle(
-                                                        fontFamily:"Inter",
-                                                        fontSize: 20,
-                                                        color: Color(0xffC6C6C6)),),
-                                                  ],
-                                                ),
-                                                Image.asset('assets/defaultCarImage.png',
-                                                  height: 96,
-                                                  width:160.0,),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      )
+                                      child: AddNewCarWidget(email: email,)
                               );
 
                             }
@@ -204,39 +174,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                       return Container(
                         height: 120,
                         margin: EdgeInsets.only(bottom: 20),
-                        child: ElevatedButton(
-                          onPressed: () {
-                            Navigator.of(context).push(MaterialPageRoute(builder: (context) => AddCarScreen(email!)));
-                          },
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor: lightGreyColor,
-                              elevation: 0,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(19))),
-                          child: SizedBox(
-                            height: 115,
-                            child: Container(
-                              padding: EdgeInsets.all(15),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                children: [
-                                  Column(
-                                    children: const [
-                                      Icon(Icons.add_circle, color:greyColor2,size: 60),
-                                      Text("Add new car",style: TextStyle(
-                                          fontFamily:"Inter",
-                                          fontSize: 20,
-                                          color: Color(0xffC6C6C6)),),
-                                    ],
-                                  ),
-                                  Image.asset('assets/defaultCarImage.png',
-                                    height: 96,
-                                    width:160.0,),
-                                    ],
-                                  ),
-                              ),
-                            ),
-                          ),
+                        child: AddNewCarWidget(email: email,)
 
                       );
                     }
