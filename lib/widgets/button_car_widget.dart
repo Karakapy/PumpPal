@@ -15,7 +15,7 @@ Widget buildButton(CarModel car, int index, int totalSize, BuildContext context,
   final email = user?.email;
 
     return Dismissible(
-      key: Key('uniqueKey'), // provide a unique key for the widget
+      key: UniqueKey(), // provide a unique key for the widget
       direction: DismissDirection.endToStart, // swipe direction
       confirmDismiss: (direction) async {
         // show the delete confirmation dialog and wait for user response
