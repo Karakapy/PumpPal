@@ -304,7 +304,7 @@ class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
                           'Select the fuel type',
                           style: TextStyle(fontSize: 20),
                         ),
-                        items: oilList.map<DropdownMenuItem<String>>((String value) {
+                        items: fuelTypeList.map<DropdownMenuItem<String>>((String value) {
                           return DropdownMenuItem<String>(
                             value: value,
                             child: Text(value, style: buttonFont,),
