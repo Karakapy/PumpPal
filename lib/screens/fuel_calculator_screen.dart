@@ -2,10 +2,11 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pumppal/api/api_oil_price.dart';
+import 'package:pumppal/parser/oil_name_parser.dart';
 import 'package:pumppal/screens/home_screen.dart';
 import 'package:pumppal/screens/result_screen.dart';
 import 'package:pumppal/screens/user_profile.dart';
-import 'package:pumppal/widgets/add_new_car_widget.dart';
 import 'package:pumppal/widgets/button_widget.dart';
 import 'package:carbon_icons/carbon_icons.dart';
 import 'package:pumppal/widgets/calculator_widget.dart';
@@ -13,7 +14,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../constantPreset.dart';
 import '../widgets/nav_bar_widget.dart';
-import 'add_car_screen.dart';
 
 class FuelCalculatorScreen extends StatefulWidget {
   const FuelCalculatorScreen({Key? key}) : super(key: key);
@@ -31,9 +31,8 @@ class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
   double fuelCapacity = 0.0;
   double fuelConsumption = 0.0;
   //bar index
-  int _selectedGasStationIndex = -1;
-  int _selectedFuelTypeIndex = -1;
-  int _selectedCalculatorIndex = -1;
+  int _selectedGasStationIndex = 0;
+  int _selectedCalculatorIndex = 0;
 
   FirebaseAuth? auth;
 
@@ -110,9 +109,9 @@ class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
       }
     }
 
-    FirebaseAuth auth = FirebaseAuth.instance;
-    final user = auth.currentUser;
-    final email = user?.email;
+    // FirebaseAuth auth = FirebaseAuth.instance;
+    // final user = auth.currentUser;
+    // final email = user?.email;
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -179,7 +178,38 @@ class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
                 SizedBox(height: 5,),
                 Container(
                   margin: EdgeInsets.only(bottom: 20),
-                  child: AddNewCarWidget(email: email,),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(context,MaterialPageRoute(builder: (context) => UserProfileScreen()));
+                    },
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: lightGreyColor,
+                        elevation: 0,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(19))),
+                    child: SizedBox(
+                      height: 115,
+                      child: Container(
+                        padding: EdgeInsets.all(15),
+                        child: Wrap(
+                          children: [
+                            Column(
+                              children: [
+                                Icon(Icons.add_circle, color: Colors.grey,size: 60),
+                                Text("Add new car",style: TextStyle(
+                                    fontFamily:"Inter",
+                                    fontSize: 20,
+                                    color: Color(0xffC6C6C6)),),
+                              ],
+                            ),
+                            Image.asset('assets/defaultCarImage.png',
+                              height: 96,
+                              width:160.0,),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
 
                 //gas station bar
@@ -248,67 +278,79 @@ class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
                     ]
                 ),
                 SizedBox(height: 5,),
-                Container(
-                  width: 339,
-                  height: 50,
-                  margin: EdgeInsets.only(bottom: 20),
-                  child: DropdownButtonFormField2<String>(
-                    value: fuelType,
-                    decoration: InputDecoration(
-                      isDense: true,
-                      contentPadding: EdgeInsets.zero,
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                    ),
-                    isExpanded: true,
-                    hint: const Text(
-                      'Select the fuel type',
-                      style: TextStyle(fontSize: 20),
-                    ),
-                    items: fuelTypeList.map<DropdownMenuItem<String>>((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value, style: buttonFont,),
-                      );
-                    }).toList(),
-                    validator: (value) {
-                      if (value == null) {
-                        return 'Please select the fuel type.';
-                      }
-                      return null;
-                    },
-                    onChanged: (String? value) {
-                      // This is called when the user selects an item.
-                      setState(() {
-                        fuelType = value!;
+                FutureBuilder(
+                  future: getOilPrice(),
+                  builder: (context,snapshot) {
+                  if (snapshot.hasData!) {
+                    return Text("no data");
+                  } else {
+                    final oil = snapshot.data!;
+                    final oilList = oil[_selectedGasStationIndex].map((e) => oilNameParser(e.name)).toList();
+                    return Container(
+                      width: 339,
+                      height: 50,
+                      margin: EdgeInsets.only(bottom: 20),
+                      child: DropdownButtonFormField2<String>(
+                        value: fuelType,
+                        decoration: InputDecoration(
+                          isDense: true,
+                          contentPadding: EdgeInsets.zero,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
+                        isExpanded: true,
+                        hint: const Text(
+                          'Select the fuel type',
+                          style: TextStyle(fontSize: 20),
+                        ),
+                        items: oilList.map<DropdownMenuItem<String>>((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value, style: buttonFont,),
+                          );
+                        }).toList(),
+                        validator: (value) {
+                          if (value == null) {
+                            return 'Please select the fuel type.';
+                          }
+                          return null;
+                        },
+                        onChanged: (String? value) {
+                          // This is called when the user selects an item.
+                          setState(() {
+                            fuelType = value!;
 
-                      });
-                    },
-                    // onSaved: (value) {
-                    //   selectedModel = value.toString();
-                    // },
-                    buttonStyleData: ButtonStyleData(
-                      height: 60,
-                      padding: const EdgeInsets.only(left: 20, right: 10),
-                      decoration:BoxDecoration(
-                        borderRadius: BorderRadius.circular(12),
-                        color: lightGreyColor
-                      )
-                    ),
-                    iconStyleData: const IconStyleData(
-                      icon: Icon(
-                        Icons.arrow_drop_down,
-                        color: blackColor,
+                          });
+                        },
+                        // onSaved: (value) {
+                        //   selectedModel = value.toString();
+                        // },
+                        buttonStyleData: ButtonStyleData(
+                            height: 60,
+                            padding: const EdgeInsets.only(left: 20, right: 10),
+                            decoration:BoxDecoration(
+                                borderRadius: BorderRadius.circular(12),
+                                color: lightGreyColor
+                            )
+                        ),
+                        iconStyleData: const IconStyleData(
+                          icon: Icon(
+                            Icons.arrow_drop_down,
+                            color: blackColor,
+                          ),
+                          iconSize: 30,
+                        ),
+                        dropdownStyleData: DropdownStyleData(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                        ),
                       ),
-                      iconSize: 30,
-                    ),
-                    dropdownStyleData: DropdownStyleData(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                    ),
-                  ),
+
+                    );
+                  }
+                }
                 ),
 
                 //Calculator bar
@@ -361,40 +403,14 @@ class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
                 /**
                  * Data entry
                  * */
-                CalculatorWidget(type: type,
+                CalculatorWidget(
+                  type: type,
+                  fuelType: fuelType,
+                  gasStation: gasStation,
+                  selectedGasStationIndex: _selectedGasStationIndex,
                   fuelConsumption: fuelConsumption,
                   fuelPrice: fuelPrice,
                   fuelCapacity: fuelCapacity,),
-
-                //calculate button
-                Container(
-                  margin: EdgeInsets.only(bottom: 40),
-                    child:ButtonWidget(
-                        color: (fuelType != null && gasStation != '' && type !='')? primaryColor: greyColor2,
-                        theChild: Container(
-                  width: 312.0,
-                  height: 64.0,
-                  child: const Center(
-                    child: Text(
-                      "Calculate",
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'montserrat',
-                        color: blackColor,
-                      ),
-                    ),
-                  ),
-                ),
-                    theOnTapFunc: () {
-                          if(fuelType!=null && gasStation != '' && type !=''){
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (context) { return ResultScreen(fuelType: fuelType,gasStation: gasStation,gasStationIndex: _selectedGasStationIndex,type: type,); }));
-                          }
-
-                    }
-                )
-                ),
               ],
             ),
           ),
@@ -419,25 +435,8 @@ class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
     );
   }
 
-  //Budget calculator
-  List<double> budgetCal(double budget) {
-    double result = budget/fuelPrice;
-    double distance = result * fuelConsumption;
-    return [result, distance];
-  }
+  // _setCar(BuildContext context) {
+  //   final
+  // }
 
-  //Tank calculator
-  List<double> tankCal(double current, double desired) {
-    double fuelTank = desired - current;
-    double result = fuelTank*fuelPrice;
-    double distance = desired * fuelConsumption;
-    return [result, distance];
-  }
-
-  //Distance calculator
-  List<double> distanceCal(double distance) {
-    double fuelTank = distance/fuelConsumption;
-    double result = fuelTank*fuelPrice;
-    return [result, fuelTank];
-  }
 }

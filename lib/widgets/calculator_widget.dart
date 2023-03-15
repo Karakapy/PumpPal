@@ -2,12 +2,19 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../constantPreset.dart';
+import '../screens/result_screen.dart';
+import 'button_widget.dart';
 
 class CalculatorWidget extends StatefulWidget {
   String type;
+  String? fuelType;
+  String gasStation;
+  int selectedGasStationIndex;
+
   double fuelPrice = 0.0;
   double fuelCapacity = 0.0;
   double fuelConsumption = 0.0;
+
 
   //Budget parameter
   double budget = 0.0;
@@ -21,6 +28,9 @@ class CalculatorWidget extends StatefulWidget {
 
   CalculatorWidget({
     required this.type,
+    required this.fuelType,
+    required this.gasStation,
+    required this.selectedGasStationIndex,
     required this.fuelConsumption,
     required this.fuelPrice,
     required this.fuelCapacity});
@@ -151,6 +161,44 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
                         Text("km", style: calculateFont),
                       ],),
                   ),
+
+                    //calculate button
+                    Container(
+                        margin: EdgeInsets.only(bottom: 40),
+                        child:ButtonWidget(
+                            color: (widget.fuelCapacity!=0 && widget.fuelPrice!=0 && widget.budget!=0
+                            )? primaryColor: greyColor2,
+                            theChild: Container(
+                              width: 312.0,
+                              height: 64.0,
+                              child: const Center(
+                                child: Text(
+                                  "Calculate",
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: 'montserrat',
+                                    color: blackColor,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            theOnTapFunc: () {
+                              if(widget.fuelCapacity!=0 && widget.fuelPrice!=0 && widget.budget!=0){
+                                List<double> res = budgetCal(widget.budget);
+                                Navigator.push(context,
+                                    MaterialPageRoute(builder: (context) {
+                                      return ResultScreen(
+                                        fuelType: widget.fuelType,
+                                        gasStation: widget.gasStation,
+                                        gasStationIndex: widget.selectedGasStationIndex,
+                                        type: widget.type,
+                                        res: res
+                                      ); }));
+                              }
+                            }
+                        )
+                    ),
               ]
             )
         )
@@ -201,6 +249,7 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
             )
             )
         );
+
     }
   }
 
@@ -244,5 +293,27 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
         ),
       ],
     );
+  }
+
+  //Budget calculator
+  List<double> budgetCal(double budget) {
+    double result = budget/widget.fuelPrice;
+    double distance = result * widget.fuelConsumption;
+    return [result, distance];
+  }
+
+  //Tank calculator
+  List<double> tankCal(double current, double desired) {
+    double fuelTank = desired - current;
+    double result = fuelTank * widget.fuelPrice;
+    double distance = desired * widget.fuelConsumption;
+    return [result, distance];
+  }
+
+  //Distance calculator
+  List<double> distanceCal(double distance) {
+    double fuelTank = distance/widget.fuelConsumption;
+    double result = fuelTank * widget.fuelPrice;
+    return [result, fuelTank];
   }
 }

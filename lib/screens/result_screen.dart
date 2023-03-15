@@ -12,14 +12,15 @@ class ResultScreen extends StatefulWidget {
     required this.gasStation,
     required this.gasStationIndex,
     required this.fuelType,
-    required this.type
+    required this.type,
+    required this.res
   });
 
   final String gasStation;
   final String? fuelType;
   final String type;
   final int gasStationIndex;
-
+  final List<double> res;
 
 
   @override
@@ -207,7 +208,11 @@ class _ResultScreenState extends State<ResultScreen> {
               // height: 115,
               width: 340,
 
-              child: CalculatorWidget(type: type,
+              child: CalculatorWidget(
+                type: type,
+                fuelType: widget.fuelType,
+                gasStation: widget.gasStation,
+                selectedGasStationIndex: widget.gasStationIndex,
                 fuelConsumption: fuelConsumption,
                 fuelPrice: fuelPrice,
                 fuelCapacity: fuelCapacity,),

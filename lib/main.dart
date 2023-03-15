@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
         '/getStarted': (context) => GetStartedScreen(),
         '/fuelCalculator': (context) => FuelCalculatorScreen(),
         '/profile': (context) => UserProfileScreen() ,
-        '/result': (context) => ResultScreen(gasStation: '',gasStationIndex:0, fuelType: '',type: '',) ,
+        // '/result': (context) => ResultScreen(gasStation: '',gasStationIndex:0, fuelType: '',type: '',res: [],) ,
       },
     );
   }
