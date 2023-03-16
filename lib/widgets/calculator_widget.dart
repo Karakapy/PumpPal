@@ -44,12 +44,28 @@ class CalculatorWidget extends StatefulWidget {
 
 class _CalculatorWidgetState extends State<CalculatorWidget> {
 
-  final TextEditingController _controller = TextEditingController();
+  final TextEditingController _budgetController = TextEditingController();
+  final TextEditingController _currentTankController = TextEditingController();
+  final TextEditingController _finalTankController = TextEditingController();
+  final TextEditingController _distanceController = TextEditingController();
+
+  // @override
+  // void dispose() {
+  //   _budgetController.dispose();
+  //   _currentTankController.dispose();
+  //   _finalTankController.dispose();
+  //   _distanceController.dispose();
+  //   super.dispose();
+  // }
+
 
   @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
+  void initState() {
+    _budgetController.clear();
+    _currentTankController.clear();
+    _finalTankController.clear();
+    _distanceController.clear();
+    super.initState();
   }
 
   @override
@@ -76,7 +92,7 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
                       Container(
                         width: 123,
                         child:TextFormField(
-                          controller: _controller,
+                          controller: _currentTankController,
                           decoration: InputDecoration(
                               hintText: 'Enter the amount',
                               border: InputBorder.none
@@ -104,7 +120,7 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
                       Container(
                         width: 123,
                         child:TextFormField(
-                          controller: _controller,
+                          controller: _finalTankController,
                           decoration: InputDecoration(
                               hintText: 'Enter the amount',
                               border: InputBorder.none
@@ -126,7 +142,7 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
                 Container(
                     margin: EdgeInsets.only(bottom: 40),
                     child:ButtonWidget(
-                        color: (widget.fuelCapacity!=0 && widget.fuelPrice!=0 && widget.budget!=0
+                        color: (widget.fuelCapacity!=0 && widget.fuelPrice!=0 && (widget.current!=0 || _currentTankController.text != 0.toString()) && (widget.desired!=0 || _finalTankController.text != 0.toString())
                         )? primaryColor: greyColor2,
                         theChild: Container(
                           width: 312.0,
@@ -145,7 +161,7 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
                         ),
                         theOnTapFunc: () {
                           if(widget.fuelCapacity!=0 && widget.fuelPrice!=0
-                              && widget.current!=0 && widget.desired!=0){
+                              && (widget.current!=0 || _currentTankController.text != 0.toString()) && (widget.desired!=0 || _finalTankController.text != 0.toString())){
                             List<double> res = tankCal(widget.current,widget.desired);
                             Navigator.push(context,
                                 MaterialPageRoute(builder: (context) {
@@ -186,7 +202,7 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
                         Container(
                           width: 123,
                           child:TextFormField(
-                            controller: _controller,
+                            controller: _distanceController,
                             decoration: InputDecoration(
                                 hintText: 'Enter the amount',
                                 border: InputBorder.none
@@ -209,7 +225,7 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
                         margin: EdgeInsets.only(bottom: 40),
                         child:ButtonWidget(
                             color: (widget.fuelCapacity!=0 && widget.fuelPrice!=0
-                                && widget.budget!=0
+                                && (widget.budget!=0 || _distanceController.text != 0.toString())
                             )? primaryColor: greyColor2,
                             theChild: Container(
                               width: 312.0,
@@ -228,7 +244,7 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
                             ),
                             theOnTapFunc: () {
                               if(widget.fuelCapacity!=0 && widget.fuelPrice!=0
-                                  && widget.distance!=0){
+                                  && (widget.budget!=0 || _distanceController.text != 0.toString())){
                                 List<double> res = distanceCal(widget.distance);
 
                                 Navigator.push(context,
@@ -271,7 +287,7 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
                             Container(
                               width: 123,
                                 child:TextFormField(
-                                  controller: _controller,
+                                  controller: _budgetController,
                               decoration: InputDecoration(
                                 hintText: 'Enter the amount',
                                 border: InputBorder.none
@@ -295,7 +311,7 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
                           margin: EdgeInsets.only(bottom: 40),
                           child:ButtonWidget(
                               color: (widget.fuelCapacity!=0 && widget.fuelPrice!=0
-                                  && widget.budget!=0
+                                  && (widget.budget!=0 || _budgetController.text != 0.toString())
                               )? primaryColor: greyColor2,
                               theChild: Container(
                                 width: 312.0,
@@ -314,7 +330,7 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
                               ),
                               theOnTapFunc: () {
                                 if(widget.fuelCapacity!=0 && widget.fuelPrice!=0
-                                    && widget.budget!=0){
+                                    && (widget.budget!=0 || _budgetController.text != 0.toString())){
                                   List<double> res = budgetCal(widget.budget);
 
                                   print(widget.fuelType);
