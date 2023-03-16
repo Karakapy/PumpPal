@@ -7,6 +7,7 @@ import '../constantPreset.dart';
 import '../models/car_model.dart';
 import '../screens/add_car_screen.dart';
 import '../parser/car_name_parser.dart';
+import '../screens/fuel_calculator_screen.dart';
 
 Widget buildButton(CarModel car, int index, int totalSize, BuildContext context, String email){
 
@@ -58,6 +59,12 @@ Widget buildButton(CarModel car, int index, int totalSize, BuildContext context,
         margin: EdgeInsets.only(left: 20,right: 20,bottom: 20),
         child:ElevatedButton(
           onPressed: (){
+            print(car.model);
+            print(car.make);
+            print(car.makeYear);
+            print(car.toJson());
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) { return FuelCalculatorScreen(car: car); }));
           },
           style: ElevatedButton.styleFrom(
               backgroundColor: lightGreyColor,

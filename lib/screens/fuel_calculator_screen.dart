@@ -13,10 +13,16 @@ import 'package:pumppal/widgets/calculator_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../constantPreset.dart';
+import '../models/car_model.dart';
+import '../parser/car_name_parser.dart';
+import '../widgets/add_new_car_widget.dart';
 import '../widgets/nav_bar_widget.dart';
 
 class FuelCalculatorScreen extends StatefulWidget {
-  const FuelCalculatorScreen({Key? key}) : super(key: key);
+
+  CarModel? car;
+
+  FuelCalculatorScreen({required this.car});
 
   @override
   State<FuelCalculatorScreen> createState() => _FuelCalculatorScreenState();
@@ -109,9 +115,9 @@ class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
       }
     }
 
-    // FirebaseAuth auth = FirebaseAuth.instance;
-    // final user = auth.currentUser;
-    // final email = user?.email;
+    FirebaseAuth auth = FirebaseAuth.instance;
+    final user = auth.currentUser;
+    final email = user?.email;
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -176,30 +182,47 @@ class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
 
                 // need shared pref keeping data
                 SizedBox(height: 5,),
+
+                widget.car != null ?
                 Container(
                   margin: EdgeInsets.only(bottom: 20),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(context,MaterialPageRoute(builder: (context) => UserProfileScreen()));
-                    },
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: lightGreyColor,
-                        elevation: 0,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(19))),
+                  child: Container(
+                    margin: EdgeInsets.only(bottom: 20),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(19),
+                      color: lightGreyColor,
+                    ),
                     child: SizedBox(
+                      width: 340,
                       height: 115,
                       child: Container(
                         padding: EdgeInsets.all(15),
-                        child: Wrap(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             Column(
-                              children: [
-                                Icon(Icons.add_circle, color: Colors.grey,size: 60),
-                                Text("Add new car",style: TextStyle(
-                                    fontFamily:"Inter",
-                                    fontSize: 20,
-                                    color: Color(0xffC6C6C6)),),
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children:  [
+                                Container(
+                                  child: Text("${carNameParser(widget.car?.make)} ", style: TextStyle(
+                                      fontFamily: "Inter",
+                                      fontSize: 20,
+                                      color: Colors.black
+                                  ),),
+                                ),
+                                Container(
+                                  child: Text("${widget.car?.model}", style: TextStyle(
+                                      fontFamily: "Inter",
+                                      fontSize: 20,
+                                      color: Colors.black
+                                  ),),
+                                ),
+                                Container(
+                                  child: Text("${widget.car?.makeYear.toInt()}",style: TextStyle(
+                                      fontFamily:"Inter",
+                                      fontSize: 20,
+                                      color: greyColor),),
+                                ),
                               ],
                             ),
                             Image.asset('assets/defaultCarImage.png',
@@ -210,7 +233,11 @@ class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
                       ),
                     ),
                   ),
+                ) : Container(
+                  margin: EdgeInsets.only(bottom: 20),
+                  child: AddNewCarWidget(email: email,),
                 ),
+
 
                 //gas station bar
                 Row(
@@ -412,9 +439,9 @@ class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
                   fuelType: fuelType,
                   gasStation: gasStation,
                   selectedGasStationIndex: _selectedGasStationIndex,
-                  fuelConsumption: fuelConsumption,
+                  fuelConsumption: widget.car?.mileageKmpl ?? 0,
                   fuelPrice: fuelPrice,
-                  fuelCapacity: fuelCapacity,),
+                  fuelCapacity: widget.car?.fuelTankCapacityL ?? 0,),
               ],
             ),
           ),

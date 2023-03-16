@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
         '/login': (context) => LogInScreen(),
         '/signup': (context) => SignUpScreen(),
         '/getStarted': (context) => GetStartedScreen(),
-        '/fuelCalculator': (context) => FuelCalculatorScreen(),
+        '/fuelCalculator': (context) => FuelCalculatorScreen(car: null,),
         '/profile': (context) => UserProfileScreen() ,
         // '/result': (context) => ResultScreen(gasStation: '',gasStationIndex:0, fuelType: '',type: '',res: [],) ,
       },
