@@ -451,9 +451,10 @@ class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
                  * Data entry
                  * */
                 CalculatorWidget(
-                  type: type,
+                  car: car,
+                  type: (_selectedCalculatorIndex == 0)? 'Budget': type,
                   fuelType: fuelType,
-                  gasStation: gasStation,
+                  gasStation: (_selectedGasStationIndex == 0)? 'PTT': gasStation,
                   selectedGasStationIndex: _selectedGasStationIndex,
                   fuelConsumption: car?.mileageKmpl ?? 0,
                   fuelPrice: fuelPrice,

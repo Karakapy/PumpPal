@@ -2,13 +2,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../constantPreset.dart';
+import '../models/car_model.dart';
 import '../screens/result_screen.dart';
 import 'button_widget.dart';
 
 class CalculatorWidget extends StatefulWidget {
-  String type;
+  CarModel? car;
+  String? type;
   String? fuelType;
-  String gasStation;
+  String? gasStation;
   int selectedGasStationIndex;
 
   double fuelPrice = 0.0;
@@ -27,6 +29,7 @@ class CalculatorWidget extends StatefulWidget {
   double distance = 0.0;
 
   CalculatorWidget({
+    required this.car,
     required this.type,
     required this.fuelType,
     required this.gasStation,
@@ -51,6 +54,7 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
 
   @override
   Widget build(BuildContext context) {
+
     switch (widget.type) {
       //Tank calculator
       case "Tank":
@@ -146,6 +150,7 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
                             Navigator.push(context,
                                 MaterialPageRoute(builder: (context) {
                                   return ResultScreen(
+                                    car: widget.car,
                                       fuelType: widget.fuelType,
                                       gasStation: widget.gasStation,
                                       gasStationIndex: widget.selectedGasStationIndex,
@@ -225,9 +230,11 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
                               if(widget.fuelCapacity!=0 && widget.fuelPrice!=0
                                   && widget.distance!=0){
                                 List<double> res = distanceCal(widget.distance);
+
                                 Navigator.push(context,
                                     MaterialPageRoute(builder: (context) {
                                       return ResultScreen(
+                                        car: widget.car,
                                           fuelType: widget.fuelType,
                                           gasStation: widget.gasStation,
                                           gasStationIndex: widget.selectedGasStationIndex,
@@ -309,9 +316,17 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
                                 if(widget.fuelCapacity!=0 && widget.fuelPrice!=0
                                     && widget.budget!=0){
                                   List<double> res = budgetCal(widget.budget);
+
+                                  print(widget.fuelType);
+                                  print(widget.gasStation);
+                                  print(widget.selectedGasStationIndex);
+                                  print(widget.type);
+                                  print(res);
+
                                   Navigator.push(context,
                                       MaterialPageRoute(builder: (context) {
                                         return ResultScreen(
+                                          car: widget.car,
                                             fuelType: widget.fuelType,
                                             gasStation: widget.gasStation,
                                             gasStationIndex: widget.selectedGasStationIndex,
