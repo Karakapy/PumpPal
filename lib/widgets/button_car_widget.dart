@@ -15,11 +15,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 Widget buildButton(CarModel car, int index, int totalSize, BuildContext context, String email){
 
-  // FirebaseAuth auth = FirebaseAuth.instance;
-  // final user = auth.currentUser;
-  // final email = user?.email;
-
-
   return Dismissible(
       key: UniqueKey(), // provide a unique key for the widget
       direction: DismissDirection.endToStart, // swipe direction
@@ -55,7 +50,7 @@ Widget buildButton(CarModel car, int index, int totalSize, BuildContext context,
       onDismissed: (direction) async {
 
         final prefs = await SharedPreferences.getInstance();
-        prefs.setString('car', "null");
+        prefs.setString('car_${email}', "null");
 
         final userCarList = FirebaseFirestore.instance.collection('user_with_car').doc(email);
 
@@ -72,8 +67,8 @@ Widget buildButton(CarModel car, int index, int totalSize, BuildContext context,
             print(car.makeYear);
 
             final prefs = await SharedPreferences.getInstance();
-            prefs.setString('car', "null");
-            await prefs.setString('car', json.encode(car.toJson()));
+            prefs.setString('car_${email}', "null");
+            await prefs.setString('car_${email}', json.encode(car.toJson()));
 
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) { return FuelCalculatorScreen(); }));

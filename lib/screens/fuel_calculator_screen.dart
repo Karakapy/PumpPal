@@ -95,8 +95,11 @@ class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
 
   CarModel? car;
   void checkCar() {
+    FirebaseAuth auth = FirebaseAuth.instance;
+    final user = auth.currentUser;
+    final email = user?.email;
     SharedPreferences.getInstance().then((prefs) {
-      final carJsonString = prefs.getString('car');
+      final carJsonString = prefs.getString('car_${email}');
       final carMap = carJsonString != null ? json.decode(carJsonString) : null;
       if (carMap != null) {
         setState(() {

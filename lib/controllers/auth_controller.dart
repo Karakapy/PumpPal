@@ -105,7 +105,7 @@ class AuthController  extends GetxController{
     print("$email is logging out.");
     await _auth.signOut();
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.clear();
+    prefs.remove('user');
     Get.offAll(HomeScreen());
   }
 
