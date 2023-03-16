@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -16,6 +18,7 @@ Widget buildButton(CarModel car, int index, int totalSize, BuildContext context,
   // FirebaseAuth auth = FirebaseAuth.instance;
   // final user = auth.currentUser;
   // final email = user?.email;
+
 
   return Dismissible(
       key: UniqueKey(), // provide a unique key for the widget
@@ -51,6 +54,9 @@ Widget buildButton(CarModel car, int index, int totalSize, BuildContext context,
       ),
       onDismissed: (direction) async {
 
+        final prefs = await SharedPreferences.getInstance();
+        prefs.setString('car', "null");
+
         final userCarList = FirebaseFirestore.instance.collection('user_with_car').doc(email);
 
         userCarList.update({
@@ -60,13 +66,17 @@ Widget buildButton(CarModel car, int index, int totalSize, BuildContext context,
       child: Container(
         margin: EdgeInsets.only(left: 20,right: 20,bottom: 20),
         child:ElevatedButton(
-          onPressed: (){
+          onPressed: () async {
             print(car.model);
             print(car.make);
             print(car.makeYear);
-            print(car.toJson());
+
+            final prefs = await SharedPreferences.getInstance();
+            prefs.setString('car', "null");
+            await prefs.setString('car', json.encode(car.toJson()));
+
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) { return FuelCalculatorScreen(car: car); }));
+                MaterialPageRoute(builder: (context) { return FuelCalculatorScreen(); }));
           },
           style: ElevatedButton.styleFrom(
               backgroundColor: lightGreyColor,

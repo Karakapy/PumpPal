@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -20,9 +22,7 @@ import '../widgets/nav_bar_widget.dart';
 
 class FuelCalculatorScreen extends StatefulWidget {
 
-  CarModel? car;
-
-  FuelCalculatorScreen({required this.car});
+  const FuelCalculatorScreen({Key? key}) : super(key: key);
 
   @override
   State<FuelCalculatorScreen> createState() => _FuelCalculatorScreenState();
@@ -79,6 +79,7 @@ class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
   void initState() {
     super.initState();
     checkToken();
+    checkCar();
   }
 
   String? token;
@@ -91,6 +92,21 @@ class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
       });
     });
   }
+
+  CarModel? car;
+  void checkCar() {
+    SharedPreferences.getInstance().then((prefs) {
+      final carJsonString = prefs.getString('car');
+      final carMap = carJsonString != null ? json.decode(carJsonString) : null;
+      if (carMap != null) {
+        setState(() {
+          car = CarModel.fromJson(carMap);
+        });
+      }
+    });
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -183,7 +199,7 @@ class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
                 // need shared pref keeping data
                 SizedBox(height: 5,),
 
-                widget.car != null ?
+                car != null ?
                 Container(
                   margin: EdgeInsets.only(bottom: 20),
                   child: Container(
@@ -204,21 +220,21 @@ class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children:  [
                                 Container(
-                                  child: Text("${carNameParser(widget.car?.make)} ", style: TextStyle(
+                                  child: Text("${carNameParser(car?.make)} ", style: TextStyle(
                                       fontFamily: "Inter",
                                       fontSize: 20,
                                       color: Colors.black
                                   ),),
                                 ),
                                 Container(
-                                  child: Text("${widget.car?.model}", style: TextStyle(
+                                  child: Text("${car?.model}", style: TextStyle(
                                       fontFamily: "Inter",
                                       fontSize: 20,
                                       color: Colors.black
                                   ),),
                                 ),
                                 Container(
-                                  child: Text("${widget.car?.makeYear.toInt()}",style: TextStyle(
+                                  child: Text("${car?.makeYear.toInt()}",style: TextStyle(
                                       fontFamily:"Inter",
                                       fontSize: 20,
                                       color: greyColor),),
@@ -439,9 +455,9 @@ class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
                   fuelType: fuelType,
                   gasStation: gasStation,
                   selectedGasStationIndex: _selectedGasStationIndex,
-                  fuelConsumption: widget.car?.mileageKmpl ?? 0,
+                  fuelConsumption: car?.mileageKmpl ?? 0,
                   fuelPrice: fuelPrice,
-                  fuelCapacity: widget.car?.fuelTankCapacityL ?? 0,),
+                  fuelCapacity: car?.fuelTankCapacityL ?? 0,),
               ],
             ),
           ),
