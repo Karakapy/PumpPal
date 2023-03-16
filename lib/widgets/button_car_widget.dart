@@ -8,14 +8,16 @@ import '../models/car_model.dart';
 import '../screens/add_car_screen.dart';
 import '../parser/car_name_parser.dart';
 import '../screens/fuel_calculator_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 
 Widget buildButton(CarModel car, int index, int totalSize, BuildContext context, String email){
 
-  FirebaseAuth auth = FirebaseAuth.instance;
-  final user = auth.currentUser;
-  final email = user?.email;
+  // FirebaseAuth auth = FirebaseAuth.instance;
+  // final user = auth.currentUser;
+  // final email = user?.email;
 
-    return Dismissible(
+  return Dismissible(
       key: UniqueKey(), // provide a unique key for the widget
       direction: DismissDirection.endToStart, // swipe direction
       confirmDismiss: (direction) async {
