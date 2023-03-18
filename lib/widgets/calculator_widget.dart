@@ -18,16 +18,6 @@ class CalculatorWidget extends StatefulWidget {
   double fuelConsumption = 0.0;
 
 
-  //Budget parameter
-  double budget = 0.0;
-
-  //Tank parameter
-  double current = 0.0;
-  double desired = 0.0;
-
-  //Distance parameter
-  double distance = 0.0;
-
   CalculatorWidget({
     required this.car,
     required this.type,
@@ -43,20 +33,20 @@ class CalculatorWidget extends StatefulWidget {
 }
 
 class _CalculatorWidgetState extends State<CalculatorWidget> {
+  //Budget parameter
+  double budget = 0.0;
+
+  //Tank parameter
+  double current_amount = 0.0;
+  double final_amount = 0.0;
+
+  //Distance parameter
+  double distance = 0.0;
 
   final TextEditingController _budgetController = TextEditingController();
   final TextEditingController _currentTankController = TextEditingController();
   final TextEditingController _finalTankController = TextEditingController();
   final TextEditingController _distanceController = TextEditingController();
-
-  // @override
-  // void dispose() {
-  //   _budgetController.dispose();
-  //   _currentTankController.dispose();
-  //   _finalTankController.dispose();
-  //   _distanceController.dispose();
-  //   super.dispose();
-  // }
 
 
   @override
@@ -101,9 +91,9 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
                           keyboardType: TextInputType.number,
                           onChanged: (input) {
                             setState(() {
-                              widget.current = double.parse(input);
+                              current_amount = double.parse(input);
                             });
-                            print(widget.current);
+                            print(current_amount);
                           },
                         ),
                       ),
@@ -129,9 +119,9 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
                           keyboardType: TextInputType.number,
                           onChanged: (input) {
                             setState(() {
-                              widget.desired = double.parse(input);
+                              final_amount = double.parse(input);
                             });
-                            print(widget.desired);
+                            print(final_amount);
                           },
                         ),
                       ),
@@ -142,7 +132,7 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
                 Container(
                     margin: EdgeInsets.only(bottom: 40),
                     child:ButtonWidget(
-                        color: (widget.fuelCapacity!=0 && widget.fuelPrice!=0 && (widget.current!=0 || _currentTankController.text != 0.toString()) && (widget.desired!=0 || _finalTankController.text != 0.toString())
+                        color: (widget.fuelCapacity!=0 && widget.fuelPrice!=0 && (current_amount!=0 || _currentTankController.text != 0.toString()) && (final_amount!=0 || _finalTankController.text != 0.toString())
                         )? primaryColor: greyColor2,
                         theChild: Container(
                           width: 312.0,
@@ -161,18 +151,24 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
                         ),
                         theOnTapFunc: () {
                           if(widget.fuelCapacity!=0 && widget.fuelPrice!=0
-                              && (widget.current!=0 || _currentTankController.text != 0.toString()) && (widget.desired!=0 || _finalTankController.text != 0.toString())){
-                            List<int> res = tankCal(widget.current,widget.desired);
+                              && (current_amount!=0 || _currentTankController.text != 0.toString()) && (final_amount!=0 || _finalTankController.text != 0.toString())){
+                            List<int> res = tankCal(current_amount,final_amount);
                             Navigator.push(context,
                                 MaterialPageRoute(builder: (context) {
                                   return ResultScreen(
-                                    car: widget.car,
-                                      fuelType: widget.fuelType,
+                                      car: widget.car,
                                       gasStation: widget.gasStation,
                                       gasStationIndex: widget.selectedGasStationIndex,
+                                      fuelType: widget.fuelType,
                                       type: widget.type,
-                                      res: res
-                                  ); }));
+                                      res: res,
+                                      fuelConsumption: widget.fuelConsumption,
+                                      fuelPrice: widget.fuelPrice,
+                                      fuelCapacity: widget.fuelCapacity,
+                                      budget: budget,
+                                      current_amount: current_amount,
+                                      final_amount: final_amount,
+                                      distance: distance); }));
                           }
                         }
                     )
@@ -211,9 +207,9 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
                             keyboardType: TextInputType.number,
                             onChanged: (input) {
                               setState(() {
-                                widget.distance = double.parse(input);
+                                distance = double.parse(input);
                               });
-                              print(widget.distance);
+                              print(distance);
                             },
                           ),
                         ),
@@ -225,7 +221,7 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
                         margin: EdgeInsets.only(bottom: 40),
                         child:ButtonWidget(
                             color: (widget.fuelCapacity!=0 && widget.fuelPrice!=0
-                                && (widget.budget!=0 || _distanceController.text != 0.toString())
+                                && (budget!=0 || _distanceController.text != 0.toString())
                             )? primaryColor: greyColor2,
                             theChild: Container(
                               width: 312.0,
@@ -244,19 +240,25 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
                             ),
                             theOnTapFunc: () {
                               if(widget.fuelCapacity!=0 && widget.fuelPrice!=0
-                                  && (widget.budget!=0 || _distanceController.text != 0.toString())){
-                                List<int> res = distanceCal(widget.distance);
+                                  && (budget!=0 || _distanceController.text != 0.toString())){
+                                List<int> res = distanceCal(distance);
 
                                 Navigator.push(context,
                                     MaterialPageRoute(builder: (context) {
                                       return ResultScreen(
-                                        car: widget.car,
-                                          fuelType: widget.fuelType,
+                                          car: widget.car,
                                           gasStation: widget.gasStation,
                                           gasStationIndex: widget.selectedGasStationIndex,
+                                          fuelType: widget.fuelType,
                                           type: widget.type,
-                                          res: res
-                                      ); }));
+                                          res: res,
+                                          fuelConsumption: widget.fuelConsumption,
+                                          fuelPrice: widget.fuelPrice,
+                                          fuelCapacity: widget.fuelCapacity,
+                                          budget: budget,
+                                          current_amount: current_amount,
+                                          final_amount: final_amount,
+                                          distance: distance); }));
                               }
                             }
                         )
@@ -296,9 +298,9 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
                               keyboardType: TextInputType.number,
                               onChanged: (input) {
                                 setState(() {
-                                  widget.budget = double.parse(input);
+                                  budget = double.parse(input);
                                 });
-                                print(widget.budget);
+                                print(budget);
                                 },
 
                             )
@@ -311,7 +313,7 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
                           margin: EdgeInsets.only(bottom: 40),
                           child:ButtonWidget(
                               color: (widget.fuelCapacity!=0 && widget.fuelPrice!=0
-                                  && (widget.budget!=0 || _budgetController.text != 0.toString())
+                                  && (budget!=0 || _budgetController.text != 0.toString())
                               )? primaryColor: greyColor2,
                               theChild: Container(
                                 width: 312.0,
@@ -330,8 +332,8 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
                               ),
                               theOnTapFunc: () {
                                 if(widget.fuelCapacity!=0 && widget.fuelPrice!=0
-                                    && (widget.budget!=0 || _budgetController.text != 0.toString())){
-                                  List<int> res = budgetCal(widget.budget);
+                                    && (budget!=0 || _budgetController.text != 0.toString())){
+                                  List<int> res = budgetCal(budget);
 
                                   print(widget.fuelType);
                                   print(widget.gasStation);
@@ -342,13 +344,19 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
                                   Navigator.push(context,
                                       MaterialPageRoute(builder: (context) {
                                         return ResultScreen(
-                                          car: widget.car,
-                                            fuelType: widget.fuelType,
+                                            car: widget.car,
                                             gasStation: widget.gasStation,
                                             gasStationIndex: widget.selectedGasStationIndex,
+                                            fuelType: widget.fuelType,
                                             type: widget.type,
-                                            res: res
-                                        ); }));
+                                            res: res,
+                                            fuelConsumption: widget.fuelConsumption,
+                                            fuelPrice: widget.fuelPrice,
+                                            fuelCapacity: widget.fuelCapacity,
+                                            budget: budget,
+                                            current_amount: current_amount,
+                                            final_amount: final_amount,
+                                            distance: distance); }));
                                 }
                               }
                           )
