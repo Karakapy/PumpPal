@@ -254,7 +254,38 @@ class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
                   ),
                 ) : Container(
                   margin: EdgeInsets.only(bottom: 20),
-                  child: AddNewCarWidget(email: email,),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => UserProfileScreen()));
+                    },
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: lightGreyColor,
+                        elevation: 0,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(19))),
+                    child: SizedBox(
+                      height: 115,
+                      child: Container(
+                        padding: EdgeInsets.all(15),
+                        child: Wrap(
+                          children: [
+                            Column(
+                              children: const [
+                                Icon(Icons.add_circle, color:greyColor2,size: 60),
+                                Text("Add new car",style: TextStyle(
+                                    fontFamily:"Inter",
+                                    fontSize: 20,
+                                    color: Color(0xffC6C6C6)),),
+                              ],
+                            ),
+                            Image.asset('assets/defaultCarImage.png',
+                              height: 96,
+                              width:160.0,),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
 
 
