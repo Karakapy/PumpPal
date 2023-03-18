@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -362,8 +363,19 @@ class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
                   if (!snapshot.hasData) {
                     return Text("no data");
                   } else {
+                    List<String?> oilListFilter = [];
                     final oil = snapshot.data!;
                     final oilList = oil[_selectedGasStationIndex].map((e) => oilNameParser(e.name)).toList();
+
+                    if(car?.fuelType == 'diesel'){
+                      final meep = oilList.where((eachOil) => eachOil!.contains('Diesel')).toList();
+                      oilListFilter = meep.where((eachOil) => !eachOil!.contains('NGV')).toList();
+
+                    } else {
+                      final meep = oilList.where((eachOil) => !eachOil!.contains('Diesel')).toList();
+                      oilListFilter = meep.where((eachOil) => !eachOil!.contains('NGV')).toList();
+
+                    }
                     return Container(
                       width: 339,
                       height: 50,
@@ -382,7 +394,7 @@ class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
                           'Select the fuel type',
                           style: TextStyle(fontSize: 20),
                         ),
-                        items: oilList.map<DropdownMenuItem<String>>((String? value) {
+                        items: oilListFilter.map<DropdownMenuItem<String>>((String? value) {
                           return DropdownMenuItem<String>(
                             value: value,
                             child: Text(value!, style: buttonFont,),
