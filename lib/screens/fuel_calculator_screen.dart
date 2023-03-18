@@ -245,7 +245,7 @@ class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
                                 ),
                               ],
                             ),
-                            Image.network('https://cdn.imagin.studio/getImage?customer=thdaranthawornwattanapolcompany&make=${car?.make}&modelFamily=${car?.model}',
+                            Image.network('https://cdn.imagin.studio/getImage?customer=thdaranthawornwattanapolcompany&make=${car?.make}&modelFamily=${car?.model}&modelYear=${car?.makeYear}',
                               width: 220,
                               height: 220,
                               fit: BoxFit.fitWidth,
