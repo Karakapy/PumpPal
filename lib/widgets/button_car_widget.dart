@@ -86,37 +86,40 @@ Widget buildButton(CarModel car, int index, int totalSize, BuildContext context,
               child:Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
-                        child: Text("${carNameParser(car.make)} ", style: TextStyle(
-                            fontFamily: "Inter",
-                            fontSize: 20,
-                            color: Colors.black
-                        ),),
-                      ),
-                      Container(
-                        child: Text("${car.model}", style: TextStyle(
-                            fontFamily: "Inter",
-                            fontSize: 20,
-                            color: Colors.black
-                        ),),
-                      ),
-                      Container(
-                        child: Text("${car.makeYear.toInt()}",style: TextStyle(
-                            fontFamily:"Inter",
-                            fontSize: 20,
-                            color: greyColor),
+                  Expanded(
+                    flex: 2,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          child: Text("${carNameParser(car.make)} ", style: TextStyle(
+                              fontFamily: "Inter",
+                              fontSize: 20,
+                              color: Colors.black
+                          ),),
                         ),
-                      ),
-                    ],
+                        Container(
+                          child: Text("${car.model}", style: TextStyle(
+                              fontFamily: "Inter",
+                              fontSize: 20,
+                              color: Colors.black
+                          ),),
+                        ),
+                        Container(
+                          child: Text("${car.makeYear.toInt()}",style: TextStyle(
+                              fontFamily:"Inter",
+                              fontSize: 20,
+                              color: greyColor),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                  Image.network('https://cdn.imagin.studio/getImage?customer=thdaranthawornwattanapolcompany&make=${car.make}&modelFamily=${car.model}&modelYear=${car.makeYear}',
-                  width: 220,
-                    height: 220,
+                  Expanded(
+                    flex: 3,
+                      child:Image.network('https://cdn.imagin.studio/getImage?customer=thdaranthawornwattanapolcompany&make=${car.make}&modelFamily=${car.model}&modelYear=${car.makeYear}',
                     fit: BoxFit.fitWidth,
-                  ),
+                  )),
 
                 ],
               ),
