@@ -24,7 +24,7 @@ class ResultScreen extends StatefulWidget {
   final String? fuelType;
   final String? type;
   final int gasStationIndex;
-  final List<double> res;
+  final List<int> res;
 
 
   @override

@@ -162,7 +162,7 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
                         theOnTapFunc: () {
                           if(widget.fuelCapacity!=0 && widget.fuelPrice!=0
                               && (widget.current!=0 || _currentTankController.text != 0.toString()) && (widget.desired!=0 || _finalTankController.text != 0.toString())){
-                            List<double> res = tankCal(widget.current,widget.desired);
+                            List<int> res = tankCal(widget.current,widget.desired);
                             Navigator.push(context,
                                 MaterialPageRoute(builder: (context) {
                                   return ResultScreen(
@@ -245,7 +245,7 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
                             theOnTapFunc: () {
                               if(widget.fuelCapacity!=0 && widget.fuelPrice!=0
                                   && (widget.budget!=0 || _distanceController.text != 0.toString())){
-                                List<double> res = distanceCal(widget.distance);
+                                List<int> res = distanceCal(widget.distance);
 
                                 Navigator.push(context,
                                     MaterialPageRoute(builder: (context) {
@@ -331,7 +331,7 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
                               theOnTapFunc: () {
                                 if(widget.fuelCapacity!=0 && widget.fuelPrice!=0
                                     && (widget.budget!=0 || _budgetController.text != 0.toString())){
-                                  List<double> res = budgetCal(widget.budget);
+                                  List<int> res = budgetCal(widget.budget);
 
                                   print(widget.fuelType);
                                   print(widget.gasStation);
@@ -405,24 +405,24 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
   }
 
   //Budget calculator
-  List<double> budgetCal(double budget) {
+  List<int> budgetCal(double budget) {
     double result = budget/widget.fuelPrice;
     double distance = result * widget.fuelConsumption;
-    return [result, distance];
+    return [result.toInt(), distance.toInt()];
   }
 
   //Tank calculator
-  List<double> tankCal(double current, double desired) {
+  List<int> tankCal(double current, double desired) {
     double fuelTank = desired - current;
     double result = fuelTank * widget.fuelPrice;
     double distance = desired * widget.fuelConsumption;
-    return [result, distance];
+    return [result.toInt(), distance.toInt()];
   }
 
   //Distance calculator
-  List<double> distanceCal(double distance) {
+  List<int> distanceCal(double distance) {
     double fuelTank = distance/widget.fuelConsumption;
     double result = fuelTank * widget.fuelPrice;
-    return [result, fuelTank];
+    return [result.toInt(), fuelTank.toInt()];
   }
 }
