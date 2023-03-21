@@ -142,7 +142,10 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
                 Container(
                     margin: EdgeInsets.only(bottom: 20),
                     child:ButtonWidget(
-                        color: (widget.fuelCapacity!=0 && widget.fuelPrice!=0 && (current_amount!=0 || _currentTankController.text != 0.toString()) && (final_amount!=0 || _finalTankController.text != 0.toString())
+                        color: (widget.fuelCapacity!=0 && widget.fuelPrice!=0
+                            && (current_amount!=0 || _currentTankController.text != 0.toString())
+                            && (final_amount!=0 || _finalTankController.text != 0.toString())
+                            && (final_amount > current_amount)
                         )? primaryColor: greyColor2,
                         theChild: Container(
                           width: 312.0,
