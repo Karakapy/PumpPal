@@ -42,8 +42,8 @@ class ResultScreen extends StatefulWidget {
   final double fuelPrice;
   final double fuelCapacity;
   final double budget;
-  final int current_amount;
-  final int final_amount;
+  final double current_amount;
+  final double final_amount;
   final double distance;
 
 

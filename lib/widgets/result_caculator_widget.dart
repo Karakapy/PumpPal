@@ -16,8 +16,8 @@ class ResultCalculatorWidget extends StatefulWidget {
   double fuelPrice;
   double fuelCapacity;
   double budget;
-  int current_amount;
-  int final_amount;
+  double current_amount;
+  double final_amount;
   double distance;
 
   ResultCalculatorWidget({
