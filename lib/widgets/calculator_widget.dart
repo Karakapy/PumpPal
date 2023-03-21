@@ -5,6 +5,8 @@ import '../models/car_model.dart';
 import '../screens/result_screen.dart';
 import 'button_widget.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 class CalculatorWidget extends StatefulWidget {
   CarModel? car;
@@ -159,24 +161,29 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
                         ),
                         theOnTapFunc: () {
                           if(widget.fuelCapacity!=0 && widget.fuelPrice!=0
-                              && (current_amount!=0 || _currentTankController.text != 0.toString()) && (final_amount!=0 || _finalTankController.text != 0.toString())){
-                            List<int> res = tankCal(current_amount,final_amount);
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (context) {
-                                  return ResultScreen(
-                                      car: widget.car,
-                                      gasStation: widget.gasStation,
-                                      gasStationIndex: widget.selectedGasStationIndex,
-                                      fuelType: widget.fuelType,
-                                      type: widget.type,
-                                      res: res,
-                                      fuelConsumption: widget.fuelConsumption,
-                                      fuelPrice: widget.fuelPrice,
-                                      fuelCapacity: widget.fuelCapacity,
-                                      budget: budget,
-                                      current_amount: current_amount,
-                                      final_amount: final_amount,
-                                      distance: distance); }));
+                              && (current_amount!=0 || _currentTankController.text != 0.toString())
+                              && (final_amount!=0 || _finalTankController.text != 0.toString())){
+                            if(final_amount <= current_amount){
+                              showSnackBar(context, "The final amount must be larger than the current amount");
+                            }else{
+                              List<int> res = tankCal(current_amount,final_amount);
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) {
+                                    return ResultScreen(
+                                        car: widget.car,
+                                        gasStation: widget.gasStation,
+                                        gasStationIndex: widget.selectedGasStationIndex,
+                                        fuelType: widget.fuelType,
+                                        type: widget.type,
+                                        res: res,
+                                        fuelConsumption: widget.fuelConsumption,
+                                        fuelPrice: widget.fuelPrice,
+                                        fuelCapacity: widget.fuelCapacity,
+                                        budget: budget,
+                                        current_amount: current_amount,
+                                        final_amount: final_amount,
+                                        distance: distance); }));
+                            }
                           }
                         }
                     )
@@ -445,6 +452,21 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
         });
       },
     );
+  }
+
+  void showSnackBar(context, text){
+    showTopSnackBar(
+      Overlay.of(context)!,
+      CustomSnackBar.error(
+        message: "${text}",
+        textStyle: TextStyle(
+            fontSize: 18,
+            color: whiteColor,
+            fontWeight: FontWeight.bold
+        ),
+      ),
+    );
+
   }
 
 
