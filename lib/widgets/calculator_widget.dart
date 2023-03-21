@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:ruler_picker_bn/ruler_picker_bn.dart';
 
 import '../constantPreset.dart';
 import '../models/car_model.dart';
@@ -37,8 +38,8 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
   double budget = 0.0;
 
   //Tank parameter
-  double current_amount = 0.0;
-  double final_amount = 0.0;
+  int current_amount = 0;
+  int final_amount = 0;
 
   //Distance parameter
   double distance = 0.0;
@@ -91,7 +92,7 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
                           keyboardType: TextInputType.number,
                           onChanged: (input) {
                             setState(() {
-                              current_amount = double.parse(input);
+                              current_amount = int.parse(input);
                             });
                             print(current_amount);
                           },
@@ -100,6 +101,24 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
                       Text("L", style: calculateFont),
                     ],),
                 ),
+
+            SizedBox(
+              width: 200,
+              height: 75,
+              child: RulerPicker(
+                onChange: (val) {
+                  setState(() {
+                    current_amount = val;
+                  });
+                },
+                background: Colors.white,
+                lineColor: Colors.black,
+                direction: Axis.horizontal,
+                startValue: 70,
+                maxValue: 200,
+              ),
+            ),
+
                 Container(
                   child:Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -119,7 +138,7 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
                           keyboardType: TextInputType.number,
                           onChanged: (input) {
                             setState(() {
-                              final_amount = double.parse(input);
+                              final_amount = int.parse(input);
                             });
                             print(final_amount);
                           },
@@ -420,8 +439,8 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
   }
 
   //Tank calculator
-  List<int> tankCal(double current, double desired) {
-    double fuelTank = desired - current;
+  List<int> tankCal(int current, int desired) {
+    int fuelTank = desired - current;
     double result = fuelTank * widget.fuelPrice;
     double distance = desired * widget.fuelConsumption;
     return [result.toInt(), distance.toInt()];
