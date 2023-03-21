@@ -239,7 +239,7 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
                         margin: EdgeInsets.only(bottom: 20),
                         child:ButtonWidget(
                             color: (widget.fuelCapacity!=0 && widget.fuelPrice!=0
-                                && (budget!=0 || _distanceController.text != 0.toString())
+                                && (distance!=0 && _distanceController.text != 0.toString())
                             )? primaryColor: greyColor2,
                             theChild: Container(
                               width: 312.0,
@@ -258,7 +258,7 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
                             ),
                             theOnTapFunc: () {
                               if(widget.fuelCapacity!=0 && widget.fuelPrice!=0
-                                  && (budget!=0 || _distanceController.text != 0.toString())){
+                                  && (distance!=0 && _distanceController.text != 0.toString())){
                                 List<int> res = distanceCal(distance);
 
                                 Navigator.push(context,
@@ -331,7 +331,7 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
                           margin: EdgeInsets.only(bottom: 20),
                           child:ButtonWidget(
                               color: (widget.fuelCapacity!=0 && widget.fuelPrice!=0
-                                  && (budget!=0 || _budgetController.text != 0.toString())
+                                  && (budget>=widget.fuelPrice && _budgetController.text != 0.toString())
                               )? primaryColor: greyColor2,
                               theChild: Container(
                                 width: 312.0,
@@ -350,7 +350,7 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
                               ),
                               theOnTapFunc: () {
                                 if(widget.fuelCapacity!=0 && widget.fuelPrice!=0
-                                    && (budget!=0 || _budgetController.text != 0.toString())){
+                                    && (budget>=widget.fuelPrice && _budgetController.text != 0.toString())){
                                   List<int> res = budgetCal(budget);
 
                                   print(widget.fuelType);
@@ -375,6 +375,8 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
                                             current_amount: current_amount,
                                             final_amount: final_amount,
                                             distance: distance); }));
+                                }else{
+                                  showSnackBar(context, 'Budget must be at least equal to the fuel price');
                                 }
                               }
                           )
