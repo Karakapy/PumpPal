@@ -204,59 +204,64 @@ class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
                 SizedBox(height: 5,),
 
                 car != null ?
-                Container(
-                  margin: EdgeInsets.only(bottom: 20),
+                GestureDetector(
+                  onTap: (){
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => UserProfileScreen()));
+                  },
                   child: Container(
                     margin: EdgeInsets.only(bottom: 20),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(19),
-                      color: lightGreyColor,
-                    ),
-                    child: SizedBox(
-                      width: 340,
-                      height: 115,
-                      child: Container(
-                        padding: EdgeInsets.all(15),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Expanded(
-                              flex: 2,
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children:  [
-                                  Container(
-                                    child: Text("${carNameParser(car?.make)} ", style: TextStyle(
-                                        fontFamily: "Inter",
-                                        fontSize: 20,
-                                        color: Colors.black
-                                    ),),
-                                  ),
-                                  Container(
-                                    child: Text("${car?.model}", style: TextStyle(
-                                        fontFamily: "Inter",
-                                        fontSize: 20,
-                                        color: Colors.black
-                                    ),),
-                                  ),
-                                  Container(
-                                    child: Text("${car?.makeYear.toInt()}",style: TextStyle(
-                                        fontFamily:"Inter",
-                                        fontSize: 20,
-                                        color: greyColor),),
-                                  ),
-                                ],
+                    child: Container(
+                      margin: EdgeInsets.only(bottom: 20),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(19),
+                        color: lightGreyColor,
+                      ),
+                      child: SizedBox(
+                        width: 340,
+                        height: 115,
+                        child: Container(
+                          padding: EdgeInsets.all(15),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              Expanded(
+                                flex: 2,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children:  [
+                                    Container(
+                                      child: Text("${carNameParser(car?.make)} ", style: TextStyle(
+                                          fontFamily: "Inter",
+                                          fontSize: 20,
+                                          color: Colors.black
+                                      ),),
+                                    ),
+                                    Container(
+                                      child: Text("${car?.model}", style: TextStyle(
+                                          fontFamily: "Inter",
+                                          fontSize: 20,
+                                          color: Colors.black
+                                      ),),
+                                    ),
+                                    Container(
+                                      child: Text("${car?.makeYear.toInt()}",style: TextStyle(
+                                          fontFamily:"Inter",
+                                          fontSize: 20,
+                                          color: greyColor),),
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                            Expanded(
-                              flex: 3,
-                              child: Image.network('https://cdn.imagin.studio/getImage?customer=thdaranthawornwattanapolcompany&make=${car?.make}&modelFamily=${car?.model}&modelYear=${car?.makeYear}',
-                                width: 220,
-                                height: 220,
-                                fit: BoxFit.fitWidth,
+                              Expanded(
+                                flex: 3,
+                                child: Image.network('https://cdn.imagin.studio/getImage?customer=thdaranthawornwattanapolcompany&make=${car?.make}&modelFamily=${car?.model}&modelYear=${car?.makeYear}',
+                                  width: 220,
+                                  height: 220,
+                                  fit: BoxFit.fitWidth,
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                     ),
