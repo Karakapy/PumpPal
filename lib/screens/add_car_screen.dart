@@ -50,8 +50,8 @@ class _AddCarScreenState extends State<AddCarScreen> {
 
             if(!snapshot.hasData){
               return Center(
-                child: Lottie.network(
-                  'https://assets4.lottiefiles.com/packages/lf20_kxsd2ytq.json',
+                child: Lottie.asset(
+                  'assets/animation/animation2.json',
                   height: 100,
                   width: 100,
 

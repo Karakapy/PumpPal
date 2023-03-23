@@ -375,8 +375,8 @@ class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
                   future: getOilPrice(),
                   builder: (context,snapshot) {
                   if (!snapshot.hasData) {
-                    return Lottie.network(
-                        'https://assets5.lottiefiles.com/datafiles/EAfXDgE8OzP6sVF/data.json',
+                    return Lottie.asset(
+                        'assets/animation/animation1.json',
                         height: 50,
                         width: 50
                     );
