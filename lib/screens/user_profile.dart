@@ -164,16 +164,16 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                                   email!);
                             } else {
                               return Container(
-                                      margin: EdgeInsets.symmetric(horizontal: 20),
-                                      child: AddNewCarWidget(email: email,)
+                                  margin: EdgeInsets.symmetric(horizontal: 20),
+                                  child: AddNewCarWidget(email: email,)
                               );
 
                             }
                           });
                     } else {
                       return Container(
-                        height: 120,
-                        margin: EdgeInsets.only(bottom: 20),
+                          padding: const EdgeInsets.only( bottom: 210),
+                        // margin: EdgeInsets.only(bottom: 20),
                         child: AddNewCarWidget(email: email,)
 
                       );
