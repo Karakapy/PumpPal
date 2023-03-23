@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:pumppal/constantPreset.dart';
 import 'package:pumppal/widgets/fuel_price_widget.dart';
 import 'package:intl/intl.dart';
@@ -196,8 +197,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       future: getOilPrice(),
                       builder: (context, snapshot) {
                          if(!snapshot.hasData){
-                           return const Center(
-                             child: CircularProgressIndicator(),
+                           return Lottie.network(
+                             'https://assets5.lottiefiles.com/datafiles/EAfXDgE8OzP6sVF/data.json',
+                             height: 100,
+                             width: 100
                            );
                          } else {
                            final oil = snapshot.data!;

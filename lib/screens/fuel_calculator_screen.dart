@@ -5,6 +5,7 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:pumppal/api/api_oil_price.dart';
 import 'package:pumppal/parser/oil_name_parser.dart';
 import 'package:pumppal/screens/home_screen.dart';
@@ -374,7 +375,12 @@ class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
                   future: getOilPrice(),
                   builder: (context,snapshot) {
                   if (!snapshot.hasData) {
-                    return Text("no data");
+                    return Lottie.network(
+                        'https://assets5.lottiefiles.com/datafiles/EAfXDgE8OzP6sVF/data.json',
+                        height: 50,
+                        width: 50
+                    );
+                    // return Text("no data");
                   } else {
                     List<String?> oilListFilter = [];
                     final oil = snapshot.data!;

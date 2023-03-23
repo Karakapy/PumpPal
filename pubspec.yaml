@@ -26,6 +26,7 @@ dependencies:
   get: ^4.6.5
   top_snackbar_flutter: ^3.0.0+1
   syncfusion_flutter_sliders: ^20.4.54
+  lottie: ^2.3.0
 
 dev_dependencies:
   flutter_test:

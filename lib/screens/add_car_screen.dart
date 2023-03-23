@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:pumppal/constantPreset.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:pumppal/screens/result_screen.dart';
@@ -48,8 +49,13 @@ class _AddCarScreenState extends State<AddCarScreen> {
           builder: (context, snapshot){
 
             if(!snapshot.hasData){
-              return const Center(
-                child: CircularProgressIndicator(),
+              return Center(
+                child: Lottie.network(
+                  'https://assets4.lottiefiles.com/packages/lf20_kxsd2ytq.json',
+                  height: 100,
+                  width: 100,
+
+                ),
               );
             }
             final car = snapshot.data!;
