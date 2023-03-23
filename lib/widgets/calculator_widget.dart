@@ -236,11 +236,11 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
                       children: [
                         Text("Distance", style: calculateFont),
                         Container(
-                          width: 123,
+                          width: 129,
                           child: TextFormField(
                             controller: _distanceController,
                             decoration: InputDecoration(
-                                hintText: 'Enter the amount',
+                                hintText: 'Enter the distance',
                                 border: InputBorder.none),
                             textAlign: TextAlign.right,
                             keyboardType: TextInputType.number,
@@ -499,10 +499,11 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
         onChanged: (dynamic value) {
           setState(() {
             if (type_amount == 'current_amount') {
-              current_amount = value;
+              current_amount = double.parse(value.toStringAsFixed(2));
               _currentTankController.text = current_amount.toStringAsFixed(1);
+
             } else {
-              final_amount = value;
+              final_amount = double.parse(value.toStringAsFixed(2));
               _finalTankController.text = final_amount.toStringAsFixed(1);
             }
           });
@@ -523,10 +524,10 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
       onChanged: (dynamic value) {
         setState(() {
           if (type_amount == 'current_amount') {
-            _currentValue = value;
+            _currentValue = double.parse(value.toStringAsFixed(2));
             _currentTankController.text = _currentValue.toStringAsFixed(1);
           } else {
-            _finalValue = value;
+            _finalValue = double.parse(value.toStringAsFixed(2));
             _finalTankController.text = _finalValue.toStringAsFixed(1);
           }
         });
