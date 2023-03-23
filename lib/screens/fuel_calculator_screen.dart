@@ -547,9 +547,4 @@ class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
       ),
     );
   }
-
-  // _setCar(BuildContext context) {
-  //   final
-  // }
-
 }

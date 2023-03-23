@@ -7,7 +7,7 @@ import '../screens/result_screen.dart';
 import 'button_widget.dart';
 
 class ResultWidget extends StatefulWidget {
-  List<int> res;
+  List<double> res;
   final String? type;
 
 
@@ -50,8 +50,8 @@ class _ResultWidgetState extends State<ResultWidget> {
                         ))
                     ),
                     Container(
-                        padding: EdgeInsets.only(left: 55,bottom: 10,),
-                        child:Text("${widget.res[0]}", style: TextStyle(
+                        padding: EdgeInsets.only(left: 90,bottom: 10,),
+                        child:Text("${widget.res[0].toStringAsFixed(2)}", style: TextStyle(
                           fontFamily: 'Inter',
                           fontSize: 23,
                           color:whiteColor,
@@ -81,7 +81,7 @@ class _ResultWidgetState extends State<ResultWidget> {
                     ),
                     Container(
                         padding: EdgeInsets.only(left: 55,bottom: 10,),
-                        child:Text("${widget.res[1]}", style: TextStyle(
+                        child:Text("${widget.res[1].toStringAsFixed(2)}", style: TextStyle(
                           fontFamily: 'Inter',
                           fontSize: 23,
                           color:whiteColor,
@@ -120,7 +120,7 @@ class _ResultWidgetState extends State<ResultWidget> {
                     ),
                     Container(
                         padding: EdgeInsets.only(left: 55,bottom: 10,),
-                        child:Text("${widget.res[0]}", style: TextStyle(
+                        child:Text("${widget.res[0].toStringAsFixed(2)}", style: TextStyle(
                           fontFamily: 'Inter',
                           fontSize: 23,
                           color:whiteColor,
@@ -141,7 +141,7 @@ class _ResultWidgetState extends State<ResultWidget> {
                   children: [
                     Container(
                         padding: EdgeInsets.only(left: 10,bottom: 10),
-                        child:Text("Distance", style: TextStyle(
+                        child:Text("Fuel", style: TextStyle(
                             fontFamily: 'Inter',
                             fontSize: 25,
                             color:whiteColor,
@@ -150,7 +150,7 @@ class _ResultWidgetState extends State<ResultWidget> {
                     ),
                     Container(
                         padding: EdgeInsets.only(left: 55,bottom: 10,),
-                        child:Text("${widget.res[1]}", style: TextStyle(
+                        child:Text("${widget.res[1].toStringAsFixed(2)}", style: TextStyle(
                           fontFamily: 'Inter',
                           fontSize: 23,
                           color:whiteColor,
@@ -158,7 +158,7 @@ class _ResultWidgetState extends State<ResultWidget> {
                     ),
                     Container(
                         padding: EdgeInsets.only(bottom: 10,right: 10),
-                        child:Text("km", style: TextStyle(
+                        child:Text("L", style: TextStyle(
                           fontFamily: 'Inter',
                           fontSize: 23,
                           color:whiteColor,
@@ -188,8 +188,8 @@ class _ResultWidgetState extends State<ResultWidget> {
                         ))
                     ),
                     Container(
-                        padding: EdgeInsets.only(left: 55,bottom: 10,),
-                        child:Text("${widget.res[0]}", style: TextStyle(
+                        padding: EdgeInsets.only(left: 75,bottom: 10,),
+                        child:Text("${widget.res[0].toStringAsFixed(2)}", style: TextStyle(
                           fontFamily: 'Inter',
                           fontSize: 23,
                           color:whiteColor,
@@ -219,7 +219,7 @@ class _ResultWidgetState extends State<ResultWidget> {
                     ),
                     Container(
                         padding: EdgeInsets.only(left: 55,bottom: 10,),
-                        child:Text("${widget.res[1]}", style: TextStyle(
+                        child:Text("${widget.res[1].toStringAsFixed(2)}", style: TextStyle(
                           fontFamily: 'Inter',
                           fontSize: 23,
                           color:whiteColor,
