@@ -6,6 +6,7 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import '../models/car_model.dart';
 import '../widgets/button_widget.dart';
 import '../screens/user_profile.dart';
+import '../parser/car_name_parser.dart';
 
 class AddCarScreen extends StatefulWidget {
   String userEmail;
@@ -23,7 +24,7 @@ class _AddCarScreenState extends State<AddCarScreen> {
 
   _AddCarScreenState(this.userEmail);
 
-  late List<String> brandList = List.empty();
+  late List<String?> brandList = List.empty();
   late List<String> modelList = List.empty();
   late List<String> yearList = List.empty();
 
@@ -55,7 +56,7 @@ class _AddCarScreenState extends State<AddCarScreen> {
               );
             }
             final car = snapshot.data!;
-            brandList = car.docs.map((eachCars) => eachCars['make'].toString()).toSet().toList();
+            brandList = car.docs.map((eachCars) => carNameParser(eachCars['make'].toString())).toSet().toList();
             modelList = car.docs.where((element) => element['make'].toString().toLowerCase() == selectedBrand.toString().toLowerCase()).map((e) => e['model'].toString()).toSet().toList();
             yearList = car.docs.where((element) => element['model'].toString().toLowerCase() == selectedModel.toString().toLowerCase()).map((e) => e['makeYear'].toString()).toSet().toList();
 
@@ -136,10 +137,10 @@ class _AddCarScreenState extends State<AddCarScreen> {
                     'Select the brand',
                     style: TextStyle(fontSize: 18),
                   ),
-                  items: brandList.map<DropdownMenuItem<String>>((String value) {
+                  items: brandList.map<DropdownMenuItem<String>>((String? value) {
                     return DropdownMenuItem<String>(
                       value: value,
-                      child: Text(value),
+                      child: Text(value!),
                     );
                   }).toList(),
                   validator: (value) {
