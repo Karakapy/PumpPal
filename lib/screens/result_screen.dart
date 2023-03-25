@@ -8,7 +8,6 @@ import 'package:pumppal/widgets/result_widget.dart';
 
 import '../parser/car_name_parser.dart';
 import '../widgets/button_widget.dart';
-import '../widgets/calculator_widget.dart';
 
 //https://pub.dev/packages/carbon_icons/install
 

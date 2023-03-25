@@ -3,7 +3,6 @@ import 'package:pumppal/constantPreset.dart';
 import 'package:carbon_icons/carbon_icons.dart';
 import 'package:pumppal/controllers/auth_controller.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:pumppal/screens/add_car_screen.dart';
 import 'package:pumppal/widgets/add_new_car_widget.dart';
 import '../widgets/button_widget.dart';
 import '../widgets/nav_bar_widget.dart';

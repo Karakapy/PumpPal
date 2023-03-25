@@ -1,15 +1,11 @@
-import 'dart:convert';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:pumppal/constantPreset.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
-import 'package:pumppal/screens/result_screen.dart';
 import '../models/car_model.dart';
 import '../widgets/button_widget.dart';
 import '../screens/user_profile.dart';
-import '../controllers/car_list_controller.dart';
 
 class AddCarScreen extends StatefulWidget {
   String userEmail;

@@ -1,13 +1,11 @@
 import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pumppal/widgets/alert_dialog_widget.dart';
 import '../constantPreset.dart';
 import '../models/car_model.dart';
-import '../screens/add_car_screen.dart';
 import '../parser/car_name_parser.dart';
 import '../screens/fuel_calculator_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -87,7 +85,7 @@ Widget buildButton(CarModel car, int index, int totalSize, BuildContext context,
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Expanded(
-                    flex: 2,
+                    flex: 3,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [

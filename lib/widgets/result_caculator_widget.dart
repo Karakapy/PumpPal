@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 
 import '../constantPreset.dart';
 import '../models/car_model.dart';
-import '../screens/result_screen.dart';
-import 'button_widget.dart';
 
 class ResultCalculatorWidget extends StatefulWidget {
   CarModel? car;

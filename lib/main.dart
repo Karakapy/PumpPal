@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:get/get.dart';
-import 'package:pumppal/screens/add_car_screen.dart';
-import 'package:pumppal/screens/result_screen.dart';
 import 'package:pumppal/screens/user_profile.dart';
 import 'package:pumppal/screens/fuel_calculator_screen.dart';
 import 'package:pumppal/screens/home_screen.dart';
@@ -29,14 +27,11 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => HomeScreen(),
-        // '/addCar': (context) => AddCarScreen(),
-        // '/addCar1': (context) => const AddCar(),
         '/login': (context) => LogInScreen(),
         '/signup': (context) => SignUpScreen(),
         '/getStarted': (context) => GetStartedScreen(),
         '/fuelCalculator': (context) => FuelCalculatorScreen(),
         '/profile': (context) => UserProfileScreen() ,
-        // '/result': (context) => ResultScreen(gasStation: '',gasStationIndex:0, fuelType: '',type: '',res: [],) ,
       },
     );
   }

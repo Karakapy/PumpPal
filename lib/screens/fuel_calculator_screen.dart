@@ -9,9 +9,7 @@ import 'package:lottie/lottie.dart';
 import 'package:pumppal/api/api_oil_price.dart';
 import 'package:pumppal/parser/oil_name_parser.dart';
 import 'package:pumppal/screens/home_screen.dart';
-import 'package:pumppal/screens/result_screen.dart';
 import 'package:pumppal/screens/user_profile.dart';
-import 'package:pumppal/widgets/button_widget.dart';
 import 'package:carbon_icons/carbon_icons.dart';
 import 'package:pumppal/widgets/calculator_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -19,7 +17,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../constantPreset.dart';
 import '../models/car_model.dart';
 import '../parser/car_name_parser.dart';
-import '../widgets/add_new_car_widget.dart';
 import '../widgets/nav_bar_widget.dart';
 
 class FuelCalculatorScreen extends StatefulWidget {
@@ -218,7 +215,6 @@ class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
                         color: lightGreyColor,
                       ),
                       child: SizedBox(
-                        width: 340,
                         height: 115,
                         child: Container(
                           padding: EdgeInsets.all(15),
@@ -226,10 +222,10 @@ class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
                               Expanded(
-                                flex: 2,
+                                flex: 3,
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
-                                  children:  [
+                                  children: [
                                     Container(
                                       child: Text("${carNameParser(car?.make)} ", style: TextStyle(
                                           fontFamily: "Inter",
@@ -248,7 +244,8 @@ class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
                                       child: Text("${car?.makeYear.toInt()}",style: TextStyle(
                                           fontFamily:"Inter",
                                           fontSize: 20,
-                                          color: greyColor),),
+                                          color: greyColor),
+                                      ),
                                     ),
                                   ],
                                 ),
