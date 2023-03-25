@@ -71,7 +71,7 @@ class _ResultWidgetState extends State<ResultWidget> {
                         padding: EdgeInsets.only(left: 10,bottom: 10),
                         child:Text("Distance", style: TextStyle(
                             fontFamily: 'Inter',
-                            fontSize: 25,
+                            fontSize: 20,
                             color:whiteColor,
                             fontWeight: FontWeight.bold
                         ))
@@ -80,7 +80,7 @@ class _ResultWidgetState extends State<ResultWidget> {
                         padding: EdgeInsets.only(left: 55,bottom: 10,),
                         child:Text("${widget.res[1].toStringAsFixed(2)}", style: TextStyle(
                           fontFamily: 'Inter',
-                          fontSize: 23,
+                          fontSize: 20,
                           color:whiteColor,
                         ))
                     ),
@@ -88,7 +88,7 @@ class _ResultWidgetState extends State<ResultWidget> {
                         padding: EdgeInsets.only(bottom: 10,right: 10),
                         child:Text("km", style: TextStyle(
                           fontFamily: 'Inter',
-                          fontSize: 23,
+                          fontSize: 20,
                           color:whiteColor,
                         ))
                     ),
