@@ -56,7 +56,7 @@ class _AddCarScreenState extends State<AddCarScreen> {
               );
             }
             final car = snapshot.data!;
-            brandList = car.docs.map((eachCars) => carNameParser(eachCars['make'].toString())).toSet().toList();
+            brandList = car.docs.map((eachCars) => eachCars['make'].toString()).toSet().toList();
             modelList = car.docs.where((element) => element['make'].toString().toLowerCase() == selectedBrand.toString().toLowerCase()).map((e) => e['model'].toString()).toSet().toList();
             yearList = car.docs.where((element) => element['model'].toString().toLowerCase() == selectedModel.toString().toLowerCase()).map((e) => e['makeYear'].toString()).toSet().toList();
 
@@ -140,7 +140,7 @@ class _AddCarScreenState extends State<AddCarScreen> {
                   items: brandList.map<DropdownMenuItem<String>>((String? value) {
                     return DropdownMenuItem<String>(
                       value: value,
-                      child: Text(value!),
+                      child: Text(carNameParser(value)!),
                     );
                   }).toList(),
                   validator: (value) {

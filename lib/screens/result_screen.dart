@@ -119,18 +119,18 @@ class _ResultScreenState extends State<ResultScreen> {
                         color: lightGreyColor,
                       ),
                       child: SizedBox(
-                        width: 340,
                         height: 115,
                         child: Container(
                           padding: EdgeInsets.only(top: 15,bottom: 15),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
+
                               Expanded(
                                 flex: 4,
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
-                                  children:  [
+                                  children: [
                                     Container(
                                       child: Text("${carNameParser(widget.car?.make)} ", style: TextStyle(
                                           fontFamily: "Inter",
@@ -149,7 +149,8 @@ class _ResultScreenState extends State<ResultScreen> {
                                       child: Text("${widget.car?.makeYear.toInt()}",style: TextStyle(
                                           fontFamily:"Inter",
                                           fontSize: 20,
-                                          color: greyColor),),
+                                          color: greyColor),
+                                      ),
                                     ),
                                   ],
                                 ),
