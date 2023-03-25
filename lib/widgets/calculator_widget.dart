@@ -172,7 +172,7 @@ class _CalculatorWidgetState extends State<CalculatorWidget> {
                         theOnTapFunc: () {
                           if (widget.car != null) {
                             if (widget.fuelPrice != 0) {
-                              if (_currentTankController.text != "" && _finalTankController.text != "") {
+                              if ( _finalTankController.text != "") {
                                 if (widget.fuelCapacity != 0 &&
                                     final_amount > current_amount) {
                                   List<double> res = tankCal(current_amount,final_amount);

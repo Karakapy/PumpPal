@@ -122,12 +122,12 @@ class _ResultScreenState extends State<ResultScreen> {
                         width: 340,
                         height: 115,
                         child: Container(
-                          padding: EdgeInsets.all(15),
+                          padding: EdgeInsets.only(top: 15,bottom: 15),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
                               Expanded(
-                                flex: 2,
+                                flex: 4,
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children:  [

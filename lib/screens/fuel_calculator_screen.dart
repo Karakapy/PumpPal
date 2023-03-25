@@ -133,10 +133,6 @@ class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
       }
     }
 
-    FirebaseAuth auth = FirebaseAuth.instance;
-    final user = auth.currentUser;
-    final email = user?.email;
-
     return Scaffold(
       backgroundColor: Colors.white,
       extendBody: true,
@@ -217,7 +213,7 @@ class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
                       child: SizedBox(
                         height: 115,
                         child: Container(
-                          padding: EdgeInsets.all(15),
+                          padding: EdgeInsets.only(top: 15,bottom: 15,left: 5),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
