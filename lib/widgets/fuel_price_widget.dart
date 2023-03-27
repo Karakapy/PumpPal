@@ -3,7 +3,7 @@ import '../models/oil_model.dart';
 import '../parser/oil_name_parser.dart';
 
 Widget createOilList(Oil oil) => Container(
-  padding: EdgeInsets.only(left: 15, right: 15),
+  // padding: EdgeInsets.only(left: 5, right: 5),
   child: Padding(
     padding: const EdgeInsets.all(10.5),
     child: Row(
