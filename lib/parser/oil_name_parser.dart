@@ -35,7 +35,10 @@ String? revOilNameParser(String prevname){
     "NGV": "ngv",
     "V-Power Gasohol 95": "vpower_gasohol_95",
     "V-Power Diesel": "vpower_diesel",
-    "V-Power Diesel B7":"vpower_diesel_b7"
+    "V-Power Diesel B7":"vpower_diesel_b7",
+    "Premium Gasohol 95":"premium_gasohol_95",
+    "Superpower Gasohol 95":"superpower_gasohol_95",
+    "Premium Gasohol 97": "premium_gasohol_97",
   };
   return parser[prevname];
 }
