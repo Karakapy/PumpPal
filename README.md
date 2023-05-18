@@ -33,7 +33,8 @@ https://www.kaggle.com/datasets/rakkesharv/used-cars-detailed-dataset
 
 
 # PumpPal team member
-- Worawit Penglam 6281453 
-- Daran Thawornwattanapol 6380413 
-- Pawara Somsongkul 6280283
+- Worawit Penglam
+- Daran Thawornwattanapol
+- Pawara Somsongkul
+- Tanapon
 
