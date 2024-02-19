@@ -29,12 +29,17 @@ https://www.imagin.studio/car-image-api
 - Car DB (Firebase)
 https://www.kaggle.com/datasets/rakkesharv/used-cars-detailed-dataset
 
+## How to run flutter project
+- เปิดemulator
+- รันให้โทรเปิด
+- กดปุ่ม Run 'main.dart'
 
-
+## How to run vue.js
+- เปิดterminal
+- พิม npm run dev
+- open the link
 
 # PumpPal team member
 - Worawit Penglam
 - Daran Thawornwattanapol
 - Pawara Somsongkul
-- Tanapon
-
