@@ -66,7 +66,7 @@ class _AddCarScreenState extends State<AddCarScreen> {
 
           return Column(
             children: <Widget>[
-              SizedBox(height: 80,),
+              SizedBox(height: 70,),
               Container(child: Padding(
                 padding: const EdgeInsets.only(left: 20.0),
                 child: Row(
@@ -86,7 +86,7 @@ class _AddCarScreenState extends State<AddCarScreen> {
                 ),
               ),),
 
-              SizedBox(height: 30,),
+              SizedBox(height: 20,),
               Container(
                 child: Padding(
                   padding: const EdgeInsets.only(left: 35),

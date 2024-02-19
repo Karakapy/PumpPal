@@ -26,7 +26,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         decoration: gradientBg,
         child: Column(
           children: [
-            SizedBox(height: 70,),
+            SizedBox(height: 50,),
             Container(child: Padding(
               padding: const EdgeInsets.only(left: 20.0),
               child: Row(

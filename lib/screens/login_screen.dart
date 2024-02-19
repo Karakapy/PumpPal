@@ -28,7 +28,7 @@ class _LogInScreenState extends State<LogInScreen> {
         decoration: gradientBg,
         child: Column(
           children: [
-            SizedBox(height: 70,),
+            SizedBox(height: 60,),
             Container(child: Padding(
               padding: const EdgeInsets.only(left: 20.0),
               child: Row(

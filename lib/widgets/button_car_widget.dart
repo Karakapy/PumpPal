@@ -79,7 +79,7 @@ Widget buildButton(CarModel car, int index, int totalSize, BuildContext context,
           child: SizedBox(
             height: 115,
             child: Container(
-              padding: EdgeInsets.symmetric(vertical: 20),
+              padding: EdgeInsets.symmetric(vertical: 10),
               // padding: EdgeInsets.all(15),
               child:Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,

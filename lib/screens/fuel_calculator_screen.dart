@@ -213,7 +213,7 @@ class _FuelCalculatorScreenState extends State<FuelCalculatorScreen> {
                       child: SizedBox(
                         height: 115,
                         child: Container(
-                          padding: EdgeInsets.only(top: 15,bottom: 15,left: 5),
+                          padding: EdgeInsets.only(top: 10,bottom: 10,left: 5),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [

@@ -24,7 +24,7 @@ class AddNewCarWidget extends StatelessWidget {
         child: SizedBox(
           height: 115,
           child: Container(
-            padding: EdgeInsets.all(15),
+            padding: EdgeInsets.all(10),
             child: Wrap(
               children: [
                 Column(
